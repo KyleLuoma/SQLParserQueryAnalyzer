@@ -4183,419 +4183,419 @@ json_null_clause
 built_in_functions
     // Metadata functions
     // https://docs.microsoft.com/en-us/sql/t-sql/functions/app-name-transact-sql?view=sql-server-ver16
-    : APP_NAME '(' ')'                                                      #APP_NAME
+    : APP_NAME '(' ')'                                                      //#APP_NAME
     // https://docs.microsoft.com/en-us/sql/t-sql/functions/applock-mode-transact-sql?view=sql-server-ver16
-    | APPLOCK_MODE '(' database_principal=expression ',' resource_name=expression ',' lock_owner=expression ')' #APPLOCK_MODE
+    | APPLOCK_MODE '(' database_principal=expression ',' resource_name=expression ',' lock_owner=expression ')' //#APPLOCK_MODE
     // https://docs.microsoft.com/en-us/sql/t-sql/functions/applock-test-transact-sql?view=sql-server-ver16
-    | APPLOCK_TEST '(' database_principal=expression ',' resource_name=expression ',' lock_mode=expression ',' lock_owner=expression ')' #APPLOCK_TEST
+    | APPLOCK_TEST '(' database_principal=expression ',' resource_name=expression ',' lock_mode=expression ',' lock_owner=expression ')' //#APPLOCK_TEST
     // https://docs.microsoft.com/en-us/sql/t-sql/functions/assemblyproperty-transact-sql?view=sql-server-ver16
-    | ASSEMBLYPROPERTY '(' assembly_name=expression ',' property_name=expression ')' #ASSEMBLYPROPERTY
+    | ASSEMBLYPROPERTY '(' assembly_name=expression ',' property_name=expression ')' //#ASSEMBLYPROPERTY
     // https://docs.microsoft.com/en-us/sql/t-sql/functions/col-length-transact-sql?view=sql-server-ver16
-    | COL_LENGTH '(' table=expression ',' column=expression ')'             #COL_LENGTH
+    | COL_LENGTH '(' table=expression ',' column=expression ')'             //#COL_LENGTH
     // https://docs.microsoft.com/en-us/sql/t-sql/functions/col-name-transact-sql?view=sql-server-ver16
-    | COL_NAME '(' table_id=expression ',' column_id=expression ')'         #COL_NAME
+    | COL_NAME '(' table_id=expression ',' column_id=expression ')'         //#COL_NAME
     // https://docs.microsoft.com/en-us/sql/t-sql/functions/columnproperty-transact-sql?view=sql-server-ver16
-    | COLUMNPROPERTY '(' id=expression ',' column=expression ',' property=expression ')' #COLUMNPROPERTY
+    | COLUMNPROPERTY '(' id=expression ',' column=expression ',' property=expression ')' //#COLUMNPROPERTY
     // https://docs.microsoft.com/en-us/sql/t-sql/functions/databasepropertyex-transact-sql?view=sql-server-ver16
-    | DATABASEPROPERTYEX '(' database=expression ',' property=expression ')' #DATABASEPROPERTYEX
+    | DATABASEPROPERTYEX '(' database=expression ',' property=expression ')' //#DATABASEPROPERTYEX
     // https://docs.microsoft.com/en-us/sql/t-sql/functions/db-id-transact-sql?view=sql-server-ver16
-    | DB_ID '(' database_name=expression? ')'                               #DB_ID
+    | DB_ID '(' database_name=expression? ')'                               //#DB_ID
     // https://docs.microsoft.com/en-us/sql/t-sql/functions/db-name-transact-sql?view=sql-server-ver16
-    | DB_NAME '(' database_id=expression? ')'                               #DB_NAME
+    | DB_NAME '(' database_id=expression? ')'                               //#DB_NAME
     // https://docs.microsoft.com/en-us/sql/t-sql/functions/file-id-transact-sql?view=sql-server-ver16
-    | FILE_ID '(' file_name=expression ')'                                  #FILE_ID
+    | FILE_ID '(' file_name=expression ')'                                  //#FILE_ID
     // https://docs.microsoft.com/en-us/sql/t-sql/functions/file-idex-transact-sql?view=sql-server-ver16
-    | FILE_IDEX '(' file_name=expression ')'                                #FILE_IDEX
+    | FILE_IDEX '(' file_name=expression ')'                                //#FILE_IDEX
     // https://docs.microsoft.com/en-us/sql/t-sql/functions/file-name-transact-sql?view=sql-server-ver16
-    | FILE_NAME '(' file_id=expression ')'                                  #FILE_NAME
+    | FILE_NAME '(' file_id=expression ')'                                  //#FILE_NAME
     // https://docs.microsoft.com/en-us/sql/t-sql/functions/filegroup-id-transact-sql?view=sql-server-ver16
-    | FILEGROUP_ID '(' filegroup_name=expression ')'                        #FILEGROUP_ID
+    | FILEGROUP_ID '(' filegroup_name=expression ')'                        //#FILEGROUP_ID
     // https://docs.microsoft.com/en-us/sql/t-sql/functions/filegroup-name-transact-sql?view=sql-server-ver16
-    | FILEGROUP_NAME '(' filegroup_id=expression ')'                        #FILEGROUP_NAME
+    | FILEGROUP_NAME '(' filegroup_id=expression ')'                        //#FILEGROUP_NAME
     // https://docs.microsoft.com/en-us/sql/t-sql/functions/filegroupproperty-transact-sql?view=sql-server-ver16
-    | FILEGROUPPROPERTY '(' filegroup_name=expression ',' property=expression ')' #FILEGROUPPROPERTY
+    | FILEGROUPPROPERTY '(' filegroup_name=expression ',' property=expression ')' //#FILEGROUPPROPERTY
     // https://docs.microsoft.com/en-us/sql/t-sql/functions/fileproperty-transact-sql?view=sql-server-ver16
-    | FILEPROPERTY '(' file_name=expression ',' property=expression ')'     #FILEPROPERTY
+    | FILEPROPERTY '(' file_name=expression ',' property=expression ')'     //#FILEPROPERTY
     // https://docs.microsoft.com/en-us/sql/t-sql/functions/filepropertyex-transact-sql?view=sql-server-ver16
-    | FILEPROPERTYEX '(' name=expression ',' property=expression ')'        #FILEPROPERTYEX
+    | FILEPROPERTYEX '(' name=expression ',' property=expression ')'        //#FILEPROPERTYEX
     // https://docs.microsoft.com/en-us/sql/t-sql/functions/fulltextcatalogproperty-transact-sql?view=sql-server-ver16
-    | FULLTEXTCATALOGPROPERTY '(' catalog_name=expression ',' property=expression ')' #FULLTEXTCATALOGPROPERTY
+    | FULLTEXTCATALOGPROPERTY '(' catalog_name=expression ',' property=expression ')' //#FULLTEXTCATALOGPROPERTY
     // https://docs.microsoft.com/en-us/sql/t-sql/functions/fulltextserviceproperty-transact-sql?view=sql-server-ver16
-    | FULLTEXTSERVICEPROPERTY '(' property=expression ')'                   #FULLTEXTSERVICEPROPERTY
+    | FULLTEXTSERVICEPROPERTY '(' property=expression ')'                   //#FULLTEXTSERVICEPROPERTY
     // https://docs.microsoft.com/en-us/sql/t-sql/functions/index-col-transact-sql?view=sql-server-ver16
-    | INDEX_COL '(' table_or_view_name=expression ',' index_id=expression ',' key_id=expression ')' #INDEX_COL
+    | INDEX_COL '(' table_or_view_name=expression ',' index_id=expression ',' key_id=expression ')' //#INDEX_COL
     // https://docs.microsoft.com/en-us/sql/t-sql/functions/indexkey-property-transact-sql?view=sql-server-ver16
-    | INDEXKEY_PROPERTY '(' object_id=expression ',' index_id=expression ',' key_id=expression ',' property=expression ')' #INDEXKEY_PROPERTY
+    | INDEXKEY_PROPERTY '(' object_id=expression ',' index_id=expression ',' key_id=expression ',' property=expression ')' //#INDEXKEY_PROPERTY
     // https://docs.microsoft.com/en-us/sql/t-sql/functions/indexproperty-transact-sql?view=sql-server-ver16
-    | INDEXPROPERTY '(' object_id=expression ',' index_or_statistics_name=expression ',' property=expression ')' #INDEXPROPERTY
+    | INDEXPROPERTY '(' object_id=expression ',' index_or_statistics_name=expression ',' property=expression ')' //#INDEXPROPERTY
     // https://docs.microsoft.com/en-us/sql/t-sql/functions/next-value-for-transact-sql?view=sql-server-ver16
-    | NEXT VALUE FOR sequence_name=table_name ( OVER '(' order_by_clause ')' )? #NEXT_VALUE_FOR
+    | NEXT VALUE FOR sequence_name=table_name ( OVER '(' order_by_clause ')' )? //#NEXT_VALUE_FOR
     // https://docs.microsoft.com/en-us/sql/t-sql/functions/object-definition-transact-sql?view=sql-server-ver16
-    | OBJECT_DEFINITION '(' object_id=expression ')'                        #OBJECT_DEFINITION
+    | OBJECT_DEFINITION '(' object_id=expression ')'                        //#OBJECT_DEFINITION
     // https://docs.microsoft.com/en-us/sql/t-sql/functions/object-id-transact-sql?view=sql-server-ver16
-    | OBJECT_ID '(' object_name=expression ( ',' object_type=expression )? ')'      #OBJECT_ID
+    | OBJECT_ID '(' object_name=expression ( ',' object_type=expression )? ')'      //#OBJECT_ID
     // https://docs.microsoft.com/en-us/sql/t-sql/functions/object-name-transact-sql?view=sql-server-ver16
-    | OBJECT_NAME '(' object_id=expression ( ',' database_id=expression )? ')' #OBJECT_NAME
+    | OBJECT_NAME '(' object_id=expression ( ',' database_id=expression )? ')' //#OBJECT_NAME
     // https://docs.microsoft.com/en-us/sql/t-sql/functions/object-schema-name-transact-sql?view=sql-server-ver16
-    | OBJECT_SCHEMA_NAME '(' object_id=expression ( ',' database_id=expression )? ')' #OBJECT_SCHEMA_NAME
+    | OBJECT_SCHEMA_NAME '(' object_id=expression ( ',' database_id=expression )? ')' //#OBJECT_SCHEMA_NAME
     // https://docs.microsoft.com/en-us/sql/t-sql/functions/objectproperty-transact-sql?view=sql-server-ver16
-    | OBJECTPROPERTY '(' id=expression ',' property=expression ')'          #OBJECTPROPERTY
+    | OBJECTPROPERTY '(' id=expression ',' property=expression ')'          //#OBJECTPROPERTY
     // https://docs.microsoft.com/en-us/sql/t-sql/functions/objectpropertyex-transact-sql?view=sql-server-ver16
-    | OBJECTPROPERTYEX '(' id=expression ',' property=expression ')'        #OBJECTPROPERTYEX
+    | OBJECTPROPERTYEX '(' id=expression ',' property=expression ')'        //#OBJECTPROPERTYEX
     // https://docs.microsoft.com/en-us/sql/t-sql/functions/original-db-name-transact-sql?view=sql-server-ver16
-    | ORIGINAL_DB_NAME '(' ')'                                              #ORIGINAL_DB_NAME
+    | ORIGINAL_DB_NAME '(' ')'                                              //#ORIGINAL_DB_NAME
     // https://docs.microsoft.com/en-us/sql/t-sql/functions/parsename-transact-sql?view=sql-server-ver16
-    | PARSENAME '(' object_name=expression ',' object_piece=expression ')'  #PARSENAME
+    | PARSENAME '(' object_name=expression ',' object_piece=expression ')'  //#PARSENAME
     // https://docs.microsoft.com/en-us/sql/t-sql/functions/schema-id-transact-sql?view=sql-server-ver16
-    | SCHEMA_ID '(' schema_name=expression? ')'                             #SCHEMA_ID
+    | SCHEMA_ID '(' schema_name=expression? ')'                             //#SCHEMA_ID
     // https://docs.microsoft.com/en-us/sql/t-sql/functions/schema-name-transact-sql?view=sql-server-ver16
-    | SCHEMA_NAME '(' schema_id=expression? ')'                             #SCHEMA_NAME
+    | SCHEMA_NAME '(' schema_id=expression? ')'                             //#SCHEMA_NAME
     // https://docs.microsoft.com/en-us/sql/t-sql/functions/scope-identity-transact-sql?view=sql-server-ver16
-    | SCOPE_IDENTITY '(' ')'                                                #SCOPE_IDENTITY
+    | SCOPE_IDENTITY '(' ')'                                                //#SCOPE_IDENTITY
     // https://docs.microsoft.com/en-us/sql/t-sql/functions/serverproperty-transact-sql?view=sql-server-ver16
-    | SERVERPROPERTY '(' property=expression ')'                            #SERVERPROPERTY
+    | SERVERPROPERTY '(' property=expression ')'                            //#SERVERPROPERTY
     // https://docs.microsoft.com/en-us/sql/t-sql/functions/stats-date-transact-sql?view=sql-server-ver16
-    | STATS_DATE '(' object_id=expression ',' stats_id=expression ')'       #STATS_DATE
+    | STATS_DATE '(' object_id=expression ',' stats_id=expression ')'       //#STATS_DATE
     // https://docs.microsoft.com/en-us/sql/t-sql/functions/type-id-transact-sql?view=sql-server-ver16
-    | TYPE_ID '(' type_name=expression ')'                                  #TYPE_ID
+    | TYPE_ID '(' type_name=expression ')'                                  //#TYPE_ID
     // https://docs.microsoft.com/en-us/sql/t-sql/functions/type-name-transact-sql?view=sql-server-ver16
-    | TYPE_NAME '(' type_id=expression ')'                                  #TYPE_NAME
+    | TYPE_NAME '(' type_id=expression ')'                                  //#TYPE_NAME
     // https://docs.microsoft.com/en-us/sql/t-sql/functions/typeproperty-transact-sql?view=sql-server-ver16
-    | TYPEPROPERTY '(' type=expression ',' property=expression ')'          #TYPEPROPERTY
+    | TYPEPROPERTY '(' type=expression ',' property=expression ')'          //#TYPEPROPERTY
     // String functions
     // https://docs.microsoft.com/en-us/sql/t-sql/functions/ascii-transact-sql?view=sql-server-ver16
-    | ASCII '(' character_expression=expression ')'                         #ASCII
+    | ASCII '(' character_expression=expression ')'                         //#ASCII
     // https://docs.microsoft.com/en-us/sql/t-sql/functions/char-transact-sql?view=sql-server-ver16
-    | CHAR '(' integer_expression=expression ')'                            #CHAR
+    | CHAR '(' integer_expression=expression ')'                            //#CHAR
     // https://docs.microsoft.com/en-us/sql/t-sql/functions/charindex-transact-sql?view=sql-server-ver16
-    | CHARINDEX '(' expressionToFind=expression ',' expressionToSearch=expression ( ',' start_location=expression )? ')' #CHARINDEX
+    | CHARINDEX '(' expressionToFind=expression ',' expressionToSearch=expression ( ',' start_location=expression )? ')' //#CHARINDEX
     // https://docs.microsoft.com/en-us/sql/t-sql/functions/concat-transact-sql?view=sql-server-ver16
-    | CONCAT '(' string_value_1=expression ',' string_value_2=expression ( ',' string_value_n+=expression )* ')' #CONCAT
+    | CONCAT '(' string_value_1=expression ',' string_value_2=expression ( ',' string_value_n+=expression )* ')' //#CONCAT
     // https://docs.microsoft.com/en-us/sql/t-sql/functions/concat-ws-transact-sql?view=sql-server-ver16
-    | CONCAT_WS '(' separator=expression ',' argument_1=expression ',' argument_2=expression ( ',' argument_n+=expression )* ')' #CONCAT_WS
+    | CONCAT_WS '(' separator=expression ',' argument_1=expression ',' argument_2=expression ( ',' argument_n+=expression )* ')' //#CONCAT_WS
     // https://docs.microsoft.com/en-us/sql/t-sql/functions/difference-transact-sql?view=sql-server-ver16
-    | DIFFERENCE '(' character_expression_1=expression ',' character_expression_2=expression ')' #DIFFERENCE
+    | DIFFERENCE '(' character_expression_1=expression ',' character_expression_2=expression ')' //#DIFFERENCE
     // https://docs.microsoft.com/en-us/sql/t-sql/functions/format-transact-sql?view=sql-server-ver16
-    | FORMAT '(' value=expression ',' format=expression ( ',' culture=expression )? ')' #FORMAT
+    | FORMAT '(' value=expression ',' format=expression ( ',' culture=expression )? ')'// #FORMAT
     // https://docs.microsoft.com/en-us/sql/t-sql/functions/left-transact-sql?view=sql-server-ver16
-    | LEFT '(' character_expression=expression ',' integer_expression=expression ')' #LEFT
+    | LEFT '(' character_expression=expression ',' integer_expression=expression ')'// #LEFT
     // https://docs.microsoft.com/en-us/sql/t-sql/functions/len-transact-sql?view=sql-server-ver16
-    | LEN '(' string_expression=expression ')'                              #LEN
+    | LEN '(' string_expression=expression ')'                              //#LEN
     // https://docs.microsoft.com/en-us/sql/t-sql/functions/lower-transact-sql?view=sql-server-ver16
-    | LOWER '(' character_expression=expression ')'                         #LOWER
+    | LOWER '(' character_expression=expression ')'                        // #LOWER
     // https://docs.microsoft.com/en-us/sql/t-sql/functions/ltrim-transact-sql?view=sql-server-ver16
-    | LTRIM '(' character_expression=expression ')'                         #LTRIM
+    | LTRIM '(' character_expression=expression ')'                        // #LTRIM
     // https://docs.microsoft.com/en-us/sql/t-sql/functions/nchar-transact-sql?view=sql-server-ver16
-    | NCHAR '(' integer_expression=expression ')'                           #NCHAR
+    | NCHAR '(' integer_expression=expression ')'                         //  #NCHAR
     // https://docs.microsoft.com/en-us/sql/t-sql/functions/patindex-transact-sql?view=sql-server-ver16
-    | PATINDEX '(' pattern=expression ',' string_expression=expression ')'  #PATINDEX
+    | PATINDEX '(' pattern=expression ',' string_expression=expression ')' // #PATINDEX
     // https://docs.microsoft.com/en-us/sql/t-sql/functions/quotename-transact-sql?view=sql-server-ver16
-    | QUOTENAME '(' character_string=expression ( ',' quote_character=expression )? ')' #QUOTENAME
+    | QUOTENAME '(' character_string=expression ( ',' quote_character=expression )? ')' //#QUOTENAME
     // https://docs.microsoft.com/en-us/sql/t-sql/functions/replace-transact-sql?view=sql-server-ver16
-    | REPLACE '(' input=expression ',' replacing=expression ',' with=expression ')'   #REPLACE
+    | REPLACE '(' input=expression ',' replacing=expression ',' with=expression ')'   //#REPLACE
     // https://docs.microsoft.com/en-us/sql/t-sql/functions/replicate-transact-sql?view=sql-server-ver16
-    | REPLICATE '(' string_expression=expression ',' integer_expression=expression ')' #REPLICATE
+    | REPLICATE '(' string_expression=expression ',' integer_expression=expression ')' //#REPLICATE
     // https://docs.microsoft.com/en-us/sql/t-sql/functions/reverse-transact-sql?view=sql-server-ver16
-    | REVERSE '(' string_expression=expression ')'                          #REVERSE
+    | REVERSE '(' string_expression=expression ')'                          //#REVERSE
     // https://docs.microsoft.com/en-us/sql/t-sql/functions/right-transact-sql?view=sql-server-ver16
-    | RIGHT '(' character_expression=expression ',' integer_expression=expression ')' #RIGHT
+    | RIGHT '(' character_expression=expression ',' integer_expression=expression ')' //#RIGHT
     // https://docs.microsoft.com/en-us/sql/t-sql/functions/rtrim-transact-sql?view=sql-server-ver16
-    | RTRIM '(' character_expression=expression ')'                         #RTRIM
+    | RTRIM '(' character_expression=expression ')'                         //#RTRIM
     // https://docs.microsoft.com/en-us/sql/t-sql/functions/soundex-transact-sql?view=sql-server-ver16
-    | SOUNDEX '(' character_expression=expression ')'                       #SOUNDEX
+    | SOUNDEX '(' character_expression=expression ')'                       //#SOUNDEX
     // https://docs.microsoft.com/en-us/sql/t-sql/functions/space-transact-sql?view=sql-server-ver16
-    | SPACE_KEYWORD '(' integer_expression=expression ')'                   #SPACE
+    | SPACE_KEYWORD '(' integer_expression=expression ')'                   //#SPACE
     // https://docs.microsoft.com/en-us/sql/t-sql/functions/str-transact-sql?view=sql-server-ver16
-    | STR '(' float_expression=expression ( ',' length_expression=expression ( ',' decimal=expression )? )? ')' #STR
+    | STR '(' float_expression=expression ( ',' length_expression=expression ( ',' decimal=expression )? )? ')' //#STR
     // https://docs.microsoft.com/en-us/sql/t-sql/functions/string-agg-transact-sql?view=sql-server-ver16
-    | STRING_AGG '(' expr=expression ',' separator=expression ')' (WITHIN GROUP '(' order_by_clause ')')?  #STRINGAGG
+    | STRING_AGG '(' expr=expression ',' separator=expression ')' (WITHIN GROUP '(' order_by_clause ')')?  //#STRINGAGG
     // https://docs.microsoft.com/en-us/sql/t-sql/functions/string-escape-transact-sql?view=sql-server-ver16
-    | STRING_ESCAPE '(' text_=expression ',' type_=expression ')'           #STRING_ESCAPE
+    | STRING_ESCAPE '(' text_=expression ',' type_=expression ')'           //#STRING_ESCAPE
     // https://msdn.microsoft.com/fr-fr/library/ms188043.aspx
-    | STUFF '(' str=expression ',' from=expression ',' to=expression ',' str_with=expression ')' #STUFF
+    | STUFF '(' str=expression ',' from=expression ',' to=expression ',' str_with=expression ')'// #STUFF
     // https://docs.microsoft.com/en-us/sql/t-sql/functions/substring-transact-sql?view=sql-server-ver16
-    | SUBSTRING '(' string_expression=expression ',' start_=expression ',' length=expression ')' #SUBSTRING
+    | SUBSTRING '(' string_expression=expression ',' start_=expression ',' length=expression ')' //#SUBSTRING
     // https://docs.microsoft.com/en-us/sql/t-sql/functions/translate-transact-sql?view=sql-server-ver16
-    | TRANSLATE '(' inputString=expression ',' characters=expression ',' translations=expression ')' #TRANSLATE
+    | TRANSLATE '(' inputString=expression ',' characters=expression ',' translations=expression ')' //#TRANSLATE
     // https://docs.microsoft.com/en-us/sql/t-sql/functions/trim-transact-sql?view=sql-server-ver16
-    | TRIM '(' ( characters=expression FROM )? string_=expression ')'       #TRIM
+    | TRIM '(' ( characters=expression FROM )? string_=expression ')'       //#TRIM
     // https://docs.microsoft.com/en-us/sql/t-sql/functions/unicode-transact-sql?view=sql-server-ver16
-    | UNICODE '(' ncharacter_expression=expression ')'                      #UNICODE
+    | UNICODE '(' ncharacter_expression=expression ')'                      //#UNICODE
     // https://docs.microsoft.com/en-us/sql/t-sql/functions/upper-transact-sql?view=sql-server-ver16
-    | UPPER '(' character_expression=expression ')'                         #UPPER
+    | UPPER '(' character_expression=expression ')'                         //#UPPER
     // System functions
     // https://msdn.microsoft.com/en-us/library/ms173784.aspx
-    | BINARY_CHECKSUM '(' ( star='*' | expression (',' expression)* ) ')'   #BINARY_CHECKSUM
+    | BINARY_CHECKSUM '(' ( star='*' | expression (',' expression)* ) ')'   //#BINARY_CHECKSUM
     // https://msdn.microsoft.com/en-us/library/ms189788.aspx
-    | CHECKSUM '(' ( star='*' | expression (',' expression)* ) ')'          #CHECKSUM
+    | CHECKSUM '(' ( star='*' | expression (',' expression)* ) ')'          //#CHECKSUM
     // https://docs.microsoft.com/en-us/sql/t-sql/functions/compress-transact-sql?view=sql-server-ver16
-    | COMPRESS '(' expr=expression ')'                                      #COMPRESS
+    | COMPRESS '(' expr=expression ')'                                      //#COMPRESS
     // https://docs.microsoft.com/en-us/sql/t-sql/functions/connectionproperty-transact-sql?view=sql-server-ver16
-    | CONNECTIONPROPERTY '(' property=STRING ')'                            #CONNECTIONPROPERTY
+//    | CONNECTIONPROPERTY '(' property=STRING ')'                           // #CONNECTIONPROPERTY
     // https://docs.microsoft.com/en-us/sql/t-sql/functions/context-info-transact-sql?view=sql-server-ver16
-    | CONTEXT_INFO '(' ')'                                                  #CONTEXT_INFO
+    | CONTEXT_INFO '(' ')'                                                 // #CONTEXT_INFO
     // https://docs.microsoft.com/en-us/sql/t-sql/functions/current-request-id-transact-sql?view=sql-server-ver16
-    | CURRENT_REQUEST_ID '(' ')'                                            #CURRENT_REQUEST_ID
+    | CURRENT_REQUEST_ID '(' ')'                                           // #CURRENT_REQUEST_ID
     // https://docs.microsoft.com/en-us/sql/t-sql/functions/current-transaction-id-transact-sql?view=sql-server-ver16
-    | CURRENT_TRANSACTION_ID '(' ')'                                        #CURRENT_TRANSACTION_ID
+    | CURRENT_TRANSACTION_ID '(' ')'                                      //  #CURRENT_TRANSACTION_ID
     // https://docs.microsoft.com/en-us/sql/t-sql/functions/decompress-transact-sql?view=sql-server-ver16
-    | DECOMPRESS '(' expr=expression ')'                                    #DECOMPRESS
+    | DECOMPRESS '(' expr=expression ')'                                    //#DECOMPRESS
     // https://docs.microsoft.com/en-us/sql/t-sql/functions/error-line-transact-sql?view=sql-server-ver16
-    | ERROR_LINE '(' ')'                                                    #ERROR_LINE
+    | ERROR_LINE '(' ')'                                                  //  #ERROR_LINE
     // https://docs.microsoft.com/en-us/sql/t-sql/functions/error-message-transact-sql?view=sql-server-ver16
-    | ERROR_MESSAGE '(' ')'                                                 #ERROR_MESSAGE
+    | ERROR_MESSAGE '(' ')'                                               //  #ERROR_MESSAGE
     // https://docs.microsoft.com/en-us/sql/t-sql/functions/error-number-transact-sql?view=sql-server-ver16
-    | ERROR_NUMBER '(' ')'                                                  #ERROR_NUMBER
+    | ERROR_NUMBER '(' ')'                                                //  #ERROR_NUMBER
     // https://docs.microsoft.com/en-us/sql/t-sql/functions/error-procedure-transact-sql?view=sql-server-ver16
-    | ERROR_PROCEDURE '(' ')'                                               #ERROR_PROCEDURE
+    | ERROR_PROCEDURE '(' ')'                                            //   #ERROR_PROCEDURE
     // https://docs.microsoft.com/en-us/sql/t-sql/functions/error-severity-transact-sql?view=sql-server-ver16
-    | ERROR_SEVERITY '(' ')'                                                #ERROR_SEVERITY
+    | ERROR_SEVERITY '(' ')'                                              //  #ERROR_SEVERITY
     // https://docs.microsoft.com/en-us/sql/t-sql/functions/error-state-transact-sql?view=sql-server-ver16
-    | ERROR_STATE '(' ')'                                                   #ERROR_STATE
+    | ERROR_STATE '(' ')'                                                //   #ERROR_STATE
     // https://docs.microsoft.com/en-us/sql/t-sql/functions/formatmessage-transact-sql?view=sql-server-ver16
-    | FORMATMESSAGE '(' (msg_number=DECIMAL | msg_string=STRING | msg_variable=LOCAL_ID) ',' expression (',' expression)* ')' #FORMATMESSAGE
+    | FORMATMESSAGE '(' (msg_number=DECIMAL | msg_string=STRING | msg_variable=LOCAL_ID) ',' expression (',' expression)* ')' //#FORMATMESSAGE
     // https://docs.microsoft.com/en-us/sql/t-sql/functions/get-filestream-transaction-context-transact-sql?view=sql-server-ver16
-    | GET_FILESTREAM_TRANSACTION_CONTEXT '(' ')'                            #GET_FILESTREAM_TRANSACTION_CONTEXT
+    | GET_FILESTREAM_TRANSACTION_CONTEXT '(' ')'                           // #GET_FILESTREAM_TRANSACTION_CONTEXT
     // https://docs.microsoft.com/en-us/sql/t-sql/functions/getansinull-transact-sql?view=sql-server-ver16
-    | GETANSINULL '(' (database=STRING)? ')'                                #GETANSINULL
+//    | GETANSINULL '(' (database=STRING)? ')'                              //  #GETANSINULL
     // https://docs.microsoft.com/en-us/sql/t-sql/functions/host-id-transact-sql?view=sql-server-ver16
-    | HOST_ID '(' ')'                                                       #HOST_ID
+    | HOST_ID '(' ')'                                                     //  #HOST_ID
     // https://docs.microsoft.com/en-us/sql/t-sql/functions/host-name-transact-sql?view=sql-server-ver16
-    | HOST_NAME '(' ')'                                                     #HOST_NAME
+    | HOST_NAME '(' ')'                                                   //  #HOST_NAME
     // https://msdn.microsoft.com/en-us/library/ms184325.aspx
-    | ISNULL '(' left=expression ',' right=expression ')'                   #ISNULL
+    | ISNULL '(' left=expression ',' right=expression ')'                   //#ISNULL
     // https://docs.microsoft.com/en-us/sql/t-sql/functions/isnumeric-transact-sql?view=sql-server-ver16
-    | ISNUMERIC '(' expression ')'                                          #ISNUMERIC
+    | ISNUMERIC '(' expression ')'                                          //#ISNUMERIC
     // https://docs.microsoft.com/en-us/sql/t-sql/functions/min-active-rowversion-transact-sql?view=sql-server-ver16
-    | MIN_ACTIVE_ROWVERSION '(' ')'                                         #MIN_ACTIVE_ROWVERSION
+    | MIN_ACTIVE_ROWVERSION '(' ')'                                       //  #MIN_ACTIVE_ROWVERSION
     // https://docs.microsoft.com/en-us/sql/t-sql/functions/newid-transact-sql?view=sql-server-ver16
-    | NEWID '(' ')'                                                         #NEWID
+    | NEWID '(' ')'                                                       //  #NEWID
     // https://docs.microsoft.com/en-us/sql/t-sql/functions/newsequentialid-transact-sql?view=sql-server-ver16
-    | NEWSEQUENTIALID '(' ')'                                               #NEWSEQUENTIALID
+    | NEWSEQUENTIALID '(' ')'                                             //  #NEWSEQUENTIALID
     // https://docs.microsoft.com/en-us/sql/t-sql/functions/rowcount-big-transact-sql?view=sql-server-ver16
-    | ROWCOUNT_BIG '(' ')'                                                  #ROWCOUNT_BIG
+    | ROWCOUNT_BIG '(' ')'                                                //  #ROWCOUNT_BIG
     // https://docs.microsoft.com/en-us/sql/t-sql/functions/session-context-transact-sql?view=sql-server-ver16
-    | SESSION_CONTEXT '(' key=STRING ')'                                    #SESSION_CONTEXT
+    | SESSION_CONTEXT '(' key=STRING ')'                                 //   #SESSION_CONTEXT
     // https://docs.microsoft.com/en-us/sql/t-sql/functions/xact-state-transact-sql?view=sql-server-ver16
-    | XACT_STATE '(' ')'                                                    #XACT_STATE
+    | XACT_STATE '(' ')'                                                 //   #XACT_STATE
     // https://msdn.microsoft.com/en-us/library/hh231076.aspx
     // https://msdn.microsoft.com/en-us/library/ms187928.aspx
-    | CAST '(' expression AS data_type ')'              #CAST
-    | TRY_CAST '(' expression AS data_type ')'          #TRY_CAST
-    | CONVERT '(' convert_data_type=data_type ','convert_expression=expression (',' style=expression)? ')'                              #CONVERT
+    | CAST '(' expression AS data_type ')'              //#CAST
+    | TRY_CAST '(' expression AS data_type ')'          //#TRY_CAST
+    | CONVERT '(' convert_data_type=data_type ','convert_expression=expression (',' style=expression)? ')'                              //#CONVERT
     // https://msdn.microsoft.com/en-us/library/ms190349.aspx
-    | COALESCE '(' expression_list_ ')'                  #COALESCE
+    | COALESCE '(' expression_list_ ')'                 // #COALESCE
     // Cursor functions
     // https://learn.microsoft.com/en-us/sql/t-sql/functions/cursor-rows-transact-sql?view=sql-server-ver16
-    | CURSOR_ROWS                                       #CURSOR_ROWS
+    | CURSOR_ROWS                                      // #CURSOR_ROWS
     // https://learn.microsoft.com/en-us/sql/t-sql/functions/cursor-rows-transact-sql?view=sql-server-ver16
-    | FETCH_STATUS                                      #FETCH_STATUS
+    | FETCH_STATUS                                    //  #FETCH_STATUS
     // https://learn.microsoft.com/en-us/sql/t-sql/functions/cursor-status-transact-sql?view=sql-server-ver16
-    | CURSOR_STATUS '(' scope=STRING ',' cursor=expression ')' #CURSOR_STATUS
+    | CURSOR_STATUS '(' scope=STRING ',' cursor=expression ')'// #CURSOR_STATUS
     // Cryptographic functions
     // https://learn.microsoft.com/en-us/sql/t-sql/functions/cert-id-transact-sql?view=sql-server-ver16
-    | CERT_ID '(' cert_name=expression ')'              #CERT_ID
+    | CERT_ID '(' cert_name=expression ')'             // #CERT_ID
     // Data type functions
     // https://learn.microsoft.com/en-us/sql/t-sql/functions/datalength-transact-sql?view=sql-server-ver16
-    | DATALENGTH '(' expression ')'                     #DATALENGTH
+    | DATALENGTH '(' expression ')'                     //#DATALENGTH
     // https://learn.microsoft.com/en-us/sql/t-sql/functions/ident-current-transact-sql?view=sql-server-ver16
-    | IDENT_CURRENT '(' table_or_view=expression ')'    # IDENT_CURRENT
+    | IDENT_CURRENT '(' table_or_view=expression ')'    //# IDENT_CURRENT
     // https://learn.microsoft.com/en-us/sql/t-sql/functions/ident-incr-transact-sql?view=sql-server-ver16
-    | IDENT_INCR '(' table_or_view=expression ')'       # IDENT_INCR
+    | IDENT_INCR '(' table_or_view=expression ')'       //# IDENT_INCR
     // https://learn.microsoft.com/en-us/sql/t-sql/functions/ident-seed-transact-sql?view=sql-server-ver16
-    | IDENT_SEED '(' table_or_view=expression ')'       # IDENT_SEED
+    | IDENT_SEED '(' table_or_view=expression ')'       //# IDENT_SEED
     // https://learn.microsoft.com/en-us/sql/t-sql/functions/ident-seed-transact-sql?view=sql-server-ver16
-    | IDENTITY '(' datatype=data_type (',' seed=DECIMAL ',' increment=DECIMAL)? ')' #IDENTITY
+    | IDENTITY '(' datatype=data_type (',' seed=DECIMAL ',' increment=DECIMAL)? ')' //#IDENTITY
     // https://learn.microsoft.com/en-us/sql/t-sql/functions/ident-seed-transact-sql?view=sql-server-ver16
-    | SQL_VARIANT_PROPERTY '(' expr=expression ',' property=STRING ')' #SQL_VARIANT_PROPERTY
+//    | SQL_VARIANT_PROPERTY '(' expr=expression ',' property=STRING ')' //#SQL_VARIANT_PROPERTY
     // Date functions
     //https://infocenter.sybase.com/help/index.jsp?topic=/com.sybase.infocenter.dc36271.1572/html/blocks/CJADIDHD.htm
-    | CURRENT_DATE '(' ')'                              #CURRENT_DATE
+    | CURRENT_DATE '(' ')'                              //#CURRENT_DATE
     // https://msdn.microsoft.com/en-us/library/ms188751.aspx
-    | CURRENT_TIMESTAMP                                 #CURRENT_TIMESTAMP
+    | CURRENT_TIMESTAMP                                // #CURRENT_TIMESTAMP
     // https://learn.microsoft.com/en-us/sql/t-sql/functions/current-timezone-transact-sql?view=sql-server-ver16
-    | CURRENT_TIMEZONE '(' ')'                          #CURRENT_TIMEZONE
+    | CURRENT_TIMEZONE '(' ')'                          //#CURRENT_TIMEZONE
     // https://learn.microsoft.com/en-us/sql/t-sql/functions/current-timezone-id-transact-sql?view=sql-server-ver16
-    | CURRENT_TIMEZONE_ID '(' ')'                       #CURRENT_TIMEZONE_ID
+    | CURRENT_TIMEZONE_ID '(' ')'                      // #CURRENT_TIMEZONE_ID
     // https://learn.microsoft.com/en-us/sql/t-sql/functions/date-bucket-transact-sql?view=sql-server-ver16
-    | DATE_BUCKET '(' datepart=dateparts_9 ',' number=expression ',' date=expression (',' origin=expression)? ')' #DATE_BUCKET
+    | DATE_BUCKET '(' datepart=dateparts_9 ',' number=expression ',' date=expression (',' origin=expression)? ')' //#DATE_BUCKET
     // https://msdn.microsoft.com/en-us/library/ms186819.aspx
-    | DATEADD '(' datepart=dateparts_12 ',' number=expression ',' date=expression ')'  #DATEADD
+//    | DATEADD '(' datepart=dateparts_12 ',' number=expression ',' date=expression ')'  //#DATEADD
     // https://msdn.microsoft.com/en-us/library/ms189794.aspx
-    | DATEDIFF '(' datepart=dateparts_12 ',' date_first=expression ',' date_second=expression ')' #DATEDIFF
+//    | DATEDIFF '(' datepart=dateparts_12 ',' date_first=expression ',' date_second=expression ')' //#DATEDIFF
     // https://learn.microsoft.com/en-us/sql/t-sql/functions/datediff-big-transact-sql?view=sql-server-ver16
-    | DATEDIFF_BIG '(' datepart=dateparts_12 ',' startdate=expression ',' enddate=expression ')' #DATEDIFF_BIG
+//    | DATEDIFF_BIG '(' datepart=dateparts_12 ',' startdate=expression ',' enddate=expression ')' //#DATEDIFF_BIG
     // https://learn.microsoft.com/en-us/sql/t-sql/functions/datefromparts-transact-sql?view=sql-server-ver16
-    | DATEFROMPARTS '(' year=expression ',' month=expression ',' day=expression ')'#DATEFROMPARTS
+    | DATEFROMPARTS '(' year=expression ',' month=expression ',' day=expression ')'//#DATEFROMPARTS
     // https://msdn.microsoft.com/en-us/library/ms174395.aspx
-    | DATENAME '(' datepart=dateparts_15 ',' date=expression ')'                #DATENAME
+//    | DATENAME '(' datepart=dateparts_15 ',' date=expression ')'                //#DATENAME
     // https://msdn.microsoft.com/en-us/library/ms174420.aspx
-    | DATEPART '(' datepart=dateparts_15 ',' date=expression ')'                #DATEPART
+//    | DATEPART '(' datepart=dateparts_15 ',' date=expression ')'                //#DATEPART
     // https://learn.microsoft.com/en-us/sql/t-sql/functions/datetime2fromparts-transact-sql?view=sql-server-ver16
-    | DATETIME2FROMPARTS '(' year=expression ',' month=expression ',' day=expression ',' hour=expression ',' minute=expression ',' seconds=expression ',' fractions=expression ',' precision=expression ')' #DATETIME2FROMPARTS
+    | DATETIME2FROMPARTS '(' year=expression ',' month=expression ',' day=expression ',' hour=expression ',' minute=expression ',' seconds=expression ',' fractions=expression ',' precision=expression ')' //#DATETIME2FROMPARTS
     // https://learn.microsoft.com/en-us/sql/t-sql/functions/datetimefromparts-transact-sql?view=sql-server-ver16
-    | DATETIMEFROMPARTS '(' year=expression ',' month=expression ',' day=expression ',' hour=expression ',' minute=expression ',' seconds=expression ',' milliseconds=expression ')' #DATETIMEFROMPARTS
+    | DATETIMEFROMPARTS '(' year=expression ',' month=expression ',' day=expression ',' hour=expression ',' minute=expression ',' seconds=expression ',' milliseconds=expression ')' //#DATETIMEFROMPARTS
     // https://learn.microsoft.com/en-us/sql/t-sql/functions/datetimeoffsetfromparts-transact-sql?view=sql-server-ver16
-    | DATETIMEOFFSETFROMPARTS '(' year=expression ',' month=expression ',' day=expression ',' hour=expression ',' minute=expression ',' seconds=expression ',' fractions=expression ',' hour_offset=expression ',' minute_offset=expression ',' precision=DECIMAL ')' #DATETIMEOFFSETFROMPARTS
+//    | DATETIMEOFFSETFROMPARTS '(' year=expression ',' month=expression ',' day=expression ',' hour=expression ',' minute=expression ',' seconds=expression ',' fractions=expression ',' hour_offset=expression ',' minute_offset=expression ',' precision=DECIMAL ')' //#DATETIMEOFFSETFROMPARTS
     // https://learn.microsoft.com/en-us/sql/t-sql/functions/datetrunc-transact-sql?view=sql-server-ver16
-    | DATETRUNC '(' datepart=dateparts_datetrunc ',' date=expression ')' #DATETRUNC
+//    | DATETRUNC '(' datepart=dateparts_datetrunc ',' date=expression ')' //#DATETRUNC
     // https://learn.microsoft.com/en-us/sql/t-sql/functions/day-transact-sql?view=sql-server-ver16
-    | DAY '(' date=expression ')' #DAY
+    | DAY '(' date=expression ')' //#DAY
     // https://learn.microsoft.com/en-us/sql/t-sql/functions/eomonth-transact-sql?view=sql-server-ver16
-    | EOMONTH '(' start_date=expression (',' month_to_add=expression)? ')'#EOMONTH
+    | EOMONTH '(' start_date=expression (',' month_to_add=expression)? ')'//#EOMONTH
     // https://docs.microsoft.com/en-us/sql/t-sql/functions/getdate-transact-sql
-    | GETDATE '(' ')'                                   #GETDATE
+    | GETDATE '(' ')'                                   //#GETDATE
     // https://docs.microsoft.com/en-us/sql/t-sql/functions/getdate-transact-sql
-    | GETUTCDATE '(' ')'                                #GETUTCDATE
+    | GETUTCDATE '(' ')'                                //#GETUTCDATE
     // https://learn.microsoft.com/en-us/sql/t-sql/functions/isdate-transact-sql?view=sql-server-ver16
-    | ISDATE '(' expression ')' #ISDATE
+    | ISDATE '(' expression ')' //#ISDATE
     // https://learn.microsoft.com/en-us/sql/t-sql/functions/month-transact-sql?view=sql-server-ver16
-    | MONTH '(' date=expression ')' #MONTH
+    | MONTH '(' date=expression ')' //#MONTH
     // https://learn.microsoft.com/en-us/sql/t-sql/functions/smalldatetimefromparts-transact-sql?view=sql-server-ver16
-    | SMALLDATETIMEFROMPARTS '(' year=expression ',' month=expression ',' day=expression ',' hour=expression ',' minute=expression ')' #SMALLDATETIMEFROMPARTS
+    | SMALLDATETIMEFROMPARTS '(' year=expression ',' month=expression ',' day=expression ',' hour=expression ',' minute=expression ')' //#SMALLDATETIMEFROMPARTS
     // https://learn.microsoft.com/en-us/sql/t-sql/functions/switchoffset-transact-sql?view=sql-server-ver16
-    | SWITCHOFFSET '(' datetimeoffset_expression=expression ',' timezoneoffset_expression=expression ')' #SWITCHOFFSET
+    | SWITCHOFFSET '(' datetimeoffset_expression=expression ',' timezoneoffset_expression=expression ')' //#SWITCHOFFSET
     // https://learn.microsoft.com/en-us/sql/t-sql/functions/sysdatetime-transact-sql?view=sql-server-ver16
-    | SYSDATETIME '(' ')' #SYSDATETIME
+    | SYSDATETIME '(' ')' //#SYSDATETIME
     // https://learn.microsoft.com/en-us/sql/t-sql/functions/sysdatetimeoffset-transact-sql?view=sql-server-ver16
-    | SYSDATETIMEOFFSET '(' ')' #SYSDATETIMEOFFSET
+    | SYSDATETIMEOFFSET '(' ')'//#SYSDATETIMEOFFSET
     // https://learn.microsoft.com/en-us/sql/t-sql/functions/sysutcdatetime-transact-sql?view=sql-server-ver16
-    | SYSUTCDATETIME '(' ')' #SYSUTCDATETIME
+    | SYSUTCDATETIME '(' ')' //#SYSUTCDATETIME
     //https://learn.microsoft.com/en-us/sql/t-sql/functions/timefromparts-transact-sql?view=sql-server-ver16
-    | TIMEFROMPARTS '(' hour=expression ',' minute=expression ',' seconds=expression ',' fractions=expression ',' precision=DECIMAL ')' #TIMEFROMPARTS
+//    | TIMEFROMPARTS '(' hour=expression ',' minute=expression ',' seconds=expression ',' fractions=expression ',' precision=DECIMAL ')' //#TIMEFROMPARTS
     // https://learn.microsoft.com/en-us/sql/t-sql/functions/todatetimeoffset-transact-sql?view=sql-server-ver16
-    | TODATETIMEOFFSET '(' datetime_expression=expression ',' timezoneoffset_expression=expression ')' #TODATETIMEOFFSET
+    | TODATETIMEOFFSET '(' datetime_expression=expression ',' timezoneoffset_expression=expression ')' //#TODATETIMEOFFSET
     // https://learn.microsoft.com/en-us/sql/t-sql/functions/year-transact-sql?view=sql-server-ver16
-    | YEAR '(' date=expression ')' #YEAR
+    | YEAR '(' date=expression ')' //#YEAR
     // https://msdn.microsoft.com/en-us/library/ms189838.aspx
-    | IDENTITY '(' data_type (',' seed=DECIMAL)? (',' increment=DECIMAL)? ')'                                                           #IDENTITY
+    | IDENTITY '(' data_type (',' seed=DECIMAL)? (',' increment=DECIMAL)? ')'                                                           //#IDENTITY
     // https://msdn.microsoft.com/en-us/library/bb839514.aspx
-    | MIN_ACTIVE_ROWVERSION '(' ')'                     #MIN_ACTIVE_ROWVERSION
+    | MIN_ACTIVE_ROWVERSION '(' ')'                     //#MIN_ACTIVE_ROWVERSION
     // https://msdn.microsoft.com/en-us/library/ms177562.aspx
-    | NULLIF '(' left=expression ',' right=expression ')'          #NULLIF
+    | NULLIF '(' left=expression ',' right=expression ')'          //#NULLIF
     // https://docs.microsoft.com/en-us/sql/t-sql/functions/parse-transact-sql
     // https://docs.microsoft.com/en-us/sql/t-sql/functions/try-parse-transact-sql
-    | PARSE '(' str=expression AS data_type ( USING culture=expression )? ')'          #PARSE
+    | PARSE '(' str=expression AS data_type ( USING culture=expression )? ')'          //#PARSE
     // https://docs.microsoft.com/en-us/sql/t-sql/xml/xml-data-type-methods
-    | xml_data_type_methods                             #XML_DATA_TYPE_FUNC
+    | xml_data_type_methods                             //#XML_DATA_TYPE_FUNC
     // https://docs.microsoft.com/en-us/sql/t-sql/functions/logical-functions-iif-transact-sql
-    | IIF '(' cond=search_condition ',' left=expression ',' right=expression ')'   #IIF
+    | IIF '(' cond=search_condition ',' left=expression ',' right=expression ')'   //#IIF
     // JSON functions
     // https://learn.microsoft.com/en-us/sql/t-sql/functions/isjson-transact-sql?view=azure-sqldw-latest
-    | ISJSON '(' json_expr=expression (',' json_type_constraint=expression)? ')' #ISJSON
+    | ISJSON '(' json_expr=expression (',' json_type_constraint=expression)? ')' //#ISJSON
     // https://learn.microsoft.com/en-us/sql/t-sql/functions/json-object-transact-sql?view=azure-sqldw-latest
-    | JSON_OBJECT '(' (key_value=json_key_value (',' key_value=json_key_value)*)? json_null_clause? ')' #JSON_OBJECT
+    | JSON_OBJECT '(' (key_value=json_key_value (',' key_value=json_key_value)*)? json_null_clause? ')' //#JSON_OBJECT
     // https://learn.microsoft.com/en-us/sql/t-sql/functions/json-array-transact-sql?view=azure-sqldw-latest
-    | JSON_ARRAY '(' expression_list_? json_null_clause? ')' #JSON_ARRAY
+    | JSON_ARRAY '(' expression_list_? json_null_clause? ')' //#JSON_ARRAY
     // https://learn.microsoft.com/en-us/sql/t-sql/functions/json-value-transact-sql?view=azure-sqldw-latest
-    | JSON_VALUE '(' expr=expression ',' path=expression ')' #JSON_VALUE
+    | JSON_VALUE '(' expr=expression ',' path=expression ')' //#JSON_VALUE
     // https://learn.microsoft.com/en-us/sql/t-sql/functions/json-query-transact-sql?view=azure-sqldw-latest
-    | JSON_QUERY '(' expr=expression (',' path=expression)? ')' #JSON_QUERY
+    | JSON_QUERY '(' expr=expression (',' path=expression)? ')' //#JSON_QUERY
     // https://learn.microsoft.com/en-us/sql/t-sql/functions/json-modify-transact-sql?view=azure-sqldw-latest
-    | JSON_MODIFY '(' expr=expression ',' path=expression ',' new_value=expression ')' #JSON_MODIFY
+    | JSON_MODIFY '(' expr=expression ',' path=expression ',' new_value=expression ')' //#JSON_MODIFY
     // https://learn.microsoft.com/en-us/sql/t-sql/functions/json-path-exists-transact-sql?view=azure-sqldw-latest
-    | JSON_PATH_EXISTS '(' value_expression=expression ',' sql_json_path=expression ')' #JSON_PATH_EXISTS
+    | JSON_PATH_EXISTS '(' value_expression=expression ',' sql_json_path=expression ')' //#JSON_PATH_EXISTS
     // Math functions
     // https://learn.microsoft.com/en-us/sql/t-sql/functions/abs-transact-sql?view=sql-server-ver16
-    | ABS '(' numeric_expression=expression ')' #ABS
+    | ABS '(' numeric_expression=expression ')' //#ABS
     // https://learn.microsoft.com/en-us/sql/t-sql/functions/acos-transact-sql?view=sql-server-ver16
-    | ACOS '(' float_expression=expression ')' #ACOS
+    | ACOS '(' float_expression=expression ')' //#ACOS
     // https://learn.microsoft.com/en-us/sql/t-sql/functions/asin-transact-sql?view=sql-server-ver16
-    | ASIN '(' float_expression=expression ')' #ASIN
+    | ASIN '(' float_expression=expression ')' //#ASIN
     // https://learn.microsoft.com/en-us/sql/t-sql/functions/atan-transact-sql?view=sql-server-ver16
-    | ATAN '(' float_expression=expression ')' #ATAN
+    | ATAN '(' float_expression=expression ')' //#ATAN
     // https://learn.microsoft.com/en-us/sql/t-sql/functions/atn2-transact-sql?view=sql-server-ver16
-    | ATN2 '(' float_expression=expression ',' float_expression=expression ')' #ATN2
+    | ATN2 '(' float_expression=expression ',' float_expression=expression ')' //#ATN2
     // https://learn.microsoft.com/en-us/sql/t-sql/functions/ceiling-transact-sql?view=sql-server-ver16
-    | CEILING '(' numeric_expression=expression ')' #CEILING
+    | CEILING '(' numeric_expression=expression ')' //CEILING
     // https://learn.microsoft.com/en-us/sql/t-sql/functions/cos-transact-sql?view=sql-server-ver16
-    | COS '(' float_expression=expression ')' #COS
+    | COS '(' float_expression=expression ')' //#COS
     // https://learn.microsoft.com/en-us/sql/t-sql/functions/cot-transact-sql?view=sql-server-ver16
-    | COT '(' float_expression=expression ')' #COT
+    | COT '(' float_expression=expression ')' //#COT
     // https://learn.microsoft.com/en-us/sql/t-sql/functions/degrees-transact-sql?view=sql-server-ver16
-    | DEGREES '(' numeric_expression=expression ')' #DEGREES
+    | DEGREES '(' numeric_expression=expression ')' //#DEGREES
     // https://learn.microsoft.com/en-us/sql/t-sql/functions/exp-transact-sql?view=sql-server-ver16
-    | EXP '(' float_expression=expression ')' #EXP
+    | EXP '(' float_expression=expression ')' //#EXP
     // https://learn.microsoft.com/en-us/sql/t-sql/functions/floor-transact-sql?view=sql-server-ver16
-    | FLOOR '(' numeric_expression=expression ')' #FLOOR
+    | FLOOR '(' numeric_expression=expression ')' //#FLOOR
     // https://learn.microsoft.com/en-us/sql/t-sql/functions/log-transact-sql?view=sql-server-ver16
-    | LOG '(' float_expression=expression (',' base=expression)? ')' #LOG
+    | LOG '(' float_expression=expression (',' base=expression)? ')' //#LOG
     // https://learn.microsoft.com/en-us/sql/t-sql/functions/log10-transact-sql?view=sql-server-ver16
-    | LOG10 '(' float_expression=expression ')' #LOG10
+    | LOG10 '(' float_expression=expression ')' //#LOG10
     // https://learn.microsoft.com/en-us/sql/t-sql/functions/pi-transact-sql?view=sql-server-ver16
-    | PI '(' ')' #PI
+    | PI '(' ')' //#PI
     // https://learn.microsoft.com/en-us/sql/t-sql/functions/power-transact-sql?view=sql-server-ver16
-    | POWER '(' float_expression=expression ',' y=expression ')' #POWER
+    | POWER '(' float_expression=expression ',' y=expression ')' //#POWER
     // https://learn.microsoft.com/en-us/sql/t-sql/functions/radians-transact-sql?view=sql-server-ver16
-    | RADIANS '(' numeric_expression=expression ')' #RADIANS
+    | RADIANS '(' numeric_expression=expression ')' //#RADIANS
     // https://learn.microsoft.com/en-us/sql/t-sql/functions/rand-transact-sql?view=sql-server-ver16
-    | RAND '(' (seed=expression)? ')' #RAND
+//    | RAND '(' (seed=expression)? ')' //#RAND
     // https://learn.microsoft.com/en-us/sql/t-sql/functions/round-transact-sql?view=sql-server-ver16
-    | ROUND '(' numeric_expression=expression ',' length=expression (',' function=expression)? ')' #ROUND
+    | ROUND '(' numeric_expression=expression ',' length=expression (',' function=expression)? ')' //#ROUND
     // https://learn.microsoft.com/en-us/sql/t-sql/functions/sign-transact-sql?view=sql-server-ver16
-    | SIGN '(' numeric_expression=expression ')' #MATH_SIGN
+    | SIGN '(' numeric_expression=expression ')' //#MATH_SIGN
     // https://learn.microsoft.com/en-us/sql/t-sql/functions/sin-transact-sql?view=sql-server-ver16
-    | SIN '(' float_expression=expression ')' #SIN
+    | SIN '(' float_expression=expression ')' //#SIN
     // https://learn.microsoft.com/en-us/sql/t-sql/functions/sqrt-transact-sql?view=sql-server-ver16
-    | SQRT '(' float_expression=expression ')' #SQRT
+    | SQRT '(' float_expression=expression ')' //#SQRT
     // https://learn.microsoft.com/en-us/sql/t-sql/functions/square-transact-sql?view=sql-server-ver16
-    | SQUARE '(' float_expression=expression ')' #SQUARE
+    | SQUARE '(' float_expression=expression ')' //#SQUARE
     // https://learn.microsoft.com/en-us/sql/t-sql/functions/tan-transact-sql?view=sql-server-ver16
-    | TAN '(' float_expression=expression ')' #TAN
+    | TAN '(' float_expression=expression ')' //#TAN
     // Logical functions
     // https://learn.microsoft.com/en-us/sql/t-sql/functions/logical-functions-greatest-transact-sql?view=azure-sqldw-latest
-    | GREATEST '(' expression_list_ ')' #GREATEST
+    | GREATEST '(' expression_list_ ')' //#GREATEST
     // https://learn.microsoft.com/en-us/sql/t-sql/functions/logical-functions-least-transact-sql?view=azure-sqldw-latest
-    | LEAST '(' expression_list_ ')' #LEAST
+    | LEAST '(' expression_list_ ')' //#LEAST
     // Security functions
     // https://learn.microsoft.com/en-us/sql/t-sql/functions/certencoded-transact-sql?view=sql-server-ver16
-    | CERTENCODED '(' certid=expression ')'             #CERTENCODED
+    | CERTENCODED '(' certid=expression ')'             //#CERTENCODED
     // https://learn.microsoft.com/en-us/sql/t-sql/functions/certprivatekey-transact-sql?view=sql-server-ver16
-    | CERTPRIVATEKEY '(' certid=expression ',' encryption_password=expression (',' decryption_pasword=expression)? ')' #CERTPRIVATEKEY
+    | CERTPRIVATEKEY '(' certid=expression ',' encryption_password=expression (',' decryption_pasword=expression)? ')' //#CERTPRIVATEKEY
     // https://msdn.microsoft.com/en-us/library/ms176050.aspx
-    | CURRENT_USER                                      #CURRENT_USER
+    | CURRENT_USER                                      //#CURRENT_USER
     // https://learn.microsoft.com/en-us/sql/t-sql/functions/database-principal-id-transact-sql?view=sql-server-ver16
-    | DATABASE_PRINCIPAL_ID '(' (principal_name=expression)? ')' #DATABASE_PRINCIPAL_ID
+    | DATABASE_PRINCIPAL_ID '(' (principal_name=expression)? ')' //#DATABASE_PRINCIPAL_ID
     // https://learn.microsoft.com/en-us/sql/t-sql/functions/has-dbaccess-transact-sql?view=sql-server-ver16
-    | HAS_DBACCESS '(' database_name=expression ')'     #HAS_DBACCESS
+    | HAS_DBACCESS '(' database_name=expression ')'     //#HAS_DBACCESS
     // https://learn.microsoft.com/en-us/sql/t-sql/functions/has-perms-by-name-transact-sql?view=sql-server-ver16
-    | HAS_PERMS_BY_NAME '(' securable=expression ',' securable_class=expression ',' permission=expression ( ',' sub_securable=expression (',' sub_securable_class=expression )? )? ')' #HAS_PERMS_BY_NAME
+    | HAS_PERMS_BY_NAME '(' securable=expression ',' securable_class=expression ',' permission=expression ( ',' sub_securable=expression (',' sub_securable_class=expression )? )? ')' //#HAS_PERMS_BY_NAME
     // https://learn.microsoft.com/en-us/sql/t-sql/functions/is-member-transact-sql?view=sql-server-ver16
-    | IS_MEMBER '(' group_or_role=expression ')'        #IS_MEMBER
+    | IS_MEMBER '(' group_or_role=expression ')'        //#IS_MEMBER
     // https://learn.microsoft.com/en-us/sql/t-sql/functions/is-rolemember-transact-sql?view=sql-server-ver16
-    | IS_ROLEMEMBER '(' role=expression ( ',' database_principal=expression )? ')' #IS_ROLEMEMBER
+    | IS_ROLEMEMBER '(' role=expression ( ',' database_principal=expression )? ')' //#IS_ROLEMEMBER
     // https://learn.microsoft.com/en-us/sql/t-sql/functions/is-srvrolemember-transact-sql?view=sql-server-ver16
-    | IS_SRVROLEMEMBER '(' role=expression ( ',' login=expression )? ')' #IS_SRVROLEMEMBER
+    | IS_SRVROLEMEMBER '(' role=expression ( ',' login=expression )? ')' //#IS_SRVROLEMEMBER
     // https://learn.microsoft.com/en-us/sql/t-sql/functions/loginproperty-transact-sql?view=sql-server-ver16
-    | LOGINPROPERTY '(' login_name=expression ',' property_name=expression ')' #LOGINPROPERTY
+    | LOGINPROPERTY '(' login_name=expression ',' property_name=expression ')'// #LOGINPROPERTY
     // https://learn.microsoft.com/en-us/sql/t-sql/functions/original-login-transact-sql?view=sql-server-ver16
-    | ORIGINAL_LOGIN '(' ')'                            #ORIGINAL_LOGIN
+    | ORIGINAL_LOGIN '(' ')'                            //#ORIGINAL_LOGIN
     // https://learn.microsoft.com/en-us/sql/t-sql/functions/permissions-transact-sql?view=sql-server-ver16
-    | PERMISSIONS '(' ( object_id=expression (',' column=expression)? )? ')' #PERMISSIONS
+    | PERMISSIONS '(' ( object_id=expression (',' column=expression)? )? ')' //#PERMISSIONS
     // https://learn.microsoft.com/en-us/sql/t-sql/functions/pwdencrypt-transact-sql?view=sql-server-ver16
-    | PWDENCRYPT '(' password=expression ')'            #PWDENCRYPT
+    | PWDENCRYPT '(' password=expression ')'           // #PWDENCRYPT
     // https://learn.microsoft.com/en-us/sql/t-sql/functions/pwdcompare-transact-sql?view=sql-server-ver16
-    | PWDCOMPARE '(' clear_text_password=expression ',' password_hash=expression (',' version=expression )?')' #PWDCOMPARE
+    | PWDCOMPARE '(' clear_text_password=expression ',' password_hash=expression (',' version=expression )?')' //#PWDCOMPARE
     // https://msdn.microsoft.com/en-us/library/ms177587.aspx
-    | SESSION_USER                                      #SESSION_USER
+    | SESSION_USER                                      //#SESSION_USER
     // https://learn.microsoft.com/en-us/sql/t-sql/functions/sessionproperty-transact-sql?view=sql-server-ver16
-    | SESSIONPROPERTY '(' option_name=expression ')'    #SESSIONPROPERTY
+    | SESSIONPROPERTY '(' option_name=expression ')'    //#SESSIONPROPERTY
     // https://learn.microsoft.com/en-us/sql/t-sql/functions/suser-id-transact-sql?view=sql-server-ver16
-    | SUSER_ID '(' (login=expression)? ')'              #SUSER_ID
+    | SUSER_ID '(' (login=expression)? ')'              //#SUSER_ID
     // https://learn.microsoft.com/en-us/sql/t-sql/functions/suser-name-transact-sql?view=sql-server-ver16
-    | SUSER_NAME '(' (server_user_sid=expression)? ')'  #SUSER_SNAME
+    | SUSER_NAME '(' (server_user_sid=expression)? ')' // #SUSER_SNAME
     // https://learn.microsoft.com/en-us/sql/t-sql/functions/suser-sid-transact-sql?view=sql-server-ver16
-    | SUSER_SID '(' (login=expression (',' param2=expression)?)? ')' #SUSER_SID
+    | SUSER_SID '(' (login=expression (',' param2=expression)?)? ')' //#SUSER_SID
     // https://learn.microsoft.com/en-us/sql/t-sql/functions/suser-sname-transact-sql?view=sql-server-ver16
-    | SUSER_SNAME '(' (server_user_sid=expression)? ')' #SUSER_SNAME
+    | SUSER_SNAME '(' (server_user_sid=expression)? ')' //#SUSER_SNAME
     // https://msdn.microsoft.com/en-us/library/ms179930.aspx
-    | SYSTEM_USER                                       #SYSTEM_USER
+    | SYSTEM_USER                                      // #SYSTEM_USER
     // https://learn.microsoft.com/en-us/sql/t-sql/functions/user-transact-sql?view=sql-server-ver16
-    | USER                                              #USER
+    | USER                                             // #USER
     // https://learn.microsoft.com/en-us/sql/t-sql/functions/user-id-transact-sql?view=sql-server-ver16
-    | USER_ID '(' (user=expression)? ')'                #USER_ID
+    | USER_ID '(' (user=expression)? ')'               // #USER_ID
     // https://learn.microsoft.com/en-us/sql/t-sql/functions/user-name-transact-sql?view=sql-server-ver16
-    | USER_NAME '(' (id=expression)? ')' #USER_NAME
+    | USER_NAME '(' (id=expression)? ')'// #USER_NAME
     ;
 
 xml_data_type_methods

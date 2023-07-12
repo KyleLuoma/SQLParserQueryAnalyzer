@@ -31,11 +31,13 @@ public class Main {
         }
 
         if(doQuery) {
-            System.out.println("Analyzing query: " + query);
             QueryElementScraper scraper = new QueryElementScraper(query);
+            System.out.println("@BEGINPARSETREE");
             scraper.printParseTree();
-            System.out.println("Scraping query");
-            scraper.scrapeQuery();
+            System.out.println("@ENDPARSETREE\n@BEGINJSON");
+            String result = scraper.getQueryElementsAsJsonString();
+            System.out.println(result);
+            System.out.println("@ENDJSON");
         }
 
     }

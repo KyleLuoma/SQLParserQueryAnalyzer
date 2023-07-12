@@ -38,9 +38,7 @@ public class TSqlScraperVisitor extends TSqlParserBaseVisitor {
             ArrayList<ArrayList<String>> tableSourceList
                     = (ArrayList<ArrayList<String>>) visit(ctx.table_sources());
             container.addAll(tableSourceList);
-        } catch(Exception e) {
-            System.out.println("No table sources in this query branch: " + ctx.getText());
-        }
+        } catch(Exception e) { }
         if(ctx.search_condition() != null) {
             for(int i = 0; i < ctx.search_condition().size(); i++) {
                 container.addAll(
@@ -244,9 +242,7 @@ public class TSqlScraperVisitor extends TSqlParserBaseVisitor {
                                     .expression()
                     )
             );
-        } catch(Exception e) {
-            System.out.println("No expression select elements in this query branch.");
-        }
+        } catch(Exception e) { }
 
         return container;
     }
@@ -269,6 +265,13 @@ public class TSqlScraperVisitor extends TSqlParserBaseVisitor {
                     )
             );
         } catch (Exception e) {}
+        if(ctx.expression() != null) {
+            for(int i = 0; i < ctx.expression().size(); i++) {
+                container.addAll(
+                        (ArrayList<ArrayList<String>>) visit(ctx.expression(i))
+                );
+            }
+        }
         return container;
     }
 
@@ -313,6 +316,26 @@ public class TSqlScraperVisitor extends TSqlParserBaseVisitor {
                     )
             );
         } catch(Exception e) {}
+        try {
+            container.addAll(
+                    (ArrayList<ArrayList<String>>) visit(ctx.built_in_functions())
+            );
+        } catch (Exception e) {}
+
+        return container;
+    }
+
+    public ArrayList<ArrayList<String>> visitBuilt_in_functions(
+            TSqlParser.Built_in_functionsContext ctx
+    ) {
+        ArrayList<ArrayList<String>> container = new ArrayList<>();
+        if(ctx.expression() != null) {
+            for(int i = 0; i < ctx.expression().size(); i++) {
+                container.addAll(
+                        (ArrayList<ArrayList<String>>) visit(ctx.expression(i))
+                );
+            }
+        }
         return container;
     }
 

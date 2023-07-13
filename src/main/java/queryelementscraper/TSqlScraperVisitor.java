@@ -32,27 +32,19 @@ public class TSqlScraperVisitor extends TSqlParserBaseVisitor<ArrayList<ArrayLis
     public ArrayList<ArrayList<String>> visitQuery_specification(
             TSqlParser.Query_specificationContext ctx
     ) {
-        ArrayList<ArrayList<String>> container
-                = visit(ctx.select_list());
-        try{
-            ArrayList<ArrayList<String>> tableSourceList
-                    = visit(ctx.table_sources());
+        ArrayList<ArrayList<String>> container = visit(ctx.select_list());
+        if(ctx.table_sources() != null) {
+            ArrayList<ArrayList<String>> tableSourceList = visit(ctx.table_sources());
             container.addAll(tableSourceList);
-        } catch(Exception e) { }
+        }
         if(ctx.search_condition() != null) {
             for(int i = 0; i < ctx.search_condition().size(); i++) {
-                container.addAll(
-                        visit(ctx.search_condition(i))
-                );
+                container.addAll(visit(ctx.search_condition(i)));
             }
         }
         if(ctx.group_by_item() != null) {
             for(int i = 0; i < ctx.group_by_item().size(); i++) {
-                container.addAll(
-                        visit(
-                                ctx.group_by_item(i).expression()
-                        )
-                );
+                container.addAll(visit(ctx.group_by_item(i).expression()));
             }
         }
         if(ctx.grouping_sets_item() != null) {
@@ -145,6 +137,10 @@ public class TSqlScraperVisitor extends TSqlParserBaseVisitor<ArrayList<ArrayLis
                                 ctx.derived_table().subquery(i).select_statement()
                         )
                 );
+                ArrayList<String> sqPair = new ArrayList<>();
+                sqPair.add("subquery");
+                sqPair.add("1");
+                container.add(sqPair);
             }
         }
         if(ctx.table_source() != null) {
@@ -161,6 +157,10 @@ public class TSqlScraperVisitor extends TSqlParserBaseVisitor<ArrayList<ArrayLis
             TSqlParser.Join_partContext ctx
     ) {
         ArrayList<ArrayList<String>> container = new ArrayList<>();
+        ArrayList<String> pair = new ArrayList<>();
+        pair.add("join");
+        pair.add("1");
+        container.add(pair);
         if(ctx.join_on() != null) {
             container.addAll(
                     visit(ctx.join_on().table_source())
@@ -170,6 +170,16 @@ public class TSqlScraperVisitor extends TSqlParserBaseVisitor<ArrayList<ArrayLis
                             ctx.join_on().search_condition()
                     )
             );
+            // Check for composite key join
+            if(
+                    ctx.join_on().search_condition().search_condition() != null
+                    && ctx.join_on().search_condition().search_condition().size() > 1
+            ) {
+                ArrayList<String> ckPair = new ArrayList<>();
+                ckPair.add("composite-key-join");
+                ckPair.add("1");
+                container.add(ckPair);
+            }
         } else if (ctx.cross_join() != null) {
             container.addAll(
                     visit(ctx.cross_join().table_source_item())
@@ -206,6 +216,10 @@ public class TSqlScraperVisitor extends TSqlParserBaseVisitor<ArrayList<ArrayLis
             container.addAll(
                     visit(ctx.subquery())
             );
+            ArrayList<String> sqPair = new ArrayList<>();
+            sqPair.add("subquery");
+            sqPair.add("1");
+            container.add(sqPair);
         }
         if(ctx.expression() != null) {
             for(int i = 0; i < ctx.expression().size(); i++) {
@@ -234,16 +248,12 @@ public class TSqlScraperVisitor extends TSqlParserBaseVisitor<ArrayList<ArrayLis
             TSqlParser.Select_list_elemContext ctx
     ) {
         ArrayList<ArrayList<String>> container = new ArrayList<>();
-
-        try{
+        if(ctx.expression_elem().expression() != null) {
             container.addAll(
-                    visit(
-                            ctx.expression_elem()
-                                    .expression()
+                    visit(ctx.expression_elem().expression()
                     )
             );
-        } catch(Exception e) { }
-
+        }
         return container;
     }
 
@@ -251,26 +261,33 @@ public class TSqlScraperVisitor extends TSqlParserBaseVisitor<ArrayList<ArrayLis
             TSqlParser.ExpressionContext ctx
     ) {
         ArrayList<ArrayList<String>> container = new ArrayList<>();
-        try{
-            container.addAll(
-                    visit(
-                            ctx.full_column_name()
-                    )
-            );
-        } catch(Exception e) {}
-        try{
-            container.addAll(
-                    visit(
-                            ctx.function_call()
-                    )
-            );
-        } catch (Exception e) {}
+        if(ctx.full_column_name() != null) {
+            container.addAll(visit(ctx.full_column_name()));
+        }
+        if(ctx.function_call() != null) {
+            container.addAll(visit(ctx.function_call()));
+        }
+
         if(ctx.expression() != null) {
             for(int i = 0; i < ctx.expression().size(); i++) {
-                container.addAll(
-                        visit(ctx.expression(i))
-                );
+                container.addAll(visit(ctx.expression(i)));
             }
+        }
+        if(ctx.bracket_expression() != null) {
+            container.addAll(visit(ctx.bracket_expression()));
+        }
+        return container;
+    }
+
+    public ArrayList<ArrayList<String>> visitBracket_expression(
+            TSqlParser.Bracket_expressionContext ctx
+    ) {
+        ArrayList<ArrayList<String>> container = new ArrayList<>();
+        if(ctx.expression() != null) {
+            container.addAll(visit(ctx.expression()));
+        }
+        if(ctx.subquery() != null) {
+            container.addAll(visit(ctx.subquery()));
         }
         return container;
     }
@@ -315,11 +332,17 @@ public class TSqlScraperVisitor extends TSqlParserBaseVisitor<ArrayList<ArrayLis
                             ctx.analytic_windowed_function().expression(0)
                     )
             );
+            functionType.add("function");
+            functionType.add(ctx.analytic_windowed_function().getChild(0).getText());
+            container.add(functionType);
         } catch(Exception e) {}
         try {
             container.addAll(
                     visit(ctx.built_in_functions())
             );
+            functionType.add("function");
+            functionType.add(ctx.built_in_functions().getChild(0).getText());
+            container.add(functionType);
         } catch (Exception e) {}
 
         return container;

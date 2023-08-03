@@ -3883,7 +3883,11 @@ query_specification
       (WHERE where=search_condition)?
       // https://msdn.microsoft.com/en-us/library/ms177673.aspx
       (GROUP BY ((groupByAll=ALL? groupBys+=group_by_item (',' groupBys+=group_by_item)*) | GROUPING SETS '(' groupSets+=grouping_sets_item (',' groupSets+=grouping_sets_item)* ')'))?
-      (HAVING having=search_condition)?
+      having_clause?
+    ;
+
+having_clause
+    : (HAVING having=search_condition)
     ;
 
 // https://msdn.microsoft.com/en-us/library/ms189463.aspx

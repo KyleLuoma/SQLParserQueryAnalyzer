@@ -2849,6 +2849,12 @@ public interface TSqlParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitQuery_specification(TSqlParser.Query_specificationContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link TSqlParser#having_clause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitHaving_clause(TSqlParser.Having_clauseContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link TSqlParser#top_clause}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

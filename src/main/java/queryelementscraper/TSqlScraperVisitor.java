@@ -49,14 +49,22 @@ public class TSqlScraperVisitor extends TSqlParserBaseVisitor<ArrayList<ArrayLis
             TSqlParser.Query_specificationContext ctx
     ) {
         ArrayList<ArrayList<String>> container = visit(ctx.select_list());
+        if(ctx.top_clause() != null) {
+            ArrayList<String> topLabel = new ArrayList<>();
+            topLabel.add("top clause");
+            topLabel.add("1");
+            container.add(topLabel);
+        }
         if(ctx.table_sources() != null) {
             ArrayList<ArrayList<String>> tableSourceList = visit(ctx.table_sources());
             container.addAll(tableSourceList);
         }
         if(ctx.search_condition() != null) {
-            for(int i = 0; i < ctx.search_condition().size(); i++) {
-                container.addAll(visit(ctx.search_condition(i)));
-            }
+            ArrayList<String> whereLabel = new ArrayList<>();
+            whereLabel.add("where");
+            whereLabel.add("1");
+            container.add(whereLabel);
+            container.addAll(visit(ctx.search_condition()));
         }
         if(ctx.group_by_item() != null) {
             for(int i = 0; i < ctx.group_by_item().size(); i++) {
@@ -71,6 +79,13 @@ public class TSqlScraperVisitor extends TSqlParserBaseVisitor<ArrayList<ArrayLis
                         )
                 );
             }
+        }
+        if(ctx.having_clause() != null) {
+            ArrayList<String> whereLabel = new ArrayList<>();
+            whereLabel.add("having");
+            whereLabel.add("1");
+            container.add(whereLabel);
+            container.addAll(visit(ctx.search_condition()));
         }
         return container;
     }
@@ -243,7 +258,7 @@ public class TSqlScraperVisitor extends TSqlParserBaseVisitor<ArrayList<ArrayLis
             );
         } else {
             ArrayList<String> logicalLabel = new ArrayList<>();
-            logicalLabel.add("logic operator");
+            logicalLabel.add("logical operator");
             logicalLabel.add(ctx.getChild(1).getText());
             container.add(logicalLabel);
             for(int i = 0; i < ctx.search_condition().size(); i++) {

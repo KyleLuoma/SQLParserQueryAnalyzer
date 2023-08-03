@@ -4738,6 +4738,16 @@ public interface TSqlParserListener extends ParseTreeListener {
 	 */
 	void exitQuery_specification(TSqlParser.Query_specificationContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link TSqlParser#having_clause}.
+	 * @param ctx the parse tree
+	 */
+	void enterHaving_clause(TSqlParser.Having_clauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link TSqlParser#having_clause}.
+	 * @param ctx the parse tree
+	 */
+	void exitHaving_clause(TSqlParser.Having_clauseContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link TSqlParser#top_clause}.
 	 * @param ctx the parse tree
 	 */

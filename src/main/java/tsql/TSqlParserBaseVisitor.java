@@ -3328,6 +3328,13 @@ public class TSqlParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> implem
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
+	@Override public T visitHaving_clause(TSqlParser.Having_clauseContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
 	@Override public T visitTop_clause(TSqlParser.Top_clauseContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}

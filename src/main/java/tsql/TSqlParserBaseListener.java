@@ -5692,6 +5692,18 @@ public class TSqlParserBaseListener implements TSqlParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterHaving_clause(TSqlParser.Having_clauseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitHaving_clause(TSqlParser.Having_clauseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterTop_clause(TSqlParser.Top_clauseContext ctx) { }
 	/**
 	 * {@inheritDoc}

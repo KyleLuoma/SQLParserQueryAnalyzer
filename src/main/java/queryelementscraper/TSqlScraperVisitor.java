@@ -81,11 +81,11 @@ public class TSqlScraperVisitor extends TSqlParserBaseVisitor<ArrayList<ArrayLis
             }
         }
         if(ctx.having_clause() != null) {
-            ArrayList<String> whereLabel = new ArrayList<>();
-            whereLabel.add("having");
-            whereLabel.add("1");
-            container.add(whereLabel);
-            container.addAll(visit(ctx.search_condition()));
+            ArrayList<String> havingLabel = new ArrayList<>();
+            havingLabel.add("having");
+            havingLabel.add("1");
+            container.add(havingLabel);
+            container.addAll(visit(ctx.having_clause().search_condition()));
         }
         return container;
     }
@@ -418,6 +418,9 @@ public class TSqlScraperVisitor extends TSqlParserBaseVisitor<ArrayList<ArrayLis
         ArrayList<ArrayList<String>> container = new ArrayList<>();
         ArrayList<String> functionType = new ArrayList<>();
         try {
+            functionType.add("function");
+            functionType.add(ctx.aggregate_windowed_function().getChild(0).getText());
+            container.add(functionType);
             container.addAll(
                     visit(
                             ctx.aggregate_windowed_function()
@@ -425,10 +428,7 @@ public class TSqlScraperVisitor extends TSqlParserBaseVisitor<ArrayList<ArrayLis
                                     .expression()
                     )
             );
-            functionType.add("function");
-            functionType.add(ctx.aggregate_windowed_function().getChild(0).getText());
-            container.add(functionType);
-        } catch(Exception e) {}
+        } catch(Exception e) { }
         try {
             container.addAll(
                     visit(

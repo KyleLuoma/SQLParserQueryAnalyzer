@@ -3503,6 +3503,12 @@ public interface TSqlParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitFull_column_name(TSqlParser.Full_column_nameContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link TSqlParser#column_name}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitColumn_name(TSqlParser.Column_nameContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link TSqlParser#column_name_list_with_order}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

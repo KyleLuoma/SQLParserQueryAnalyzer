@@ -5828,6 +5828,16 @@ public interface TSqlParserListener extends ParseTreeListener {
 	 */
 	void exitFull_column_name(TSqlParser.Full_column_nameContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link TSqlParser#column_name}.
+	 * @param ctx the parse tree
+	 */
+	void enterColumn_name(TSqlParser.Column_nameContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link TSqlParser#column_name}.
+	 * @param ctx the parse tree
+	 */
+	void exitColumn_name(TSqlParser.Column_nameContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link TSqlParser#column_name_list_with_order}.
 	 * @param ctx the parse tree
 	 */

@@ -1,3 +1,4 @@
+import queryschemaidentifiertagger.QuerySchemaIdentifierTagger;
 import server.ParserServer;
 
 import java.util.Locale;
@@ -9,6 +10,7 @@ public class Main {
 
         Boolean doServer = false;
         Boolean doQuery = false;
+        Boolean schematagging = false;
         String query = "";
 
         for(int i = 0; i < args.length; i++){
@@ -21,6 +23,14 @@ public class Main {
                     doQuery = true;
                 } catch(Exception e) {
                     System.out.println("query argument must be followed by a query encased in quotes");
+                }
+            }
+            if(args[i].toLowerCase(Locale.ROOT).equals("--schematagger")){
+                try {
+                    query = args[i + 1];
+                    schematagging = true;
+                } catch(Exception e) {
+                    System.out.println("query to tag renaming elements must be followed by a query encased in quotes");
                 }
             }
         }
@@ -38,6 +48,16 @@ public class Main {
             String result = scraper.getQueryElementsAsJsonString();
             System.out.println(result);
             System.out.println("@ENDJSON");
+        }
+
+        if(schematagging){
+            QuerySchemaIdentifierTagger renamer = new QuerySchemaIdentifierTagger(query);
+            System.out.println("@BEGINTAGGEDQUERY");
+            renamer.printQueryString();
+            System.out.println("@ENDTAGGEDQUERY");
+            System.out.println("@BEGINALIASES");
+            renamer.printAliasString();
+            System.out.println("@ENDALIASES");
         }
 
     }

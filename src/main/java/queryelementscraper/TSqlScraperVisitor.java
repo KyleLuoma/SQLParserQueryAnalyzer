@@ -400,9 +400,9 @@ public class TSqlScraperVisitor extends TSqlParserBaseVisitor<ArrayList<ArrayLis
     ) {
         ArrayList<ArrayList<String>> container = new ArrayList<>();
         ArrayList<String> pair = new ArrayList<>();
-        if(ctx.id_() != null) {
+        if(ctx.column_name() != null) {
             pair.add("column");
-            pair.add(ctx.id_().getText());
+            pair.add(ctx.column_name().getText());
             container.add(pair);
         } else if (ctx.getText().charAt(0) == '$') {
             pair.add("column");

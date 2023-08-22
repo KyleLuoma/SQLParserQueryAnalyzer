@@ -4951,7 +4951,11 @@ ddl_object
     ;
 
 full_column_name
-    : ((DELETED | INSERTED | full_table_name) '.')? (column_name=id_ | ('$' (IDENTITY | ROWGUID)))
+    : ((DELETED | INSERTED | full_table_name) '.')? (column_name | ('$' (IDENTITY | ROWGUID)))
+    ;
+
+column_name
+    : id_
     ;
 
 column_name_list_with_order

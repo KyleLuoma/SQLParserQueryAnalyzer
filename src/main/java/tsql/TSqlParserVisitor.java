@@ -3461,6 +3461,12 @@ public interface TSqlParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitFull_table_name(TSqlParser.Full_table_nameContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link TSqlParser#atomic_table_name}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAtomic_table_name(TSqlParser.Atomic_table_nameContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link TSqlParser#table_name}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

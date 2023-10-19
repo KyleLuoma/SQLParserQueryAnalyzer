@@ -25,11 +25,11 @@ public class TSqlRenamerListener extends TSqlParserBaseListener {
     }
 
 
-    public void enterFull_table_name(TSqlParser.Full_table_nameContext ctx){
+    public void enterAtomic_table_name(TSqlParser.Atomic_table_nameContext ctx){
         stack.push("<TABLE_NAME>");
     }
 
-    public void exitFull_table_name(TSqlParser.Full_table_nameContext ctx){
+    public void exitAtomic_table_name(TSqlParser.Atomic_table_nameContext ctx){
         stack.push("</TABLE_NAME>");
     }
 

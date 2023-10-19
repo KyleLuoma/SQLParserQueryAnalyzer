@@ -6916,6 +6916,18 @@ public class TSqlParserBaseListener implements TSqlParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterAtomic_table_name(TSqlParser.Atomic_table_nameContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitAtomic_table_name(TSqlParser.Atomic_table_nameContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterTable_name(TSqlParser.Table_nameContext ctx) { }
 	/**
 	 * {@inheritDoc}

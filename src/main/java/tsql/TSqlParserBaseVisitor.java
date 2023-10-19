@@ -4042,6 +4042,13 @@ public class TSqlParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> implem
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
+	@Override public T visitAtomic_table_name(TSqlParser.Atomic_table_nameContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
 	@Override public T visitTable_name(TSqlParser.Table_nameContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}

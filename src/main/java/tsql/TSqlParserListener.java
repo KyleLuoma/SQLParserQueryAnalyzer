@@ -5758,6 +5758,16 @@ public interface TSqlParserListener extends ParseTreeListener {
 	 */
 	void exitFull_table_name(TSqlParser.Full_table_nameContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link TSqlParser#atomic_table_name}.
+	 * @param ctx the parse tree
+	 */
+	void enterAtomic_table_name(TSqlParser.Atomic_table_nameContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link TSqlParser#atomic_table_name}.
+	 * @param ctx the parse tree
+	 */
+	void exitAtomic_table_name(TSqlParser.Atomic_table_nameContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link TSqlParser#table_name}.
 	 * @param ctx the parse tree
 	 */

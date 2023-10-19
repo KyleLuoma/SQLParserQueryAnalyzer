@@ -4920,7 +4920,12 @@ full_table_name
     : (linkedServer=id_ '.' '.' schema=id_   '.'
     |                       server=id_    '.' database=id_ '.'  schema=id_   '.'
     |                                         database=id_ '.'  schema=id_? '.'
-    |                                                           schema=id_    '.')? table=id_
+    |                                                           schema=id_    '.')? atomic_table_name
+//    |                                                           schema=id_    '.')? table=id_
+    ;
+
+atomic_table_name
+    : table=id_
     ;
 
 table_name

@@ -173,9 +173,7 @@ public class TSqlScraperVisitor extends TSqlParserBaseVisitor<ArrayList<ArrayLis
             ArrayList<String> pair = new ArrayList<>();
             pair.add("table");
             pair.add(
-                    ctx.full_table_name().id_(
-                            ctx.full_table_name().id_().size() - 1
-                    ).getText()
+                    ctx.full_table_name().atomic_table_name().getText()
             );
             container.add(pair);
         }

@@ -13,6 +13,7 @@ import java.util.Locale;
 
 import org.json.JSONObject;
 import queryelementscraper.QueryElementScraper;
+import queryelementscraper.TSqlQueryElementScraper;
 
 public class ParserServer {
 
@@ -47,7 +48,7 @@ public class ParserServer {
             String query = jsonObject.getString("query");
             System.out.println("Query: " + query);
 
-            QueryElementScraper scraper = new QueryElementScraper(query.toUpperCase(Locale.ROOT));
+            QueryElementScraper scraper = new TSqlQueryElementScraper(query.toUpperCase(Locale.ROOT));
             String response = scraper.getQueryElementsAsJsonString();
 
             t.sendResponseHeaders(200, response.length());

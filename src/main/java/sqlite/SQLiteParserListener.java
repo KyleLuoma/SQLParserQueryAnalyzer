@@ -338,6 +338,56 @@ public interface SQLiteParserListener extends ParseTreeListener {
 	 */
 	void exitExpr(SQLiteParser.ExprContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link SQLiteParser#keyword_exists}.
+	 * @param ctx the parse tree
+	 */
+	void enterKeyword_exists(SQLiteParser.Keyword_existsContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link SQLiteParser#keyword_exists}.
+	 * @param ctx the parse tree
+	 */
+	void exitKeyword_exists(SQLiteParser.Keyword_existsContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link SQLiteParser#predicate_operator}.
+	 * @param ctx the parse tree
+	 */
+	void enterPredicate_operator(SQLiteParser.Predicate_operatorContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link SQLiteParser#predicate_operator}.
+	 * @param ctx the parse tree
+	 */
+	void exitPredicate_operator(SQLiteParser.Predicate_operatorContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link SQLiteParser#predicate_and}.
+	 * @param ctx the parse tree
+	 */
+	void enterPredicate_and(SQLiteParser.Predicate_andContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link SQLiteParser#predicate_and}.
+	 * @param ctx the parse tree
+	 */
+	void exitPredicate_and(SQLiteParser.Predicate_andContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link SQLiteParser#predicate_or}.
+	 * @param ctx the parse tree
+	 */
+	void enterPredicate_or(SQLiteParser.Predicate_orContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link SQLiteParser#predicate_or}.
+	 * @param ctx the parse tree
+	 */
+	void exitPredicate_or(SQLiteParser.Predicate_orContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link SQLiteParser#negation}.
+	 * @param ctx the parse tree
+	 */
+	void enterNegation(SQLiteParser.NegationContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link SQLiteParser#negation}.
+	 * @param ctx the parse tree
+	 */
+	void exitNegation(SQLiteParser.NegationContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link SQLiteParser#raise_function}.
 	 * @param ctx the parse tree
 	 */
@@ -468,6 +518,36 @@ public interface SQLiteParserListener extends ParseTreeListener {
 	 */
 	void exitSelect_core(SQLiteParser.Select_coreContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link SQLiteParser#where_expr}.
+	 * @param ctx the parse tree
+	 */
+	void enterWhere_expr(SQLiteParser.Where_exprContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link SQLiteParser#where_expr}.
+	 * @param ctx the parse tree
+	 */
+	void exitWhere_expr(SQLiteParser.Where_exprContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link SQLiteParser#group_by_expr}.
+	 * @param ctx the parse tree
+	 */
+	void enterGroup_by_expr(SQLiteParser.Group_by_exprContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link SQLiteParser#group_by_expr}.
+	 * @param ctx the parse tree
+	 */
+	void exitGroup_by_expr(SQLiteParser.Group_by_exprContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link SQLiteParser#having_expr}.
+	 * @param ctx the parse tree
+	 */
+	void enterHaving_expr(SQLiteParser.Having_exprContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link SQLiteParser#having_expr}.
+	 * @param ctx the parse tree
+	 */
+	void exitHaving_expr(SQLiteParser.Having_exprContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link SQLiteParser#factored_select_stmt}.
 	 * @param ctx the parse tree
 	 */
@@ -508,6 +588,16 @@ public interface SQLiteParserListener extends ParseTreeListener {
 	 */
 	void exitTable_or_subquery(SQLiteParser.Table_or_subqueryContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link SQLiteParser#subquery}.
+	 * @param ctx the parse tree
+	 */
+	void enterSubquery(SQLiteParser.SubqueryContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link SQLiteParser#subquery}.
+	 * @param ctx the parse tree
+	 */
+	void exitSubquery(SQLiteParser.SubqueryContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link SQLiteParser#result_column}.
 	 * @param ctx the parse tree
 	 */
@@ -518,6 +608,16 @@ public interface SQLiteParserListener extends ParseTreeListener {
 	 */
 	void exitResult_column(SQLiteParser.Result_columnContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link SQLiteParser#asterisk}.
+	 * @param ctx the parse tree
+	 */
+	void enterAsterisk(SQLiteParser.AsteriskContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link SQLiteParser#asterisk}.
+	 * @param ctx the parse tree
+	 */
+	void exitAsterisk(SQLiteParser.AsteriskContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link SQLiteParser#join_operator}.
 	 * @param ctx the parse tree
 	 */
@@ -527,6 +627,16 @@ public interface SQLiteParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitJoin_operator(SQLiteParser.Join_operatorContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link SQLiteParser#non_ansi_join_operator}.
+	 * @param ctx the parse tree
+	 */
+	void enterNon_ansi_join_operator(SQLiteParser.Non_ansi_join_operatorContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link SQLiteParser#non_ansi_join_operator}.
+	 * @param ctx the parse tree
+	 */
+	void exitNon_ansi_join_operator(SQLiteParser.Non_ansi_join_operatorContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link SQLiteParser#join_constraint}.
 	 * @param ctx the parse tree

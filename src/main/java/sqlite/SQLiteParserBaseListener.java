@@ -412,6 +412,66 @@ public class SQLiteParserBaseListener implements SQLiteParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterKeyword_exists(SQLiteParser.Keyword_existsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitKeyword_exists(SQLiteParser.Keyword_existsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterPredicate_operator(SQLiteParser.Predicate_operatorContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitPredicate_operator(SQLiteParser.Predicate_operatorContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterPredicate_and(SQLiteParser.Predicate_andContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitPredicate_and(SQLiteParser.Predicate_andContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterPredicate_or(SQLiteParser.Predicate_orContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitPredicate_or(SQLiteParser.Predicate_orContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterNegation(SQLiteParser.NegationContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitNegation(SQLiteParser.NegationContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterRaise_function(SQLiteParser.Raise_functionContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -568,6 +628,42 @@ public class SQLiteParserBaseListener implements SQLiteParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterWhere_expr(SQLiteParser.Where_exprContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitWhere_expr(SQLiteParser.Where_exprContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterGroup_by_expr(SQLiteParser.Group_by_exprContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitGroup_by_expr(SQLiteParser.Group_by_exprContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterHaving_expr(SQLiteParser.Having_exprContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitHaving_expr(SQLiteParser.Having_exprContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterFactored_select_stmt(SQLiteParser.Factored_select_stmtContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -616,6 +712,18 @@ public class SQLiteParserBaseListener implements SQLiteParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterSubquery(SQLiteParser.SubqueryContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitSubquery(SQLiteParser.SubqueryContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterResult_column(SQLiteParser.Result_columnContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -628,6 +736,18 @@ public class SQLiteParserBaseListener implements SQLiteParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterAsterisk(SQLiteParser.AsteriskContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitAsterisk(SQLiteParser.AsteriskContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterJoin_operator(SQLiteParser.Join_operatorContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -635,6 +755,18 @@ public class SQLiteParserBaseListener implements SQLiteParserListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitJoin_operator(SQLiteParser.Join_operatorContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterNon_ansi_join_operator(SQLiteParser.Non_ansi_join_operatorContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitNon_ansi_join_operator(SQLiteParser.Non_ansi_join_operatorContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

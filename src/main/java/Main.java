@@ -1,3 +1,5 @@
+import queryelementscraper.SQliteQueryElementScraper;
+import queryelementscraper.TSqlQueryElementScraper;
 import queryschemaidentifiertagger.QuerySchemaIdentifierTagger;
 import queryschemaidentifiertagger.SQLiteQuerySchemaIdentifierTagger;
 import queryschemaidentifiertagger.TSqlQuerySchemaIdentifierTagger;
@@ -68,7 +70,18 @@ public class Main {
         }
 
         if(doQuery) {
-            QueryElementScraper scraper = new QueryElementScraper(query);
+            QueryElementScraper scraper;
+            if(sqlDialect == SqlDialect.TSQL){
+                scraper = new TSqlQueryElementScraper(query);
+                System.out.println("Using TSQL tagger.");
+            } else if(sqlDialect == SqlDialect.SQLITE){
+                scraper = new SQliteQueryElementScraper(query);
+                System.out.println("Using SQLITE tagger.");
+            } else {
+                scraper = new TSqlQueryElementScraper(query);
+                System.out.println("Using TSQL tagger as default.");
+            }
+
             System.out.println("@BEGINPARSETREE");
             scraper.printParseTree();
             System.out.println("@ENDPARSETREE\n@BEGINJSON");

@@ -209,6 +209,36 @@ public interface SQLiteParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitExpr(SQLiteParser.ExprContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link SQLiteParser#keyword_exists}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitKeyword_exists(SQLiteParser.Keyword_existsContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link SQLiteParser#predicate_operator}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPredicate_operator(SQLiteParser.Predicate_operatorContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link SQLiteParser#predicate_and}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPredicate_and(SQLiteParser.Predicate_andContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link SQLiteParser#predicate_or}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPredicate_or(SQLiteParser.Predicate_orContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link SQLiteParser#negation}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitNegation(SQLiteParser.NegationContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link SQLiteParser#raise_function}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -287,6 +317,24 @@ public interface SQLiteParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitSelect_core(SQLiteParser.Select_coreContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link SQLiteParser#where_expr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitWhere_expr(SQLiteParser.Where_exprContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link SQLiteParser#group_by_expr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitGroup_by_expr(SQLiteParser.Group_by_exprContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link SQLiteParser#having_expr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitHaving_expr(SQLiteParser.Having_exprContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link SQLiteParser#factored_select_stmt}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -311,17 +359,35 @@ public interface SQLiteParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitTable_or_subquery(SQLiteParser.Table_or_subqueryContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link SQLiteParser#subquery}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSubquery(SQLiteParser.SubqueryContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link SQLiteParser#result_column}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitResult_column(SQLiteParser.Result_columnContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link SQLiteParser#asterisk}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAsterisk(SQLiteParser.AsteriskContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link SQLiteParser#join_operator}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitJoin_operator(SQLiteParser.Join_operatorContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link SQLiteParser#non_ansi_join_operator}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitNon_ansi_join_operator(SQLiteParser.Non_ansi_join_operatorContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link SQLiteParser#join_constraint}.
 	 * @param ctx the parse tree

@@ -263,38 +263,57 @@ expr
     | expr ( PLUS | MINUS) expr
     | expr ( LT2 | GT2 | AMP | PIPE) expr
     | expr ( LT | LT_EQ | GT | GT_EQ) expr
-    | expr (
-        ASSIGN
-        | EQ
-        | NOT_EQ1
-        | NOT_EQ2
-        | IS_
-        | IS_ NOT_
-        | IN_
-        | LIKE_
-        | GLOB_
-        | MATCH_
-        | REGEXP_
-    ) expr
-    | expr AND_ expr
-    | expr OR_ expr
+    | expr predicate_operator expr
+    | expr predicate_and expr
+    | expr predicate_or expr
     | function_name OPEN_PAR ((DISTINCT_? expr ( COMMA expr)*) | STAR)? CLOSE_PAR filter_clause? over_clause?
     | OPEN_PAR expr (COMMA expr)* CLOSE_PAR
     | CAST_ OPEN_PAR expr AS_ type_name CLOSE_PAR
     | expr COLLATE_ collation_name
-    | expr NOT_? (LIKE_ | GLOB_ | REGEXP_ | MATCH_) expr (ESCAPE_ expr)?
-    | expr ( ISNULL_ | NOTNULL_ | NOT_ NULL_)
+    | expr negation? (LIKE_ | GLOB_ | REGEXP_ | MATCH_) expr (ESCAPE_ expr)?
+    | expr ( ISNULL_ | NOTNULL_ | negation NULL_)
     | expr IS_ NOT_? expr
-    | expr NOT_? BETWEEN_ expr AND_ expr
-    | expr NOT_? IN_ (
+    | expr negation? BETWEEN_ expr AND_ expr
+    | expr negation? IN_ (
         OPEN_PAR (select_stmt | expr ( COMMA expr)*)? CLOSE_PAR
         | ( schema_name DOT)? table_name
         | (schema_name DOT)? table_function_name OPEN_PAR (expr (COMMA expr)*)? CLOSE_PAR
     )
-    | ((NOT_)? EXISTS_)? OPEN_PAR select_stmt CLOSE_PAR
+    | ((negation)? keyword_exists)? OPEN_PAR select_stmt CLOSE_PAR
     | CASE_ expr? (WHEN_ expr THEN_ expr)+ (ELSE_ expr)? END_
     | raise_function
 ;
+
+keyword_exists
+    : EXISTS_
+    ;
+
+predicate_operator
+    :
+    ASSIGN
+    | EQ
+    | NOT_EQ1
+    | NOT_EQ2
+    | IS_
+    | IS_ negation
+    | IN_
+    | LIKE_
+    | GLOB_
+    | MATCH_
+    | REGEXP_
+    ;
+
+predicate_and
+    : AND_
+    ;
+
+predicate_or
+    : OR_
+    ;
+
+negation
+    : NOT_
+    ;
 
 raise_function
     : RAISE_ OPEN_PAR (IGNORE_ | (ROLLBACK_ | ABORT_ | FAIL_) COMMA error_message) CLOSE_PAR
@@ -376,13 +395,27 @@ select_core
     : (
         SELECT_ (DISTINCT_ | ALL_)? result_column (COMMA result_column)* (
             FROM_ (table_or_subquery (COMMA table_or_subquery)* | join_clause)
-        )? (WHERE_ whereExpr = expr)? (
-            GROUP_ BY_ groupByExpr += expr (COMMA groupByExpr += expr)* (
-                HAVING_ havingExpr = expr
+        )? (where_expr)? (
+            group_by_expr (
+                having_expr
             )?
         )? (WINDOW_ window_name AS_ window_defn ( COMMA window_name AS_ window_defn)*)?
     )
     | values_clause
+;
+
+where_expr
+    :
+    WHERE_ expr
+;
+
+group_by_expr
+    : GROUP_ BY_ expr (COMMA expr)*
+;
+
+having_expr
+    :
+    HAVING_ expr
 ;
 
 factored_select_stmt
@@ -410,19 +443,31 @@ table_or_subquery
         AS_? table_alias
     )?
     | OPEN_PAR (table_or_subquery (COMMA table_or_subquery)* | join_clause) CLOSE_PAR
-    | OPEN_PAR select_stmt CLOSE_PAR (AS_? table_alias)?
+    | subquery
+;
+
+subquery
+    : OPEN_PAR select_stmt CLOSE_PAR (AS_? table_alias)?
 ;
 
 result_column
-    : STAR
-    | table_name DOT STAR
+    : asterisk
+    | table_name DOT asterisk
     | expr ( AS_? column_alias)?
 ;
 
+asterisk
+    : STAR
+;
+
 join_operator
-    : COMMA
+    : non_ansi_join_operator
     | NATURAL_? (LEFT_ OUTER_? | INNER_ | CROSS_)? JOIN_
 ;
+
+non_ansi_join_operator
+    : COMMA
+    ;
 
 join_constraint
     : ON_ expr

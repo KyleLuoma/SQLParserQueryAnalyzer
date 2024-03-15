@@ -38,3 +38,18 @@ Response:
 The tagger currently supports TSQL and SQLIte dialects. Queries in other dialects that use the LIMIT clause will probably have a decent chance of parsing correctly by selecting the SQLite dialect.
 This feature returns the provided SQL query with table and column names encased in opening and closing XML-style tags. 
 It also provides a list of table and column aliases used in the query so that users can isolate aliases tagged as tables and columns in their analysis.
+
+### Tagger usage example:
+At the command line:
+```
+java -jar ./SQLParserQueryAnalyzer.jar --schematagger "SELECT A, B, C AS C_ALIAS FROM T1 AS T1_ALIAS"
+```
+Response:
+```
+@BEGINTAGGEDQUERY
+SELECT <COLUMN_NAME> A </COLUMN_NAME> , <COLUMN_NAME> B </COLUMN_NAME> , <COLUMN_NAME> C </COLUMN_NAME> AS C_ALIAS FROM <TABLE_NAME> T1 </TABLE_NAME> AS T1_ALIAS 
+@ENDTAGGEDQUERY
+@BEGINALIASES
+<COLUMN_ALIASES>C_ALIAS</COLUMN_ALIASES><TABLE_ALIASES>T1_ALIAS</TABLE_ALIASES>
+@ENDALIASES
+```

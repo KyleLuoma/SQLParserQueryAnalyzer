@@ -20,6 +20,15 @@ public class Main {
         SqlDialect sqlDialect = SqlDialect.TSQL;
 
         for(int i = 0; i < args.length; i++){
+            if(args[i].toLowerCase(Locale.ROOT).equals("--help")) {
+                System.out.println("SQL Parser Query Analyzer Options:");
+                System.out.println(" --server : launches a small server to handle API requests for parsing (TSQL only");
+                System.out.println(" Command line options (select one or the other):");
+                System.out.println(" --query \"SELECT A FROM...\" : the query you wish to analyze encased in quotes");
+                System.out.println(" --schematagger \"SELECT A FROM...\" : the query you wish to tag");
+                System.out.println(" Tagger options:");
+                System.out.println(" --dialect [tsql | sqlite] : the dialect of the query you are tagging.");
+            }
             if(args[i].toLowerCase(Locale.ROOT).equals("--server")) {
                 doServer = true;
             }

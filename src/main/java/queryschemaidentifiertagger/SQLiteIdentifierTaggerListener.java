@@ -1,13 +1,12 @@
 package queryschemaidentifiertagger;
 
 import org.antlr.v4.runtime.tree.TerminalNode;
-import tsql.TSqlParser;
-import tsql.TSqlParserBaseListener;
-
+import sqlite.SQLiteParser;
+import sqlite.SQLiteParserBaseListener;
 import java.util.Stack;
 
-public class TSqlRenamerListener extends TSqlParserBaseListener {
 
+public class SQLiteIdentifierTaggerListener  extends SQLiteParserBaseListener{
     Stack<String> stack = new Stack<String>();
     Stack<String> tableAliases = new Stack<>();
     Stack<String> columnAliases = new Stack<>();
@@ -16,29 +15,27 @@ public class TSqlRenamerListener extends TSqlParserBaseListener {
         stack.push(node.getText());
     }
 
-    public void enterColumn_name(TSqlParser.Column_nameContext ctx){
+    public void enterColumn_name(SQLiteParser.Column_nameContext ctx){
         stack.push("<COLUMN_NAME>");
     }
 
-    public void exitColumn_name(TSqlParser.Column_nameContext ctx){
+    public void exitColumn_name(SQLiteParser.Column_nameContext ctx){
         stack.push("</COLUMN_NAME>");
     }
 
-
-    public void enterAtomic_table_name(TSqlParser.Atomic_table_nameContext ctx){
+    public void enterTable_name(SQLiteParser.Table_nameContext ctx){
         stack.push("<TABLE_NAME>");
     }
 
-    public void exitAtomic_table_name(TSqlParser.Atomic_table_nameContext ctx){
+    public void exitTable_name(SQLiteParser.Table_nameContext ctx){
         stack.push("</TABLE_NAME>");
     }
 
-    public void enterTable_alias(TSqlParser.Table_aliasContext ctx){
+    public void enterTable_alias(SQLiteParser.Table_aliasContext ctx){
         tableAliases.push(ctx.getText());
     }
 
-    public void enterColumn_alias(TSqlParser.Column_aliasContext ctx){
+    public void enterColumn_alias(SQLiteParser.Column_aliasContext ctx) {
         columnAliases.push(ctx.getText());
     }
-
 }

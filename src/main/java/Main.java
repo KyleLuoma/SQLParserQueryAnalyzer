@@ -1,10 +1,15 @@
 import queryschemaidentifiertagger.QuerySchemaIdentifierTagger;
+import queryschemaidentifiertagger.SQLiteQuerySchemaIdentifierTagger;
+import queryschemaidentifiertagger.TSqlQuerySchemaIdentifierTagger;
 import server.ParserServer;
 
 import java.util.Locale;
 import queryelementscraper.QueryElementScraper;
 
 public class Main {
+
+    public enum SqlDialect {TSQL, SQLITE}
+
     public static void main(String[] args) throws Exception {
         System.out.println("Starting the SQL Parser Analyzer.");
 
@@ -12,6 +17,7 @@ public class Main {
         Boolean doQuery = false;
         Boolean schematagging = false;
         String query = "";
+        SqlDialect sqlDialect = SqlDialect.TSQL;
 
         for(int i = 0; i < args.length; i++){
             if(args[i].toLowerCase(Locale.ROOT).equals("--server")) {
@@ -33,6 +39,18 @@ public class Main {
                     System.out.println("query to tag renaming elements must be followed by a query encased in quotes");
                 }
             }
+            if(args[i].toLowerCase(Locale.ROOT).equals("--dialect")){
+                try {
+                    String dialectArg = args[i + 1];
+                    if(dialectArg.toLowerCase(Locale.ROOT).equals("tsql")){
+                        sqlDialect = SqlDialect.TSQL;
+                    } else if(dialectArg.toLowerCase(Locale.ROOT).equals("sqlite")){
+                        sqlDialect = SqlDialect.SQLITE;
+                    }
+                } catch(Exception e) {
+                    System.out.println("Dialect option selected without dialect selection argument");
+                }
+            }
         }
 
         if(doServer) {
@@ -51,7 +69,14 @@ public class Main {
         }
 
         if(schematagging){
-            QuerySchemaIdentifierTagger renamer = new QuerySchemaIdentifierTagger(query);
+            QuerySchemaIdentifierTagger renamer = new TSqlQuerySchemaIdentifierTagger(query);
+            if(sqlDialect == SqlDialect.TSQL){
+                System.out.println("Using TSQL tagger.");
+            } else if(sqlDialect == SqlDialect.SQLITE){
+                System.out.println("Using SQLITE tagger.");
+                renamer = new SQLiteQuerySchemaIdentifierTagger(query);
+            }
+
             System.out.println("@BEGINTAGGEDQUERY");
             renamer.printQueryString();
             System.out.println("@ENDTAGGEDQUERY");

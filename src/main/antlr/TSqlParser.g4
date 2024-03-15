@@ -4929,7 +4929,7 @@ atomic_table_name
     ;
 
 table_name
-    : (database=id_ '.' schema=id_? '.' | schema=id_ '.')? (table=id_ | blocking_hierarchy=BLOCKING_HIERARCHY)
+    : (database=id_ '.' schema=id_? '.' | schema=id_ '.')? (atomic_table_name | blocking_hierarchy=BLOCKING_HIERARCHY)
     ;
 
 simple_name

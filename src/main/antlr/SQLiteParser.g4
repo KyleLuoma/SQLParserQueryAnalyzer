@@ -650,7 +650,7 @@ unary_operator
     : MINUS
     | PLUS
     | TILDE
-    | NOT_
+    | negation
 ;
 
 error_message

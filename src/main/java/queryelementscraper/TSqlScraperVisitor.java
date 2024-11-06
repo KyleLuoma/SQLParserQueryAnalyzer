@@ -374,8 +374,39 @@ public class TSqlScraperVisitor extends TSqlParserBaseVisitor<ArrayList<ArrayLis
                 container.addAll(visit(ctx.expression(i)));
             }
         }
+        if(ctx.case_expression() != null) {
+            container.addAll(visit(ctx.case_expression()));
+        }
         if(ctx.bracket_expression() != null) {
             container.addAll(visit(ctx.bracket_expression()));
+        }
+        return container;
+    }
+
+    public ArrayList<ArrayList<String>> visitCase_expression(
+            TSqlParser.Case_expressionContext ctx
+    ) {
+        ArrayList<ArrayList<String>> container = new ArrayList<>();
+
+        ArrayList<String> caseLabel = new ArrayList<>();
+        caseLabel.add("case");
+        caseLabel.add("1");
+        container.add(caseLabel);
+
+        if(ctx.switch_search_condition_section() == null){
+            for(int i = 0; i < ctx.expression().size(); i++){
+                container.addAll(visit(ctx.expression(i)));
+            }
+        } else {
+            for(int i = 0; i < ctx.switch_search_condition_section().size(); i++){
+                container.addAll(
+                        visit(ctx.switch_search_condition_section(i).search_condition())
+                );
+                container.addAll(
+                        visit(ctx.switch_search_condition_section(i).expression())
+                );
+            }
+
         }
         return container;
     }

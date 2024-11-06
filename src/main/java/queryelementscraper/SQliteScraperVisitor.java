@@ -34,6 +34,32 @@ public class SQliteScraperVisitor
             container.add(limLabel);
             container.addAll(visit(ctx.limit_stmt()));
         }
+
+        if (ctx.common_table_stmt() != null){
+            container.addAll(visit(ctx.common_table_stmt()));
+        }
+        return container;
+    }
+
+    public ArrayList<ArrayList<String>> visitCommon_table_stmt(
+            SQLiteParser.Common_table_stmtContext ctx
+    ){
+        ArrayList<ArrayList<String>> container = new ArrayList<>();
+        ArrayList<String> cteLabel = new ArrayList<>();
+        cteLabel.add("cte");
+        cteLabel.add("1");
+        container.add(cteLabel);
+        for(int i = 0; i < ctx.common_table_expression().size(); i++){
+            container.addAll(visit(ctx.common_table_expression(i)));
+        }
+        return container;
+    }
+
+    public ArrayList<ArrayList<String>> visitCommon_table_expression(
+            SQLiteParser.Common_table_expressionContext ctx
+    ){
+        ArrayList<ArrayList<String>> container = new ArrayList<>();
+        container.addAll(visit(ctx.select_stmt()));
         return container;
     }
 
@@ -62,7 +88,7 @@ public class SQliteScraperVisitor
             container.add(gbLabel);
             for(int i = 0; i < ctx.group_by_expr().expr().size(); i++){
                 container.addAll(
-                        visit(ctx.group_by_expr().expr(1))
+                        visit(ctx.group_by_expr().expr(i))
                 );
             }
         }
@@ -79,6 +105,9 @@ public class SQliteScraperVisitor
         }
         for(int i = 0; i < ctx.table_or_subquery().size(); i++){
             container.addAll(visit(ctx.table_or_subquery(i)));
+        }
+        if(ctx.join_clause() != null){
+            container.addAll(visit(ctx.join_clause()));
         }
         return container;
     }
@@ -146,7 +175,6 @@ public class SQliteScraperVisitor
         for(int i = 0; i < ctx.table_or_subquery().size(); i++){
             container.addAll(visit(ctx.table_or_subquery(i)));
         }
-
         if(ctx.join_operator() != null){
             for(int i = 0; i < ctx.join_operator().size(); i++){
                 if(ctx.join_operator(i).non_ansi_join_operator() != null){
@@ -240,7 +268,10 @@ public class SQliteScraperVisitor
         if(ctx.table_name() != null){
             container.addAll(visit(ctx.table_name()));
         }
-        if(ctx.negation() != null){
+        if(ctx.negation() != null || (
+                ctx.unary_operator() != null &&
+                ctx.unary_operator().negation() != null
+        )){
             ArrayList<String> pair = new ArrayList<>();
             pair.add("negation");
             pair.add("1");
@@ -275,6 +306,7 @@ public class SQliteScraperVisitor
                 container.addAll(visit(ctx.expr(i)));
             }
         }
+
         return container;
     }
 

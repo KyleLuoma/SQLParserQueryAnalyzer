@@ -14,12 +14,13 @@ public class SQliteQueryElementScraper extends QueryElementScraper{
     private SQLiteLexer lexer;
     private CommonTokenStream tokens;
     private SQLiteParser parser;
-    private TSqlScraperVisitor visitor;
+    private SQliteScraperVisitor visitor;
     private ParseTreeWalker walker;
     private ArrayList<ArrayList<String>> queryElements;
 
     public SQliteQueryElementScraper(String query) {
         super(query);
+        this.doNewQuery(query);
     }
 
     @Override
@@ -27,7 +28,7 @@ public class SQliteQueryElementScraper extends QueryElementScraper{
         this.lexer = new SQLiteLexer(CharStreams.fromString(query));
         this.tokens = new CommonTokenStream(this.lexer);
         this.parser = new SQLiteParser(this.tokens);
-        this.visitor = new TSqlScraperVisitor();
+        this.visitor = new SQliteScraperVisitor();
 //        this.walker = new ParseTreeWalker();
         this.queryElements = this.scrapeQuery();
     }

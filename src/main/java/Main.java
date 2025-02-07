@@ -20,6 +20,8 @@ public class Main {
         Boolean schematagging = false;
         String query = "";
         SqlDialect sqlDialect = SqlDialect.TSQL;
+        String version = "1.0";
+        String version_date = "7 February 2025";
 
         for(int i = 0; i < args.length; i++){
             if(args[i].toLowerCase(Locale.ROOT).equals("--help")) {
@@ -30,6 +32,7 @@ public class Main {
                 System.out.println(" --schematagger \"SELECT A FROM...\" : the query you wish to tag");
                 System.out.println(" Tagger options:");
                 System.out.println(" --dialect [tsql | sqlite] : the dialect of the query you are tagging.");
+                System.out.println(" --version : prints the current version.");
             }
             if(args[i].toLowerCase(Locale.ROOT).equals("--server")) {
                 doServer = true;
@@ -61,6 +64,9 @@ public class Main {
                 } catch(Exception e) {
                     System.out.println("Dialect option selected without dialect selection argument");
                 }
+            }
+            if(args[i].toLowerCase(Locale.ROOT).equals("--version")) {
+            	System.out.println("SqlParserQueryAnalyzer version " + version + " Compiled on " + version_date);
             }
         }
 

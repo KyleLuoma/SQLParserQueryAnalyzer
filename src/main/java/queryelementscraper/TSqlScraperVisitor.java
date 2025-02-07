@@ -299,12 +299,54 @@ public class TSqlScraperVisitor extends TSqlParserBaseVisitor<ArrayList<ArrayLis
         }
 
         if(ctx.expression() != null) {
-            for(int i = 0; i < ctx.expression().size(); i++) {
-                container.addAll(
-                        visit(ctx.expression(i))
-                );
-            }
+        	if(ctx.expression().size() > 1) {
+        		for(int i = 0; i < ctx.expression().size(); i++) {
+	            	if(
+	            			ctx.expression(i).full_column_name() != null 
+	            			&& ctx.expression(i).full_column_name().column_name() != null
+	            			&& ctx.expression(i + 1).primitive_expression() != null
+	            			&& ctx.expression(i + 1).primitive_expression().primitive_constant() != null
+	    			) {
+	            		ArrayList<String> predicateContents = new ArrayList<>();
+	            		String column_name = "predicatecolumn " + ctx.expression(i).full_column_name().column_name().getText();
+	            		String value = "predicatevalue " + ctx.expression(i + 1).primitive_expression().primitive_constant().getText();
+	            		predicateContents.add(column_name);
+	            		predicateContents.add(value);
+	            		container.add(predicateContents);
+	            	}
+	                container.addAll(
+	                        visit(ctx.expression(i))
+	                );
+        		}
+        	} else if(
+				ctx.IN() != null 
+				&& ctx.expression_list_() != null
+				&& ctx.expression(0).full_column_name().column_name() != null
+			) {
+        		
+        		String column_name = ctx.expression(0).full_column_name().column_name().getText();
+        		ArrayList<String> columnName = new ArrayList<>();
+        		columnName.add("column");
+        		columnName.add(column_name);
+        		container.add(columnName);
+        		column_name = "predicatecolumn " + column_name;
+        		for(int i = 0; i < ctx.expression_list_().expression().size(); i++) {
+        			if(
+    					ctx.expression_list_().expression(i).primitive_expression() != null
+        				&& 	ctx.expression_list_().expression(i).primitive_expression().primitive_constant() != null
+					) {
+        				ArrayList<String> predicateContents = new ArrayList<>();
+        				String value = "predicatevalue " + ctx.expression_list_().expression(i).primitive_expression().primitive_constant().getText();
+        				predicateContents.add(column_name);
+        				predicateContents.add(value);
+        				container.add(predicateContents);
+        			}
+        		}
+        	}
+            
         }
+        
+        
         return container;
     }
 

@@ -282,6 +282,33 @@ public class SQliteScraperVisitor
             predicateLabel.add("predicate");
             predicateLabel.add("1");
             container.add(predicateLabel);
+            
+            if(ctx.expr(0).column_name() != null && ctx.expr(1).literal_value() != null) {
+            	ArrayList<String> predicateContents = new ArrayList<>();
+        		String column_name = "predicatecolumn " + ctx.expr(0).column_name().getText();
+        		String value = "predicatevalue " + ctx.expr(1).literal_value().getText();
+        		predicateContents.add(column_name);
+        		predicateContents.add(value);
+        		container.add(predicateContents);
+            }
+            
+            if (
+            		ctx.predicate_operator().IN_() != null 
+            		&& ctx.expr(0).column_name() != null 
+    				&& ctx.expr(1).OPEN_PAR() != null
+            		&& ctx.expr(1).expr() != null
+        		) {
+        		for(int i = 0; i < ctx.expr(1).expr().size(); i++) {
+        			if(ctx.expr(1).expr(i).literal_value() != null) {
+        				ArrayList<String> predicateContents = new ArrayList<>();
+        				String column_name = "predicatecolumn " + ctx.expr(0).column_name().getText();
+                		String value = "predicatevalue " + ctx.expr(1).expr(i).literal_value().getText();
+                		predicateContents.add(column_name);
+                		predicateContents.add(value);
+                		container.add(predicateContents);
+        			}
+        		}
+            }
         }
         if(ctx.predicate_or() != null){
             ArrayList<String> pair = new ArrayList<>();

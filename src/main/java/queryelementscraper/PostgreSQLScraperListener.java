@@ -23,14 +23,21 @@ public class PostgreSQLScraperListener extends PostgreSQLParserBaseListener{
             && ctx.indirection().indirection_el().size() > 0
             ) {
             int numIndirections = ctx.indirection().indirection_el().size();
-            columnName = ctx.indirection().indirection_el(numIndirections - 1).attr_name().getText();
+            if(ctx.indirection().indirection_el(numIndirections - 1).attr_name() != null){
+                columnName = ctx.indirection().indirection_el(numIndirections - 1).attr_name().getText();
+            } else {
+                columnName = "none";
+            }
+            
         } else {
             columnName = ctx.colid().getText();
         }
         columnName = columnName.replace("\"", "");
         columnName = columnName.replace("`", "");
         addItem.add(columnName);
-        stack.push(addItem);
+        if(!columnName.equals("none")) {
+            stack.push(addItem);
+        }
     }
 
     public void enterTable_ref(PostgreSQLParser.Table_refContext ctx) {
@@ -59,12 +66,14 @@ public class PostgreSQLScraperListener extends PostgreSQLParserBaseListener{
             ) {
                 tableName = ctx.relation_expr().qualified_name().getText();
             } else {
-                tableName = ctx.getText();
+                tableName = "none";
             }
         tableName = tableName.replace("\"", "");
         tableName = tableName.replace("`", "");
         addItem.add(tableName);
-        stack.push(addItem);
+        if(!tableName.equals("none")){
+            stack.push(addItem);
+        }
     }
 
     public void enterAlias_clause(PostgreSQLParser.Alias_clauseContext ctx) {

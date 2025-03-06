@@ -52,9 +52,9 @@ public class PostgreSQLQueryElementScraper extends QueryElementScraper{
             }
             elements.add(currentItem);
         }
-        elements.removeIf(
-            element -> !element.get(0).endsWith("alias") && aliases.contains(element.get(1))
-            );
+        // elements.removeIf(
+        //     element -> !element.get(0).endsWith("alias") && aliases.contains(element.get(1))
+        //     );
 
         return elements;
     }

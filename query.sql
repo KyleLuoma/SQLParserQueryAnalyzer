@@ -1,68 +1,91 @@
-SELECT *
-FROM (
-  SELECT
-    `start`,
-    `end`,
-    ROUND(
-      POW(ABS(case_ref_count - (ref_count / allele_count) * case_count) - 0.5, 2) / ((ref_count / allele_count) * case_count) +
-      POW(ABS(control_ref_count - (ref_count / allele_count) * control_count) - 0.5, 2) / ((ref_count / allele_count) * control_count) +
-      POW(ABS(case_alt_count - (alt_count / allele_count) * case_count) - 0.5, 2) / ((alt_count / allele_count) * case_count) +
-      POW(ABS(control_alt_count - (alt_count / allele_count) * control_count) - 0.5, 2) / ((alt_count / allele_count) * control_count),
-      3
-    ) AS chi_squared_score
-  FROM (
+ DECLARE start_date STRING DEFAULT '20170101';
+DECLARE end_date STRING DEFAULT '20170630';
+
+WITH daily_revenue AS (
     SELECT
-      reference_name,
-      `start`,
-      `end`,
-      reference_bases,
-      alternate_bases,
-      vt,
-      SUM(ref_count + alt_count) AS allele_count,
-      SUM(ref_count) AS ref_count,
-      SUM(alt_count) AS alt_count,
-      SUM(IF(is_case, CAST(ref_count + alt_count AS INT64), 0)) AS case_count,
-      SUM(IF(NOT is_case, CAST(ref_count + alt_count AS INT64), 0)) AS control_count,
-      SUM(IF(is_case, ref_count, 0)) AS case_ref_count,
-      SUM(IF(is_case, alt_count, 0)) AS case_alt_count,
-      SUM(IF(NOT is_case, ref_count, 0)) AS control_ref_count,
-      SUM(IF(NOT is_case, alt_count, 0)) AS control_alt_count
-    FROM (
-      SELECT
-        v.reference_name,
-        v.`start`,
-        v.`end`,
-        v.reference_bases,
-        v.alternate_bases,
-        v.vt,
-        ('EAS' = p.super_population) AS is_case,
-        IF(call.genotype[SAFE_OFFSET(0)] = 0, 1, 0) AS ref_count,
-        IF(call.genotype[SAFE_OFFSET(0)] = 1, 1, 0) AS alt_count
-      FROM
-        `spider2-public-data.1000_genomes.variants` AS v,
-        UNNEST(v.call) AS call
-      JOIN
-        `spider2-public-data.1000_genomes.sample_info` AS p
-      ON
-        call.call_set_name = p.sample
-      WHERE
-        v.reference_name = '12'
-    )
+        trafficSource.source AS source,
+        date,
+        SUM(productRevenue) / 1000000 AS revenue
+    FROM
+        `bigquery-public-data.google_analytics_sample.ga_sessions_*`,
+        UNNEST (hits) AS hits,
+        UNNEST (hits.product) AS product
+    WHERE
+        _table_suffix BETWEEN start_date AND end_date
     GROUP BY
-      reference_name,
-      `start`,
-      `end`,
-      reference_bases,
-      alternate_bases,
-      vt
-  )
-  WHERE
-    (ref_count / allele_count) * case_count >= 5.0
-    AND (ref_count / allele_count) * control_count >= 5.0
-    AND (alt_count / allele_count) * case_count >= 5.0
-    AND (alt_count / allele_count) * control_count >= 5.0
+        source, date
+),
+weekly_revenue AS (
+    SELECT
+        source,
+        CONCAT(EXTRACT(YEAR FROM (PARSE_DATE('%Y%m%d', date))), 'W', EXTRACT(WEEK FROM (PARSE_DATE('%Y%m%d', date)))) AS week,
+        SUM(revenue) AS revenue
+    FROM daily_revenue
+    GROUP BY source, week
+),
+monthly_revenue AS (
+    SELECT
+        source,
+        CONCAT(EXTRACT(YEAR FROM (PARSE_DATE('%Y%m%d', date))),'0', EXTRACT(MONTH FROM (PARSE_DATE('%Y%m%d', date)))) AS month,
+        SUM(revenue) AS revenue
+    FROM daily_revenue
+    GROUP BY source, month
+),
+
+top_source AS (
+    SELECT source, SUM(revenue) AS total_revenue
+    FROM daily_revenue
+    GROUP BY source
+    ORDER BY total_revenue DESC
+    LIMIT 1
+),
+
+max_revenues AS (
+    (
+      SELECT
+        'Daily' AS time_type,
+        date AS time,
+        source,
+        MAX(revenue) AS max_revenue
+      FROM daily_revenue
+      WHERE source = (SELECT source FROM top_source)
+      GROUP BY source, date
+      ORDER BY max_revenue DESC
+      LIMIT 1
+    )
+
+    UNION ALL
+
+    (
+      SELECT
+        'Weekly' AS time_type,
+        week AS time,
+        source,
+        MAX(revenue) AS max_revenue
+      FROM weekly_revenue
+      WHERE source = (SELECT source FROM top_source)
+      GROUP BY source, week
+      ORDER BY max_revenue DESC
+      LIMIT 1
+    )
+
+    UNION ALL
+
+    (
+      SELECT
+          'Monthly' AS time_type,
+          month AS time,
+          source,
+          MAX(revenue) AS max_revenue
+      FROM monthly_revenue
+      WHERE source = (SELECT source FROM top_source)
+      GROUP BY source, month
+      ORDER BY max_revenue DESC
+      LIMIT 1
+    )
 )
-WHERE
-  chi_squared_score >= 29.71679
-ORDER BY
-  chi_squared_score DESC
+
+SELECT
+    max_revenue
+FROM max_revenues
+ORDER BY max_revenue DESC;

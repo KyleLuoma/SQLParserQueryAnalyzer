@@ -5,12 +5,16 @@ import queryschemaidentifiertagger.SQLiteQuerySchemaIdentifierTagger;
 import queryschemaidentifiertagger.TSqlQuerySchemaIdentifierTagger;
 import server.ParserServer;
 
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Locale;
+
+import queryelementscraper.PostgreSQLQueryElementScraper;
 import queryelementscraper.QueryElementScraper;
 
 public class Main {
 
-    public enum SqlDialect {TSQL, SQLITE}
+    public enum SqlDialect {TSQL, SQLITE, POSTGRESQL}
 
     public static void main(String[] args) throws Exception {
         System.out.println("Starting the SQL Parser Analyzer.");
@@ -20,18 +24,18 @@ public class Main {
         Boolean schematagging = false;
         String query = "";
         SqlDialect sqlDialect = SqlDialect.TSQL;
-        String version = "1.0";
-        String version_date = "7 February 2025";
+        String version = "1.20";
+        String version_date = "6 March 2025";
 
         for(int i = 0; i < args.length; i++){
             if(args[i].toLowerCase(Locale.ROOT).equals("--help")) {
                 System.out.println("SQL Parser Query Analyzer Options:");
                 System.out.println(" --server : launches a small server to handle API requests for parsing (TSQL only");
                 System.out.println(" Command line options (select one or the other):");
-                System.out.println(" --query \"SELECT A FROM...\" : the query you wish to analyze encased in quotes");
-                System.out.println(" --schematagger \"SELECT A FROM...\" : the query you wish to tag");
+                System.out.println(" --query [\"SELECT A FROM...\" | filename.sql] : the query you wish to analyze encased in quotes");
+                System.out.println(" --schematagger [\"SELECT A FROM...\" | filename.sql] : the query you wish to tag");
                 System.out.println(" Tagger options:");
-                System.out.println(" --dialect [tsql | sqlite] : the dialect of the query you are tagging.");
+                System.out.println(" --dialect [tsql | sqlite | postgressql] : the dialect of the query you are tagging.");
                 System.out.println(" --version : prints the current version.");
             }
             if(args[i].toLowerCase(Locale.ROOT).equals("--server")) {
@@ -39,7 +43,13 @@ public class Main {
             }
             if(args[i].toLowerCase(Locale.ROOT).equals("--query")) {
                 try {
-                    query = args[i + 1];
+                    if (args[i + 1].toLowerCase(Locale.ROOT).endsWith(".sql")) {
+                        query = new String(Files.readAllBytes(Paths.get(args[i + 1])));
+                        // query = query.toUpperCase(Locale.ROOT);
+                        // query = query.replace("\r", "").replace("\n", " ");
+                    } else {
+                        query = args[i + 1];
+                    }
                     doQuery = true;
                 } catch(Exception e) {
                     System.out.println("query argument must be followed by a query encased in quotes");
@@ -47,7 +57,12 @@ public class Main {
             }
             if(args[i].toLowerCase(Locale.ROOT).equals("--schematagger")){
                 try {
-                    query = args[i + 1];
+                    if (args[i + 1].toLowerCase(Locale.ROOT).endsWith(".sql")) {
+                        query = new String(Files.readAllBytes(Paths.get(args[i + 1])));
+                        query = query.replace("\r", "").replace("\n", " ");
+                    } else {
+                        query = args[i + 1];
+                    }
                     schematagging = true;
                 } catch(Exception e) {
                     System.out.println("query to tag renaming elements must be followed by a query encased in quotes");
@@ -60,6 +75,8 @@ public class Main {
                         sqlDialect = SqlDialect.TSQL;
                     } else if(dialectArg.toLowerCase(Locale.ROOT).equals("sqlite")){
                         sqlDialect = SqlDialect.SQLITE;
+                    } else if(dialectArg.toLowerCase(Locale.ROOT).equals("postgresql")){
+                        sqlDialect = SqlDialect.POSTGRESQL;
                     }
                 } catch(Exception e) {
                     System.out.println("Dialect option selected without dialect selection argument");
@@ -83,6 +100,9 @@ public class Main {
             } else if(sqlDialect == SqlDialect.SQLITE){
                 scraper = new SQliteQueryElementScraper(query);
                 System.out.println("Using SQLITE tagger.");
+            } else if (sqlDialect == SqlDialect.POSTGRESQL) {
+                scraper = new PostgreSQLQueryElementScraper(query);
+                System.out.println("Using PostgreSQL tagger.");
             } else {
                 scraper = new TSqlQueryElementScraper(query);
                 System.out.println("Using TSQL tagger as default.");

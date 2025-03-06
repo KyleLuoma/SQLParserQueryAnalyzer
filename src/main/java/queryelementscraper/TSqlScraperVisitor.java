@@ -304,6 +304,7 @@ public class TSqlScraperVisitor extends TSqlParserBaseVisitor<ArrayList<ArrayLis
 	            	if(
 	            			ctx.expression(i).full_column_name() != null 
 	            			&& ctx.expression(i).full_column_name().column_name() != null
+        					&& ctx.expression(i + 1) != null
 	            			&& ctx.expression(i + 1).primitive_expression() != null
 	            			&& ctx.expression(i + 1).primitive_expression().primitive_constant() != null
 	    			) {

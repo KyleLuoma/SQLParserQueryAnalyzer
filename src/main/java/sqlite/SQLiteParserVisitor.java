@@ -1,4 +1,4 @@
-// Generated from SQLiteParser.g4 by ANTLR 4.9.3
+// Generated from ./SQLiteParser.g4 by ANTLR 4.13.2
 package sqlite;
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 

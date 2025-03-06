@@ -1,4 +1,4 @@
-// Generated from TSqlParser.g4 by ANTLR 4.9.3
+// Generated from TSqlParser.g4 by ANTLR 4.13.2
 package tsql;
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 

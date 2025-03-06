@@ -8,6 +8,8 @@ import java.util.ArrayList;
 
 public class SQliteScraperVisitor
         extends SQLiteParserBaseVisitor<ArrayList<ArrayList<String>>>{
+	
+	
 
     public ArrayList<ArrayList<String>> visitSelect_stmt(
             SQLiteParser.Select_stmtContext ctx
@@ -60,6 +62,10 @@ public class SQliteScraperVisitor
     ){
         ArrayList<ArrayList<String>> container = new ArrayList<>();
         container.addAll(visit(ctx.select_stmt()));
+        ArrayList<String> cteTable = new ArrayList<>();
+        cteTable.add("cte table alias");
+        cteTable.add(ctx.table_name().getText());
+        container.add(cteTable);
         return container;
     }
 

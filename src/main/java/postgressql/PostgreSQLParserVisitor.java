@@ -3662,6 +3662,12 @@ public interface PostgreSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitFunc_application(PostgreSQLParser.Func_applicationContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link PostgreSQLParser#ignore_null_clause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitIgnore_null_clause(PostgreSQLParser.Ignore_null_clauseContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link PostgreSQLParser#enclosed_bracket_expr}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

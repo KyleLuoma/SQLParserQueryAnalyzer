@@ -3727,12 +3727,16 @@ plsqlvariablename
 
 func_application
     : func_name OPEN_PAREN (
-        func_arg_list (COMMA VARIADIC func_arg_expr)? sort_clause_?
-        | VARIADIC func_arg_expr sort_clause_?
-        | (ALL | DISTINCT) func_arg_list sort_clause_?
+        func_arg_list (COMMA VARIADIC func_arg_expr)? ignore_null_clause? sort_clause_? 
+        | VARIADIC func_arg_expr ignore_null_clause? sort_clause_? 
+        | (ALL | DISTINCT) func_arg_list ignore_null_clause? sort_clause_? 
         | STAR
         |
     ) CLOSE_PAREN enclosed_bracket_expr?
+    ;
+
+ignore_null_clause
+    : IGNORE NULLS_P
     ;
 
 //Added to handle bigquery array calls without crashing
@@ -4117,7 +4121,6 @@ indirection_el
 
 slice_bound_
     : a_expr
-    
     ;
 
 indirection

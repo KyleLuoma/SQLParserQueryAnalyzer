@@ -6094,6 +6094,16 @@ public interface PostgreSQLParserListener extends ParseTreeListener {
 	 */
 	void exitFunc_application(PostgreSQLParser.Func_applicationContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link PostgreSQLParser#ignore_null_clause}.
+	 * @param ctx the parse tree
+	 */
+	void enterIgnore_null_clause(PostgreSQLParser.Ignore_null_clauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PostgreSQLParser#ignore_null_clause}.
+	 * @param ctx the parse tree
+	 */
+	void exitIgnore_null_clause(PostgreSQLParser.Ignore_null_clauseContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link PostgreSQLParser#enclosed_bracket_expr}.
 	 * @param ctx the parse tree
 	 */

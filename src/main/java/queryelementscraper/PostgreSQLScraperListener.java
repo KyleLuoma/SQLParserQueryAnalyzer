@@ -10,9 +10,6 @@ import java.util.Stack;
 
 public class PostgreSQLScraperListener extends PostgreSQLParserBaseListener{
     Stack<ArrayList<String>> stack = new Stack<>();
-    Stack<String> tableAliases = new Stack<>();
-    Stack<String> columnAliases = new Stack<>();
-
 
     public void enterColumnref(PostgreSQLParser.ColumnrefContext ctx) {
         ArrayList<String> addItem = new ArrayList<>();
@@ -70,6 +67,9 @@ public class PostgreSQLScraperListener extends PostgreSQLParserBaseListener{
             }
         tableName = tableName.replace("\"", "");
         tableName = tableName.replace("`", "");
+        if (tableName.startsWith(".")) {
+            tableName = tableName.substring(1);
+        }
         addItem.add(tableName);
         if(!tableName.equals("none")){
             stack.push(addItem);

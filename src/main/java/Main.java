@@ -1,4 +1,5 @@
 import queryelementscraper.SQliteQueryElementScraper;
+import queryelementscraper.SnowflakeQueryElementScraper;
 import queryelementscraper.TSqlQueryElementScraper;
 import queryschemaidentifiertagger.QuerySchemaIdentifierTagger;
 import queryschemaidentifiertagger.SQLiteQuerySchemaIdentifierTagger;
@@ -14,7 +15,7 @@ import queryelementscraper.QueryElementScraper;
 
 public class Main {
 
-    public enum SqlDialect {TSQL, SQLITE, POSTGRESQL}
+    public enum SqlDialect {TSQL, SQLITE, POSTGRESQL, SNOWFLAKE}
 
     public static void main(String[] args) throws Exception {
         System.out.println("Starting the SQL Parser Analyzer.");
@@ -24,8 +25,8 @@ public class Main {
         Boolean schematagging = false;
         String query = "";
         SqlDialect sqlDialect = SqlDialect.TSQL;
-        String version = "1.20";
-        String version_date = "6 March 2025";
+        String version = "1.30";
+        String version_date = "7 March 2025";
 
         for(int i = 0; i < args.length; i++){
             if(args[i].toLowerCase(Locale.ROOT).equals("--help")) {
@@ -71,12 +72,18 @@ public class Main {
             if(args[i].toLowerCase(Locale.ROOT).equals("--dialect")){
                 try {
                     String dialectArg = args[i + 1];
-                    if(dialectArg.toLowerCase(Locale.ROOT).equals("tsql")){
+                    dialectArg = dialectArg.toLowerCase(Locale.ROOT);
+                    if(dialectArg.equals("tsql")){
                         sqlDialect = SqlDialect.TSQL;
-                    } else if(dialectArg.toLowerCase(Locale.ROOT).equals("sqlite")){
+                    } else if(dialectArg.equals("sqlite")){
                         sqlDialect = SqlDialect.SQLITE;
-                    } else if(dialectArg.toLowerCase(Locale.ROOT).equals("postgresql")){
+                    } else if(
+                        dialectArg.equals("postgresql")
+                        || dialectArg.equals("bigquery")
+                        ){
                         sqlDialect = SqlDialect.POSTGRESQL;
+                    } else if(dialectArg.equals("snowflake")){
+                        sqlDialect = SqlDialect.SNOWFLAKE;
                     }
                 } catch(Exception e) {
                     System.out.println("Dialect option selected without dialect selection argument");
@@ -96,16 +103,19 @@ public class Main {
             QueryElementScraper scraper;
             if(sqlDialect == SqlDialect.TSQL){
                 scraper = new TSqlQueryElementScraper(query);
-                System.out.println("Using TSQL tagger.");
+                System.out.println("Using TSQL parser.");
             } else if(sqlDialect == SqlDialect.SQLITE){
                 scraper = new SQliteQueryElementScraper(query);
-                System.out.println("Using SQLITE tagger.");
+                System.out.println("Using SQLITE parser.");
             } else if (sqlDialect == SqlDialect.POSTGRESQL) {
                 scraper = new PostgreSQLQueryElementScraper(query);
-                System.out.println("Using PostgreSQL tagger.");
+                System.out.println("Using PostgreSQL parser.");
+            } else if (sqlDialect == SqlDialect.SNOWFLAKE) {
+                scraper = new SnowflakeQueryElementScraper(query);
+                System.out.println("Using Snowflake parser.");
             } else {
                 scraper = new TSqlQueryElementScraper(query);
-                System.out.println("Using TSQL tagger as default.");
+                System.out.println("Using TSQL parser as parser.");
             }
 
             System.out.println("@BEGINPARSETREE");

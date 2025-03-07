@@ -4274,6 +4274,13 @@ public class PostgreSQLParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> 
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
+	@Override public T visitIgnore_null_clause(PostgreSQLParser.Ignore_null_clauseContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
 	@Override public T visitEnclosed_bracket_expr(PostgreSQLParser.Enclosed_bracket_exprContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}

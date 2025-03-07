@@ -4155,10 +4155,14 @@ select_list
     ;
 
 select_list_elem
-    : column_elem as_alias?
+    : column_elem projection_alias?
     | column_elem_star exclude_clause?
     //    | udt_elem
-    | expression_elem as_alias?
+    | expression_elem projection_alias?
+    ;
+
+projection_alias
+    : as_alias
     ;
 
 column_elem_star
@@ -4231,13 +4235,21 @@ table_source_item_joined
     | '(' table_source_item_joined ')' join_clause*
     ;
 
+table_object_name
+    : object_name
+    ;
+
+relation_alias
+    : as_alias
+    ;
+
 object_ref
-    : object_name at_before? changes? match_recognize? pivot_unpivot? as_alias? column_list_in_parentheses? sample?
-    | object_name START WITH predicate CONNECT BY prior_list?
-    | TABLE '(' function_call ')' pivot_unpivot? as_alias? sample?
+    : table_object_name at_before? changes? match_recognize? pivot_unpivot? relation_alias? column_list_in_parentheses? sample?
+    | table_object_name START WITH predicate CONNECT BY prior_list?
+    | TABLE '(' function_call ')' pivot_unpivot? relation_alias? sample?
     | values_table sample?
-    | LATERAL? '(' subquery ')' pivot_unpivot? as_alias? column_list_in_parentheses?
-    | LATERAL (flatten_table | splited_table) as_alias?
+    | LATERAL? '(' subquery ')' pivot_unpivot? relation_alias? column_list_in_parentheses?
+    | LATERAL (flatten_table | splited_table) relation_alias?
     //| AT id_ PATH?
     //    ('(' FILE_FORMAT ASSOC id_ COMMA pattern_assoc ')')?
     //    as_alias?

@@ -1,4 +1,4 @@
-// Generated from ./SQLiteParser.g4 by ANTLR 4.13.2
+// Generated from .\SQLiteParser.g4 by ANTLR 4.13.0
 package sqlite;
 
 import org.antlr.v4.runtime.ParserRuleContext;

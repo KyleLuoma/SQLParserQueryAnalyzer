@@ -7313,6 +7313,18 @@ public class PostgreSQLParserBaseListener implements PostgreSQLParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterIgnore_null_clause(PostgreSQLParser.Ignore_null_clauseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitIgnore_null_clause(PostgreSQLParser.Ignore_null_clauseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterEnclosed_bracket_expr(PostgreSQLParser.Enclosed_bracket_exprContext ctx) { }
 	/**
 	 * {@inheritDoc}

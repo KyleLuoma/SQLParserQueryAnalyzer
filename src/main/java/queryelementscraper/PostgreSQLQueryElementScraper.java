@@ -5,14 +5,12 @@ import postgressql.PostgreSQLLexer;
 
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
-import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 
 
 import java.util.ArrayList;
 import java.util.ListIterator;
 
-import javax.management.Query;
 
 public class PostgreSQLQueryElementScraper extends QueryElementScraper{
 

@@ -46,7 +46,6 @@ options {
 
 // Insert here @header for C++ lexer.
 
-
 Dollar: '$';
 
 OPEN_PAREN: '(';
@@ -601,6 +600,8 @@ HOUR_P: 'HOUR';
 IDENTITY_P: 'IDENTITY';
 
 IF_P: 'IF';
+
+IGNORE: 'IGNORE';
 
 IMMEDIATE: 'IMMEDIATE';
 
@@ -1222,7 +1223,7 @@ fragment IdentifierStartChar options {
 
 fragment IdentifierChar: StrictIdentifierChar | '$';
 
-fragment StrictIdentifierChar: IdentifierStartChar | [0-9];
+fragment StrictIdentifierChar: IdentifierStartChar | [0-9\-];
 /* Quoted Identifiers
  *
  *   These are divided into four separate tokens, allowing distinction of valid quoted identifiers from invalid quoted

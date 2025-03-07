@@ -45,7 +45,14 @@ public class SnowflakeQueryElementScraper extends QueryElementScraper{
             if(currentItem.get(0).endsWith("alias")) {
                 aliases.add(currentItem.get(1));
             }
-            elements.add(currentItem);
+            currentItem.set(1, currentItem.get(1).replace("\"", ""));
+            if(currentItem.get(0).equals("column") && currentItem.get(1).contains(".")) {
+                String[] parts = currentItem.get(1).split("\\.");
+                currentItem.set(1, parts[parts.length - 1]);
+            }
+            if(currentItem.get(1).length() > 0){
+                elements.add(currentItem);
+            }
         }
         // elements.removeIf(
         //     element -> !element.get(0).endsWith("alias") && aliases.contains(element.get(1))

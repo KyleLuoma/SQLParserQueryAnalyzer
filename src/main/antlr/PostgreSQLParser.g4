@@ -4299,7 +4299,8 @@ target_list
 
 target_el
     : a_expr (target_el_alias | (AS target_el_alias))? # target_label
-    | STAR                                # target_star
+    | STAR func_expr? # target_star_except
+    // | STAR                                # target_star
     ;
 
 target_el_alias

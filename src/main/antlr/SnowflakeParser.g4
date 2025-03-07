@@ -4013,6 +4013,8 @@ function_call
     | to_date = ( TO_DATE | DATE) LR_BRACKET expr RR_BRACKET
     | length = ( LENGTH | LEN) LR_BRACKET expr RR_BRACKET
     | TO_BOOLEAN LR_BRACKET expr RR_BRACKET
+    | EXTRACT '(' expr (FROM | COMMA) expr ')'
+    | POSITION '(' (expr IN expr | expr COMMA expr COMMA literal) ')'
     ;
 
 param_assoc_list

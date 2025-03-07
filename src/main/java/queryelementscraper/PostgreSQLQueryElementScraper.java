@@ -48,7 +48,10 @@ public class PostgreSQLQueryElementScraper extends QueryElementScraper{
             if(currentItem.get(0).endsWith("alias")) {
                 aliases.add(currentItem.get(1));
             }
-            elements.add(currentItem);
+            if(currentItem.get(1).length() > 0){
+                elements.add(currentItem);
+            }
+            
         }
         // elements.removeIf(
         //     element -> !element.get(0).endsWith("alias") && aliases.contains(element.get(1))

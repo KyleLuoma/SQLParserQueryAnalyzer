@@ -346,6 +346,7 @@ EXTERNAL_OAUTH_SNOWFLAKE_USER_MAPPING_ATTRIBUTE:
 EXTERNAL_OAUTH_TOKEN_USER_MAPPING_CLAIM : 'EXTERNAL_OAUTH_TOKEN_USER_MAPPING_CLAIM';
 EXTERNAL_OAUTH_TYPE                     : 'EXTERNAL_OAUTH_TYPE';
 EXTERNAL_STAGE                          : 'EXTERNAL_STAGE';
+EXTRACT                                 : 'EXTRACT';
 FAILOVER                                : 'FAILOVER';
 // FAILOVER_MODE:                                         'FAILOVER_MODE';
 // FAIL_OPERATION:                                        'FAIL_OPERATION';
@@ -678,6 +679,7 @@ POLICY   : 'POLICY';
 PORT: 'PORT';
 // PRECEDING:                                             'PRECEDING';
 // PREDICATE:                                             'PREDICATE';
+POSITION                          : 'POSITION';
 PREFIX                            : 'PREFIX';
 PRESERVE_SPACE                    : 'PRESERVE_SPACE';
 PREVENT_UNLOAD_TO_INLINE_URL      : 'PREVENT_UNLOAD_TO_INLINE_URL';

@@ -73,7 +73,7 @@ public class Main {
                 try {
                     String dialectArg = args[i + 1];
                     dialectArg = dialectArg.toLowerCase(Locale.ROOT);
-                    if(dialectArg.equals("tsql")){
+                    if(dialectArg.equals("tsql") || dialectArg.equals("mssql")){
                         sqlDialect = SqlDialect.TSQL;
                     } else if(dialectArg.equals("sqlite")){
                         sqlDialect = SqlDialect.SQLITE;

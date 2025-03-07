@@ -4295,14 +4295,13 @@ target_list
     ;
 
 target_el
-    : a_expr (AS target_el_alias)? # target_label
+    : a_expr (target_el_alias | (AS target_el_alias))? # target_label
     | STAR                                # target_star
     ;
 
 target_el_alias
     : colLabel 
     | bareColLabel
-    |
     ;
 
 qualified_name_list

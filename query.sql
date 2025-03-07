@@ -1,91 +1,122 @@
- DECLARE start_date STRING DEFAULT '20170101';
-DECLARE end_date STRING DEFAULT '20170630';
+-- ga4 ga018.sql
 
-WITH daily_revenue AS (
-    SELECT
-        trafficSource.source AS source,
-        date,
-        SUM(productRevenue) / 1000000 AS revenue
-    FROM
-        `bigquery-public-data.google_analytics_sample.ga_sessions_*`,
-        UNNEST (hits) AS hits,
-        UNNEST (hits.product) AS product
-    WHERE
-        _table_suffix BETWEEN start_date AND end_date
-    GROUP BY
-        source, date
-),
-weekly_revenue AS (
-    SELECT
-        source,
-        CONCAT(EXTRACT(YEAR FROM (PARSE_DATE('%Y%m%d', date))), 'W', EXTRACT(WEEK FROM (PARSE_DATE('%Y%m%d', date)))) AS week,
-        SUM(revenue) AS revenue
-    FROM daily_revenue
-    GROUP BY source, week
-),
-monthly_revenue AS (
-    SELECT
-        source,
-        CONCAT(EXTRACT(YEAR FROM (PARSE_DATE('%Y%m%d', date))),'0', EXTRACT(MONTH FROM (PARSE_DATE('%Y%m%d', date)))) AS month,
-        SUM(revenue) AS revenue
-    FROM daily_revenue
-    GROUP BY source, month
-),
+WITH base_table AS (
+  SELECT
+    event_name,
+    event_date,
+    event_timestamp,
+    user_pseudo_id,
+    user_id,
+    device,
+    geo,
+    traffic_source,
+    event_params,
+    user_properties
+  FROM
+    `bigquery-public-data.ga4_obfuscated_sample_ecommerce.events_*`
+  WHERE
+    _table_suffix = '20210102'
+  AND event_name IN ('page_view')
+)
+, unnested_events AS (
+-- unnests event parameters to get to relevant keys and values
+  SELECT
+    event_date AS date,
+    event_timestamp AS event_timestamp_microseconds,
+    user_pseudo_id,
+    MAX(CASE WHEN c.key = 'ga_session_id' THEN c.value.int_value END) AS visitID,
+    MAX(CASE WHEN c.key = 'ga_session_number' THEN c.value.int_value END) AS visitNumber,
+    MAX(CASE WHEN c.key = 'page_title' THEN c.value.string_value END) AS page_title,
+    MAX(CASE WHEN c.key = 'page_location' THEN c.value.string_value END) AS page_location
+  FROM 
+    base_table,
+    UNNEST (event_params) c
+  GROUP BY 1,2,3
+)
 
-top_source AS (
-    SELECT source, SUM(revenue) AS total_revenue
-    FROM daily_revenue
-    GROUP BY source
-    ORDER BY total_revenue DESC
-    LIMIT 1
-),
+, unnested_events_categorised AS (
+-- categorizing Page Titles into PDPs and PLPs
+  SELECT
+  *,
+  CASE WHEN ARRAY_LENGTH(SPLIT(page_location, '/')) >= 5 
+            AND
+            CONTAINS_SUBSTR(ARRAY_REVERSE(SPLIT(page_location, '/'))[SAFE_OFFSET(0)], '+')
+            AND (LOWER(SPLIT(page_location, '/')[SAFE_OFFSET(4)]) IN 
+                                        ('accessories','apparel','brands','campus+collection','drinkware',
+                                          'electronics','google+redesign',
+                                          'lifestyle','nest','new+2015+logo','notebooks+journals',
+                                          'office','shop+by+brand','small+goods','stationery','wearables'
+                                          )
+                  OR
+                  LOWER(SPLIT(page_location, '/')[SAFE_OFFSET(3)]) IN 
+                                        ('accessories','apparel','brands','campus+collection','drinkware',
+                                          'electronics','google+redesign',
+                                          'lifestyle','nest','new+2015+logo','notebooks+journals',
+                                          'office','shop+by+brand','small+goods','stationery','wearables'
+                                          )
+            )
+            THEN 'PDP'
+            WHEN NOT(CONTAINS_SUBSTR(ARRAY_REVERSE(SPLIT(page_location, '/'))[SAFE_OFFSET(0)], '+'))
+            AND (LOWER(SPLIT(page_location, '/')[SAFE_OFFSET(4)]) IN 
+                                        ('accessories','apparel','brands','campus+collection','drinkware',
+                                          'electronics','google+redesign',
+                                          'lifestyle','nest','new+2015+logo','notebooks+journals',
+                                          'office','shop+by+brand','small+goods','stationery','wearables'
+                                          )
+                  OR 
+                  LOWER(SPLIT(page_location, '/')[SAFE_OFFSET(3)]) IN 
+                                          ('accessories','apparel','brands','campus+collection','drinkware',
+                                            'electronics','google+redesign',
+                                            'lifestyle','nest','new+2015+logo','notebooks+journals',
+                                            'office','shop+by+brand','small+goods','stationery','wearables'
+                                            )
+            )
+            THEN 'PLP'
+        ELSE page_title
+        END AS page_title_adjusted 
 
-max_revenues AS (
-    (
-      SELECT
-        'Daily' AS time_type,
-        date AS time,
-        source,
-        MAX(revenue) AS max_revenue
-      FROM daily_revenue
-      WHERE source = (SELECT source FROM top_source)
-      GROUP BY source, date
-      ORDER BY max_revenue DESC
-      LIMIT 1
-    )
+  FROM 
+    unnested_events
+)
 
-    UNION ALL
 
-    (
-      SELECT
-        'Weekly' AS time_type,
-        week AS time,
-        source,
-        MAX(revenue) AS max_revenue
-      FROM weekly_revenue
-      WHERE source = (SELECT source FROM top_source)
-      GROUP BY source, week
-      ORDER BY max_revenue DESC
-      LIMIT 1
-    )
+, ranked_screens AS (
+  SELECT
+    *,
+    LAG(page_title_adjusted,1) OVER (PARTITION BY  user_pseudo_id, visitID ORDER BY event_timestamp_microseconds ASC) previous_page,
+    LEAD(page_title_adjusted,1) OVER (PARTITION BY  user_pseudo_id, visitID ORDER BY event_timestamp_microseconds ASC) next_page
+  FROM 
+    unnested_events_categorised
 
-    UNION ALL
+)
 
-    (
-      SELECT
-          'Monthly' AS time_type,
-          month AS time,
-          source,
-          MAX(revenue) AS max_revenue
-      FROM monthly_revenue
-      WHERE source = (SELECT source FROM top_source)
-      GROUP BY source, month
-      ORDER BY max_revenue DESC
-      LIMIT 1
-    )
+,PLPtoPDPTransitions AS (
+  SELECT
+    user_pseudo_id,
+    visitID
+  FROM
+    ranked_screens
+  WHERE
+    page_title_adjusted = 'PLP' AND next_page = 'PDP'
+)
+
+,TotalPLPViews AS (
+  SELECT
+    COUNT(*) AS total_plp_views
+  FROM
+    ranked_screens
+  WHERE
+    page_title_adjusted = 'PLP'
+)
+
+,TotalTransitions AS (
+  SELECT
+    COUNT(*) AS total_transitions
+  FROM
+    PLPtoPDPTransitions
 )
 
 SELECT
-    max_revenue
-FROM max_revenues
-ORDER BY max_revenue DESC;
+  (total_transitions * 100.0) / total_plp_views AS percentage
+FROM
+  TotalTransitions, TotalPLPViews;

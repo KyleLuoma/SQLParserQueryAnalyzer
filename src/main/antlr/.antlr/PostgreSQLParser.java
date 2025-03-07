@@ -68440,10 +68440,10 @@ public class PostgreSQLParser extends PostgreSQLParserBase {
 		public A_exprContext a_expr() {
 			return getRuleContext(A_exprContext.class,0);
 		}
-		public TerminalNode AS() { return getToken(PostgreSQLParser.AS, 0); }
 		public Target_el_aliasContext target_el_alias() {
 			return getRuleContext(Target_el_aliasContext.class,0);
 		}
+		public TerminalNode AS() { return getToken(PostgreSQLParser.AS, 0); }
 		public Target_labelContext(Target_elContext ctx) { copyFrom(ctx); }
 	}
 	@SuppressWarnings("CheckReturnValue")
@@ -68455,9 +68455,8 @@ public class PostgreSQLParser extends PostgreSQLParserBase {
 	public final Target_elContext target_el() throws RecognitionException {
 		Target_elContext _localctx = new Target_elContext(_ctx, getState());
 		enterRule(_localctx, 1376, RULE_target_el);
-		int _la;
 		try {
-			setState(10299);
+			setState(10300);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case OPEN_PAREN:
@@ -68919,25 +68918,33 @@ public class PostgreSQLParser extends PostgreSQLParserBase {
 				{
 				setState(10293);
 				a_expr();
-				setState(10296);
+				setState(10297);
 				_errHandler.sync(this);
-				_la = _input.LA(1);
-				if (_la==AS) {
+				switch ( getInterpreter().adaptivePredict(_input,1027,_ctx) ) {
+				case 1:
 					{
 					setState(10294);
-					match(AS);
-					setState(10295);
 					target_el_alias();
 					}
+					break;
+				case 2:
+					{
+					{
+					setState(10295);
+					match(AS);
+					setState(10296);
+					target_el_alias();
+					}
+					}
+					break;
 				}
-
 				}
 				break;
 			case STAR:
 				_localctx = new Target_starContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(10298);
+				setState(10299);
 				match(STAR);
 				}
 				break;
@@ -68980,20 +68987,15 @@ public class PostgreSQLParser extends PostgreSQLParserBase {
 			case 1:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(10301);
+				setState(10302);
 				colLabel();
 				}
 				break;
 			case 2:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(10302);
+				setState(10303);
 				bareColLabel();
-				}
-				break;
-			case 3:
-				enterOuterAlt(_localctx, 3);
-				{
 				}
 				break;
 			}
@@ -76258,8 +76260,8 @@ public class PostgreSQLParser extends PostgreSQLParserBase {
 		"\u0003\u02ac\u2826\b\u02ac\u0001\u02ad\u0001\u02ad\u0001\u02ad\u0001\u02ad"+
 		"\u0001\u02ae\u0001\u02ae\u0001\u02af\u0001\u02af\u0001\u02af\u0005\u02af"+
 		"\u2831\b\u02af\n\u02af\f\u02af\u2834\t\u02af\u0001\u02b0\u0001\u02b0\u0001"+
-		"\u02b0\u0003\u02b0\u2839\b\u02b0\u0001\u02b0\u0003\u02b0\u283c\b\u02b0"+
-		"\u0001\u02b1\u0001\u02b1\u0001\u02b1\u0003\u02b1\u2841\b\u02b1\u0001\u02b2"+
+		"\u02b0\u0001\u02b0\u0003\u02b0\u283a\b\u02b0\u0001\u02b0\u0003\u02b0\u283d"+
+		"\b\u02b0\u0001\u02b1\u0001\u02b1\u0003\u02b1\u2841\b\u02b1\u0001\u02b2"+
 		"\u0001\u02b2\u0001\u02b2\u0005\u02b2\u2846\b\u02b2\n\u02b2\f\u02b2\u2849"+
 		"\t\u02b2\u0001\u02b3\u0001\u02b3\u0003\u02b3\u284d\b\u02b3\u0001\u02b4"+
 		"\u0001\u02b4\u0001\u02b4\u0005\u02b4\u2852\b\u02b4\n\u02b4\f\u02b4\u2855"+
@@ -76736,7 +76738,7 @@ public class PostgreSQLParser extends PostgreSQLParserBase {
 		"\u0001\u0000\u0000\u0000\u0552\u27f8\u0001\u0000\u0000\u0000\u0554\u2800"+
 		"\u0001\u0000\u0000\u0000\u0556\u2802\u0001\u0000\u0000\u0000\u0558\u2825"+
 		"\u0001\u0000\u0000\u0000\u055a\u2827\u0001\u0000\u0000\u0000\u055c\u282b"+
-		"\u0001\u0000\u0000\u0000\u055e\u282d\u0001\u0000\u0000\u0000\u0560\u283b"+
+		"\u0001\u0000\u0000\u0000\u055e\u282d\u0001\u0000\u0000\u0000\u0560\u283c"+
 		"\u0001\u0000\u0000\u0000\u0562\u2840\u0001\u0000\u0000\u0000\u0564\u2842"+
 		"\u0001\u0000\u0000\u0000\u0566\u284a\u0001\u0000\u0000\u0000\u0568\u284e"+
 		"\u0001\u0000\u0000\u0000\u056a\u2856\u0001\u0000\u0000\u0000\u056c\u2858"+
@@ -81999,14 +82001,14 @@ public class PostgreSQLParser extends PostgreSQLParserBase {
 		"\u2831\u0003\u0560\u02b0\u0000\u2830\u282e\u0001\u0000\u0000\u0000\u2831"+
 		"\u2834\u0001\u0000\u0000\u0000\u2832\u2830\u0001\u0000\u0000\u0000\u2832"+
 		"\u2833\u0001\u0000\u0000\u0000\u2833\u055f\u0001\u0000\u0000\u0000\u2834"+
-		"\u2832\u0001\u0000\u0000\u0000\u2835\u2838\u0003\u048a\u0245\u0000\u2836"+
-		"\u2837\u0005J\u0000\u0000\u2837\u2839\u0003\u0562\u02b1\u0000\u2838\u2836"+
-		"\u0001\u0000\u0000\u0000\u2838\u2839\u0001\u0000\u0000\u0000\u2839\u283c"+
-		"\u0001\u0000\u0000\u0000\u283a\u283c\u0005\t\u0000\u0000\u283b\u2835\u0001"+
-		"\u0000\u0000\u0000\u283b\u283a\u0001\u0000\u0000\u0000\u283c\u0561\u0001"+
-		"\u0000\u0000\u0000\u283d\u2841\u0003\u0590\u02c8\u0000\u283e\u2841\u0003"+
-		"\u0592\u02c9\u0000\u283f\u2841\u0001\u0000\u0000\u0000\u2840\u283d\u0001"+
-		"\u0000\u0000\u0000\u2840\u283e\u0001\u0000\u0000\u0000\u2840\u283f\u0001"+
+		"\u2832\u0001\u0000\u0000\u0000\u2835\u2839\u0003\u048a\u0245\u0000\u2836"+
+		"\u283a\u0003\u0562\u02b1\u0000\u2837\u2838\u0005J\u0000\u0000\u2838\u283a"+
+		"\u0003\u0562\u02b1\u0000\u2839\u2836\u0001\u0000\u0000\u0000\u2839\u2837"+
+		"\u0001\u0000\u0000\u0000\u2839\u283a\u0001\u0000\u0000\u0000\u283a\u283d"+
+		"\u0001\u0000\u0000\u0000\u283b\u283d\u0005\t\u0000\u0000\u283c\u2835\u0001"+
+		"\u0000\u0000\u0000\u283c\u283b\u0001\u0000\u0000\u0000\u283d\u0561\u0001"+
+		"\u0000\u0000\u0000\u283e\u2841\u0003\u0590\u02c8\u0000\u283f\u2841\u0003"+
+		"\u0592\u02c9\u0000\u2840\u283e\u0001\u0000\u0000\u0000\u2840\u283f\u0001"+
 		"\u0000\u0000\u0000\u2841\u0563\u0001\u0000\u0000\u0000\u2842\u2847\u0003"+
 		"\u0566\u02b3\u0000\u2843\u2844\u0005\u0006\u0000\u0000\u2844\u2846\u0003"+
 		"\u0566\u02b3\u0000\u2845\u2843\u0001\u0000\u0000\u0000\u2846\u2849\u0001"+
@@ -82261,8 +82263,8 @@ public class PostgreSQLParser extends PostgreSQLParserBase {
 		"\u2686\u268e\u269c\u26a3\u26ab\u26b3\u26ba\u26c0\u26c9\u26d8\u26e3\u2703"+
 		"\u270c\u2713\u2717\u271b\u2722\u2730\u2735\u273a\u273e\u2740\u2743\u274a"+
 		"\u274f\u275d\u277d\u2782\u278e\u279f\u27a7\u27af\u27bf\u27c4\u27cf\u27db"+
-		"\u27e5\u27f0\u27f8\u2800\u280a\u2811\u2814\u281d\u2820\u2825\u2832\u2838"+
-		"\u283b\u2840\u2847\u284c\u2853\u2860\u286c\u2871\u2879\u2880\u2885\u2891"+
+		"\u27e5\u27f0\u27f8\u2800\u280a\u2811\u2814\u281d\u2820\u2825\u2832\u2839"+
+		"\u283c\u2840\u2847\u284c\u2853\u2860\u286c\u2871\u2879\u2880\u2885\u2891"+
 		"\u2899\u289e\u28a8\u28af\u28b6\u28bc\u28c1\u28c7\u28cf\u28d3\u2916\u2922"+
 		"\u2928";
 	public static final String _serializedATN = Utils.join(

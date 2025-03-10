@@ -3184,7 +3184,16 @@ values_clause
 
 from_clause
     : FROM from_list
-    
+    ;
+
+unnest_func
+    : UNNEST OPEN_PAREN unnest_args CLOSE_PAREN alias_clause? (WITH OFFSET a_expr)?
+    ;
+
+unnest_args
+    : a_expr
+    | OPEN_BRACKET a_expr (COMMA a_expr)* CLOSE_BRACKET
+    | func_expr
     ;
 
 from_list
@@ -3197,6 +3206,7 @@ table_ref
         | func_table func_alias_clause?
         | xmltable alias_clause?
         | select_with_parens alias_clause?
+        | unnest_func
         | LATERAL_P (
             xmltable alias_clause?
             | func_table func_alias_clause?
@@ -3211,11 +3221,12 @@ table_ref
         CROSS JOIN table_ref
         | NATURAL join_type? JOIN table_ref
         | join_type? JOIN table_ref join_qual
+        | join_type? JOIN unnest_func join_qual?
     )*
     ;
 
 alias_clause
-    : AS? colid (OPEN_PAREN name_list CLOSE_PAREN)?
+    : AS? colid (OPEN_PAREN name_list CLOSE_PAREN)? 
     ;
 
 func_alias_clause
@@ -3435,7 +3446,7 @@ varying_
     ;
 
 constdatetime
-    : (TIMESTAMP | TIME) (OPEN_PAREN iconst CLOSE_PAREN)? timezone_?
+    : (TIMESTAMP | TIME) (OPEN_PAREN (iconst | func_application) CLOSE_PAREN)? timezone_?
     ;
 
 constinterval
@@ -3705,6 +3716,8 @@ b_expr
 
 c_expr
     : EXISTS select_with_parens                                        # c_expr_exists
+    | bq_col_array_lookup                                              # c_expr_expr
+    | bigquery_functions                                               # c_expr_expr
     | ARRAY (select_with_parens | array_expr)                          # c_expr_expr
     | PARAM opt_indirection                                            # c_expr_expr
     | GROUPING OPEN_PAREN expr_list CLOSE_PAREN                        # c_expr_expr
@@ -3719,6 +3732,31 @@ c_expr
     | implicit_row                                                     # c_expr_expr
     | row OVERLAPS row /* 14*/                                         # c_expr_expr
     | DEFAULT                                                          # c_expr_expr
+    ;
+
+bigquery_functions
+    : DATE OPEN_PAREN (a_expr+) CLOSE_PAREN
+    | DATE_ADD OPEN_PAREN a_expr COMMA INTERVAL a_expr bq_date_expr CLOSE_PAREN
+    | DATE_DIFF OPEN_PAREN a_expr COMMA INTERVAL a_expr bq_date_expr CLOSE_PAREN
+    | DATE_SUB OPEN_PAREN a_expr COMMA INTERVAL a_expr bq_date_expr CLOSE_PAREN
+    | DATE_TRUNC OPEN_PAREN a_expr COMMA bq_date_expr CLOSE_PAREN
+    | PARSE_DATE OPEN_PAREN a_expr COMMA a_expr (COMMA bq_date_expr)? CLOSE_PAREN
+    | FORMAT_DATE OPEN_PAREN a_expr COMMA c_expr CLOSE_PAREN
+    | TIMESTAMP OPEN_PAREN a_expr CLOSE_PAREN
+    | APPROX_QUANTILES OPEN_PAREN DISTINCT? a_expr COMMA a_expr (IGNORE | RESPECT)? CLOSE_PAREN
+        (OPEN_BRACKET (a_expr | offset_clause) CLOSE_BRACKET alias_clause?)?
+    ;
+
+bq_date_expr
+    : DAY_P
+    | MONTH_P
+    | QUARTER_P
+    | YEAR_P
+    | WEEK_P (OPEN_PAREN a_expr CLOSE_PAREN)?
+    ;
+
+bq_col_array_lookup
+    : columnref OPEN_BRACKET (a_expr | offset_clause) CLOSE_BRACKET alias_clause?
     ;
 
 plsqlvariablename
@@ -3775,6 +3813,7 @@ func_expr_common_subexpr
     | CURRENT_CATALOG
     | CURRENT_SCHEMA
     | CAST OPEN_PAREN a_expr AS typename CLOSE_PAREN
+    | SAFE_CAST OPEN_PAREN a_expr AS typename CLOSE_PAREN
     | EXTRACT OPEN_PAREN extract_list? CLOSE_PAREN
     | NORMALIZE OPEN_PAREN a_expr (COMMA unicode_normal_form)? CLOSE_PAREN
     | OVERLAY OPEN_PAREN (overlay_list | func_arg_list? ) CLOSE_PAREN
@@ -4086,6 +4125,7 @@ trim_list
 in_expr
     : select_with_parens               # in_expr_select
     | OPEN_PAREN expr_list CLOSE_PAREN # in_expr_list
+    | unnest_func                      # in_expr_unnest
     ;
 
 case_expr
@@ -4294,7 +4334,7 @@ target_list_
     ;
 
 target_list
-    : target_el (COMMA target_el)*
+    : target_el (COMMA target_el)* COMMA?
     ;
 
 target_el
@@ -4603,6 +4643,7 @@ unreserved_keyword
     | INDENT
     | INDEX
     | INDEXES
+    | INFO
     | INHERIT
     | INHERITS
     | INLINE_P
@@ -4723,6 +4764,7 @@ unreserved_keyword
     | ROUTINES
     | ROWS
     | RULE
+    | SAFE_CAST
     | SAVEPOINT
     | SCALAR
     | SCHEMA
@@ -4901,6 +4943,7 @@ type_func_name_keyword
     | CONCURRENTLY
     | CROSS
     | CURRENT_SCHEMA
+    | DATE_ADD
     | FREEZE
     | FULL
     | ILIKE

@@ -6377,6 +6377,30 @@ public class PostgreSQLParserBaseListener implements PostgreSQLParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterUnnest_func(PostgreSQLParser.Unnest_funcContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitUnnest_func(PostgreSQLParser.Unnest_funcContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterUnnest_args(PostgreSQLParser.Unnest_argsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitUnnest_args(PostgreSQLParser.Unnest_argsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterFrom_list(PostgreSQLParser.From_listContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -7289,6 +7313,42 @@ public class PostgreSQLParserBaseListener implements PostgreSQLParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterBigquery_functions(PostgreSQLParser.Bigquery_functionsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitBigquery_functions(PostgreSQLParser.Bigquery_functionsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterBq_date_expr(PostgreSQLParser.Bq_date_exprContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitBq_date_expr(PostgreSQLParser.Bq_date_exprContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterBq_col_array_lookup(PostgreSQLParser.Bq_col_array_lookupContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitBq_col_array_lookup(PostgreSQLParser.Bq_col_array_lookupContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterPlsqlvariablename(PostgreSQLParser.PlsqlvariablenameContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -7925,6 +7985,18 @@ public class PostgreSQLParserBaseListener implements PostgreSQLParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterIn_expr_unnest(PostgreSQLParser.In_expr_unnestContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitIn_expr_unnest(PostgreSQLParser.In_expr_unnestContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterCase_expr(PostgreSQLParser.Case_exprContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -8333,13 +8405,13 @@ public class PostgreSQLParserBaseListener implements PostgreSQLParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterTarget_star(PostgreSQLParser.Target_starContext ctx) { }
+	@Override public void enterTarget_star_except(PostgreSQLParser.Target_star_exceptContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitTarget_star(PostgreSQLParser.Target_starContext ctx) { }
+	@Override public void exitTarget_star_except(PostgreSQLParser.Target_star_exceptContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

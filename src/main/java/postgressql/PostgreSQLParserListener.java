@@ -5308,6 +5308,26 @@ public interface PostgreSQLParserListener extends ParseTreeListener {
 	 */
 	void exitFrom_clause(PostgreSQLParser.From_clauseContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link PostgreSQLParser#unnest_func}.
+	 * @param ctx the parse tree
+	 */
+	void enterUnnest_func(PostgreSQLParser.Unnest_funcContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PostgreSQLParser#unnest_func}.
+	 * @param ctx the parse tree
+	 */
+	void exitUnnest_func(PostgreSQLParser.Unnest_funcContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link PostgreSQLParser#unnest_args}.
+	 * @param ctx the parse tree
+	 */
+	void enterUnnest_args(PostgreSQLParser.Unnest_argsContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PostgreSQLParser#unnest_args}.
+	 * @param ctx the parse tree
+	 */
+	void exitUnnest_args(PostgreSQLParser.Unnest_argsContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link PostgreSQLParser#from_list}.
 	 * @param ctx the parse tree
 	 */
@@ -6074,6 +6094,36 @@ public interface PostgreSQLParserListener extends ParseTreeListener {
 	 */
 	void exitC_expr_case(PostgreSQLParser.C_expr_caseContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link PostgreSQLParser#bigquery_functions}.
+	 * @param ctx the parse tree
+	 */
+	void enterBigquery_functions(PostgreSQLParser.Bigquery_functionsContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PostgreSQLParser#bigquery_functions}.
+	 * @param ctx the parse tree
+	 */
+	void exitBigquery_functions(PostgreSQLParser.Bigquery_functionsContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link PostgreSQLParser#bq_date_expr}.
+	 * @param ctx the parse tree
+	 */
+	void enterBq_date_expr(PostgreSQLParser.Bq_date_exprContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PostgreSQLParser#bq_date_expr}.
+	 * @param ctx the parse tree
+	 */
+	void exitBq_date_expr(PostgreSQLParser.Bq_date_exprContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link PostgreSQLParser#bq_col_array_lookup}.
+	 * @param ctx the parse tree
+	 */
+	void enterBq_col_array_lookup(PostgreSQLParser.Bq_col_array_lookupContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PostgreSQLParser#bq_col_array_lookup}.
+	 * @param ctx the parse tree
+	 */
+	void exitBq_col_array_lookup(PostgreSQLParser.Bq_col_array_lookupContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link PostgreSQLParser#plsqlvariablename}.
 	 * @param ctx the parse tree
 	 */
@@ -6608,6 +6658,18 @@ public interface PostgreSQLParserListener extends ParseTreeListener {
 	 */
 	void exitIn_expr_list(PostgreSQLParser.In_expr_listContext ctx);
 	/**
+	 * Enter a parse tree produced by the {@code in_expr_unnest}
+	 * labeled alternative in {@link PostgreSQLParser#in_expr}.
+	 * @param ctx the parse tree
+	 */
+	void enterIn_expr_unnest(PostgreSQLParser.In_expr_unnestContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code in_expr_unnest}
+	 * labeled alternative in {@link PostgreSQLParser#in_expr}.
+	 * @param ctx the parse tree
+	 */
+	void exitIn_expr_unnest(PostgreSQLParser.In_expr_unnestContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link PostgreSQLParser#case_expr}.
 	 * @param ctx the parse tree
 	 */
@@ -6950,17 +7012,17 @@ public interface PostgreSQLParserListener extends ParseTreeListener {
 	 */
 	void exitTarget_label(PostgreSQLParser.Target_labelContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code target_star}
+	 * Enter a parse tree produced by the {@code target_star_except}
 	 * labeled alternative in {@link PostgreSQLParser#target_el}.
 	 * @param ctx the parse tree
 	 */
-	void enterTarget_star(PostgreSQLParser.Target_starContext ctx);
+	void enterTarget_star_except(PostgreSQLParser.Target_star_exceptContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code target_star}
+	 * Exit a parse tree produced by the {@code target_star_except}
 	 * labeled alternative in {@link PostgreSQLParser#target_el}.
 	 * @param ctx the parse tree
 	 */
-	void exitTarget_star(PostgreSQLParser.Target_starContext ctx);
+	void exitTarget_star_except(PostgreSQLParser.Target_star_exceptContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link PostgreSQLParser#target_el_alias}.
 	 * @param ctx the parse tree

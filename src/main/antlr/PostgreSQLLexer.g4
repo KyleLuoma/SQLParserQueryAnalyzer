@@ -378,6 +378,18 @@ CROSS: 'CROSS';
 
 CURRENT_SCHEMA: 'CURRENT_SCHEMA';
 
+DATE: 'DATE';
+
+DATE_ADD: 'DATE_ADD';
+
+DATE_DIFF: 'DATE_DIFF';
+
+DATE_SUB: 'DATE_SUB';
+
+DATE_TRUNC: 'DATE_TRUNC';
+
+FORMAT_DATE:' FORMATE_DATE';
+
 FREEZE: 'FREEZE';
 
 FULL: 'FULL';
@@ -406,9 +418,15 @@ OVER: 'OVER';
 
 OVERLAPS: 'OVERLAPS';
 
+PARSE_DATE: 'PARSE_DATE';
+
 RIGHT: 'RIGHT';
 
+SAFE_CAST: 'SAFE_CAST';
+
 SIMILAR: 'SIMILAR';
+
+UNNEST: 'UNNEST';
 
 VERBOSE: 'VERBOSE';
 //
@@ -438,6 +456,8 @@ ALSO: 'ALSO';
 ALTER: 'ALTER';
 
 ALWAYS: 'ALWAYS';
+
+APPROX_QUANTILES: 'APPROX_QUANTILES';
 
 ASSERTION: 'ASSERTION';
 
@@ -746,6 +766,8 @@ PROCEDURE: 'PROCEDURE';
 
 PROGRAM: 'PROGRAM';
 
+QUARTER_P: 'QUARTER';
+
 QUOTE: 'QUOTE';
 
 RANGE: 'RANGE';
@@ -777,6 +799,8 @@ REPLACE: 'REPLACE';
 REPLICA: 'REPLICA';
 
 RESET: 'RESET';
+
+RESPECT: 'RESPECT';
 
 RESTART: 'RESTART';
 
@@ -906,6 +930,8 @@ VERSION_P: 'VERSION';
 VIEW: 'VIEW';
 
 VOLATILE: 'VOLATILE';
+
+WEEK_P: 'WEEK';
 
 WHITESPACE_P: 'WHITESPACE';
 
@@ -1363,6 +1389,7 @@ Newline: ('\r' '\n'? | '\n') -> channel (HIDDEN);
 //
 
 LineComment: '--' ~ [\r\n]* -> channel (HIDDEN);
+LineComment2: '#' ~ [\r\n]* -> channel (HIDDEN);
 
 BlockComment:
     ('/*' ('/'* BlockComment | ~ [/*] | '/'+ ~ [/*] | '*'+ ~ [/*])* '*'* '*/') -> channel (HIDDEN)

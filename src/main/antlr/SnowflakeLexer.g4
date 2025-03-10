@@ -1157,6 +1157,7 @@ SPACE: [ \t\r\n]+ -> channel(HIDDEN);
 SQL_COMMENT    : '/*' (SQL_COMMENT | .)*? '*/' -> channel(HIDDEN);
 LINE_COMMENT   : '--' ~[\r\n]*                 -> channel(HIDDEN);
 LINE_COMMENT_2 : '//' ~[\r\n]*                 -> channel(HIDDEN);
+LINE_COMMENT_3 : '#'  ~[\r\n]*                 -> channel(HIDDEN);
 
 // TODO: ID can be not only Latin.
 DOUBLE_QUOTE_ID    : '"' ~'"'+ '"';

@@ -3191,6 +3191,18 @@ public interface PostgreSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitFrom_clause(PostgreSQLParser.From_clauseContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link PostgreSQLParser#unnest_func}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitUnnest_func(PostgreSQLParser.Unnest_funcContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link PostgreSQLParser#unnest_args}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitUnnest_args(PostgreSQLParser.Unnest_argsContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link PostgreSQLParser#from_list}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -3650,6 +3662,24 @@ public interface PostgreSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitC_expr_case(PostgreSQLParser.C_expr_caseContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link PostgreSQLParser#bigquery_functions}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBigquery_functions(PostgreSQLParser.Bigquery_functionsContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link PostgreSQLParser#bq_date_expr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBq_date_expr(PostgreSQLParser.Bq_date_exprContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link PostgreSQLParser#bq_col_array_lookup}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBq_col_array_lookup(PostgreSQLParser.Bq_col_array_lookupContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link PostgreSQLParser#plsqlvariablename}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -3970,6 +4000,13 @@ public interface PostgreSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitIn_expr_list(PostgreSQLParser.In_expr_listContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code in_expr_unnest}
+	 * labeled alternative in {@link PostgreSQLParser#in_expr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitIn_expr_unnest(PostgreSQLParser.In_expr_unnestContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link PostgreSQLParser#case_expr}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -4175,12 +4212,12 @@ public interface PostgreSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitTarget_label(PostgreSQLParser.Target_labelContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code target_star}
+	 * Visit a parse tree produced by the {@code target_star_except}
 	 * labeled alternative in {@link PostgreSQLParser#target_el}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitTarget_star(PostgreSQLParser.Target_starContext ctx);
+	T visitTarget_star_except(PostgreSQLParser.Target_star_exceptContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link PostgreSQLParser#target_el_alias}.
 	 * @param ctx the parse tree

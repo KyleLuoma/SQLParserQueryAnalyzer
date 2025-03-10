@@ -3721,6 +3721,7 @@ non_reserved_words
     | TAGS
     | TARGET_LAG
     | TIMEZONE
+    | TRANSACTIONS
     | URL
     | USERADMIN
     | VALUE

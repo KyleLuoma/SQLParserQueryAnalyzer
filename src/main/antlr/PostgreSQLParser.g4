@@ -3735,14 +3735,19 @@ c_expr
     ;
 
 bigquery_functions
-    : DATE OPEN_PAREN (a_expr+) CLOSE_PAREN
+    : DATE OPEN_PAREN a_expr (COMMA a_expr)* CLOSE_PAREN
     | DATE_ADD OPEN_PAREN a_expr COMMA INTERVAL a_expr bq_date_expr CLOSE_PAREN
-    | DATE_DIFF OPEN_PAREN a_expr COMMA INTERVAL a_expr bq_date_expr CLOSE_PAREN
+    | DATE_DIFF OPEN_PAREN a_expr (
+        COMMA INTERVAL a_expr
+        | (COMMA a_expr)*
+        ) COMMA bq_date_expr CLOSE_PAREN
     | DATE_SUB OPEN_PAREN a_expr COMMA INTERVAL a_expr bq_date_expr CLOSE_PAREN
     | DATE_TRUNC OPEN_PAREN a_expr COMMA bq_date_expr CLOSE_PAREN
     | PARSE_DATE OPEN_PAREN a_expr COMMA a_expr (COMMA bq_date_expr)? CLOSE_PAREN
     | FORMAT_DATE OPEN_PAREN a_expr COMMA c_expr CLOSE_PAREN
-    | TIMESTAMP OPEN_PAREN a_expr CLOSE_PAREN
+    | TIMESTAMP OPEN_PAREN a_expr (COMMA a_expr)* CLOSE_PAREN
+    | TIMESTAMP_MICROS OPEN_PAREN a_expr (COMMA a_expr)* CLOSE_PAREN
+    | UNIX_MICROS OPEN_PAREN a_expr CLOSE_PAREN
     | APPROX_QUANTILES OPEN_PAREN DISTINCT? a_expr COMMA a_expr (IGNORE | RESPECT)? CLOSE_PAREN
         (OPEN_BRACKET (a_expr | offset_clause) CLOSE_BRACKET alias_clause?)?
     ;
@@ -4084,6 +4089,7 @@ extract_list
 extract_arg
     : identifier
     | YEAR_P
+    | WEEK_P
     | MONTH_P
     | DAY_P
     | HOUR_P
@@ -4575,6 +4581,7 @@ unreserved_keyword
     | CURRENT_P
     | CURSOR
     | CYCLE
+    | DATE
     | DATA_P
     | DATABASE
     | DAY_P
@@ -4868,6 +4875,8 @@ col_name_keyword
     | CHAR_P
     | character
     | COALESCE
+    | DATE
+    | DAY_P
     | DEC
     | DECIMAL_P
     | EXISTS
@@ -4892,6 +4901,7 @@ col_name_keyword
     | JSON_VALUE
     | LEAST
     | MERGE_ACTION
+    | MONTH_P
     | NATIONAL
     | NCHAR
     | NONE
@@ -4913,6 +4923,7 @@ col_name_keyword
     | TRIM
     | VALUES
     | VARCHAR
+    | WEEK_P
     | XMLATTRIBUTES
     | XMLCONCAT
     | XMLELEMENT
@@ -4924,6 +4935,7 @@ col_name_keyword
     | XMLROOT
     | XMLSERIALIZE
     | XMLTABLE
+    | YEAR_P
     ;
 
 /* Type/function identifier --- keywords that can be type or function names.

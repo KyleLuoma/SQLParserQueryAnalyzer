@@ -3137,6 +3137,12 @@ public interface SnowflakeParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitOver_clause(SnowflakeParser.Over_clauseContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link SnowflakeParser#window_frame_clause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitWindow_frame_clause(SnowflakeParser.Window_frame_clauseContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link SnowflakeParser#function_call}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

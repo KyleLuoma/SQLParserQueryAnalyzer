@@ -3617,6 +3617,7 @@ non_reserved_words
     | COLLECTION
     | COMMENT
     | CONFIGURATION
+    | COPY
     | DATA
     | DAYS
     | DEFINITION
@@ -3994,10 +3995,24 @@ asc_desc
     ;
 
 over_clause
-    : OVER '(' partition_by order_by_expr? ')'
+    : OVER '(' partition_by order_by_expr? window_frame_clause?')'
     | OVER '(' order_by_expr ')'
     | OVER '(' ')'
     ;
+
+
+window_frame_clause
+    : (ROWS | RANGE) UNBOUNDED PRECEDING
+    | (ROWS | RANGE) num PRECEDING
+    | (ROWS | RANGE) CURRENT ROW
+    | (ROWS | RANGE) BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW
+    | (ROWS | RANGE) BETWEEN CURRENT ROW AND UNBOUNDED FOLLOWING
+    | (ROWS | RANGE) BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING
+    | (ROWS | RANGE) BETWEEN num (PRECEDING | FOLLOWING) AND num (PRECEDING | FOLLOWING)
+    | (ROWS | RANGE) BETWEEN UNBOUNDED PRECEDING AND num (PRECEDING | FOLLOWING)
+    | (ROWS | RANGE) BETWEEN num (PRECEDING | FOLLOWING) AND UNBOUNDED FOLLOWING
+    ;
+
 
 function_call
     : round_expr
@@ -4291,7 +4306,7 @@ join_type
     ;
 
 join_clause
-    : join_type? JOIN object_ref ((ON search_condition)? | (USING '(' column_list ')')?)
+    : NATURAL? join_type? JOIN object_ref ((ON search_condition)? | (USING '(' column_list ')')?)
     //| join_type? JOIN object_ref (USING '(' column_list ')')?
     | NATURAL outer_join? JOIN object_ref
     | CROSS JOIN object_ref

@@ -6269,6 +6269,18 @@ public class SnowflakeParserBaseListener implements SnowflakeParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterWindow_frame_clause(SnowflakeParser.Window_frame_clauseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitWindow_frame_clause(SnowflakeParser.Window_frame_clauseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterFunction_call(SnowflakeParser.Function_callContext ctx) { }
 	/**
 	 * {@inheritDoc}

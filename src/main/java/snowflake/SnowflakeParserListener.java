@@ -5218,6 +5218,16 @@ public interface SnowflakeParserListener extends ParseTreeListener {
 	 */
 	void exitOver_clause(SnowflakeParser.Over_clauseContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link SnowflakeParser#window_frame_clause}.
+	 * @param ctx the parse tree
+	 */
+	void enterWindow_frame_clause(SnowflakeParser.Window_frame_clauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link SnowflakeParser#window_frame_clause}.
+	 * @param ctx the parse tree
+	 */
+	void exitWindow_frame_clause(SnowflakeParser.Window_frame_clauseContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link SnowflakeParser#function_call}.
 	 * @param ctx the parse tree
 	 */

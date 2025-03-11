@@ -1,84 +1,77 @@
--- firebase ga028.sql bigquery
+-- TCGA_MITELMAN sf_bq176.sql snowflake
 
-WITH dates AS (
-    SELECT 
-        DATE('2018-07-02') AS start_date,
-        DATE('2018-10-02') AS end_date,
-        DATE_ADD(DATE_TRUNC(DATE('2018-10-02'), WEEK(TUESDAY)), INTERVAL -4 WEEK) AS min_date
-),
-
-date_table AS (
-    SELECT DISTINCT 
-        PARSE_DATE('%Y%m%d', `event_date`) AS event_date,
-        user_pseudo_id,
-        CASE 
-            WHEN DATE_DIFF(PARSE_DATE('%Y%m%d', `event_date`), DATE(TIMESTAMP_MICROS(user_first_touch_timestamp)), DAY) = 0 
-            THEN 1 
-            ELSE 0 
-        END AS is_new_user
-    FROM 
-        `firebase-public-project.analytics_153293282.events_*` 
-    WHERE 
-        event_name = 'session_start'
-),
-
-new_user_list AS (
-    SELECT DISTINCT 
-        user_pseudo_id,
-        event_date
-    FROM 
-        date_table
-    WHERE 
-        is_new_user = 1
-),
-
-days_since_start_table AS (
-    SELECT DISTINCT 
-        is_new_user,
-        nu.event_date AS date_cohort,
-        dt.user_pseudo_id,
-        dt.event_date,
-        DATE_DIFF(dt.event_date, nu.event_date, DAY) AS days_since_start
-    FROM 
-        date_table dt
-    JOIN 
-        new_user_list nu ON dt.user_pseudo_id = nu.user_pseudo_id
-),
-
-weeks_retention AS (
-    SELECT 
-        date_cohort,
-        DATE_TRUNC(date_cohort, WEEK(MONDAY)) AS week_cohort,
-        user_pseudo_id,
-        days_since_start,
-        CASE 
-            WHEN days_since_start = 0 
-            THEN 0 
-            ELSE CEIL(days_since_start / 7) 
-        END AS weeks_since_start
-    FROM 
-        days_since_start_table
-),
-RETENTION_INFO AS (
+WITH 
+copy AS (
   SELECT 
-      week_cohort,
-      weeks_since_start,
-      COUNT(DISTINCT user_pseudo_id) AS retained_users
+    "case_barcode", 
+    "chromosome", 
+    "start_pos", 
+    "end_pos", 
+    MAX("copy_number") AS "copy_number"
   FROM 
-      weeks_retention
+    "TCGA_MITELMAN"."TCGA_VERSIONED"."COPY_NUMBER_SEGMENT_ALLELIC_HG38_GDC_R23"
   WHERE 
-      week_cohort <= (SELECT min_date FROM dates)
+    "project_short_name" = 'TCGA-LAML'
   GROUP BY 
-      week_cohort,
-      weeks_since_start
-  HAVING 
-      weeks_since_start <= 4
-  ORDER BY 
-      week_cohort,
-      weeks_since_start
+    "case_barcode", 
+    "chromosome", 
+    "start_pos", 
+    "end_pos"
+),
+total_cases AS (
+  SELECT COUNT(DISTINCT "case_barcode") AS "total"
+  FROM copy
+),
+cytob AS (
+  SELECT 
+    "chromosome", 
+    "cytoband_name", 
+    "hg38_start", 
+    "hg38_stop"
+  FROM 
+    "TCGA_MITELMAN"."PROD"."CYTOBANDS_HG38"
+),
+joined AS (
+  SELECT 
+    cytob."chromosome", 
+    cytob."cytoband_name", 
+    cytob."hg38_start", 
+    cytob."hg38_stop", 
+    copy."case_barcode",
+    (ABS(cytob."hg38_stop" - cytob."hg38_start") + ABS(copy."end_pos" - copy."start_pos") 
+      - ABS(cytob."hg38_stop" - copy."end_pos") - ABS(cytob."hg38_start" - copy."start_pos")) / 2.0 AS "overlap", 
+    copy."copy_number"
+  FROM 
+    copy
+  LEFT JOIN 
+    cytob
+  ON 
+    cytob."chromosome" = copy."chromosome"
+  WHERE 
+    (cytob."hg38_start" >= copy."start_pos" AND copy."end_pos" >= cytob."hg38_start")
+    OR (copy."start_pos" >= cytob."hg38_start" AND copy."start_pos" <= cytob."hg38_stop")
+),
+INFO AS (
+  SELECT 
+    "chromosome", 
+    "cytoband_name", 
+    "hg38_start", 
+    "hg38_stop", 
+    "case_barcode",
+    ROUND(SUM("overlap" * "copy_number") / SUM("overlap")) AS "copy_number"
+  FROM 
+    joined
+  GROUP BY 
+    "chromosome", "cytoband_name", "hg38_start", "hg38_stop", "case_barcode"
 )
 
-SELECT weeks_since_start, retained_users
-FROM RETENTION_INFO
-WHERE week_cohort = DATE('2018-07-02')
-
+SELECT 
+  "case_barcode"
+FROM
+  INFO
+WHERE 
+  "chromosome" = 'chr15' 
+  AND "cytoband_name" = '15q11'
+ORDER BY 
+  "copy_number" DESC
+LIMIT 1;

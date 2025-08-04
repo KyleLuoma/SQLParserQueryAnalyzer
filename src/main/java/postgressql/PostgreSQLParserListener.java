@@ -6634,41 +6634,15 @@ public interface PostgreSQLParserListener extends ParseTreeListener {
 	 */
 	void exitTrim_list(PostgreSQLParser.Trim_listContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code in_expr_select}
-	 * labeled alternative in {@link PostgreSQLParser#in_expr}.
+	 * Enter a parse tree produced by {@link PostgreSQLParser#in_expr}.
 	 * @param ctx the parse tree
 	 */
-	void enterIn_expr_select(PostgreSQLParser.In_expr_selectContext ctx);
+	void enterIn_expr(PostgreSQLParser.In_exprContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code in_expr_select}
-	 * labeled alternative in {@link PostgreSQLParser#in_expr}.
+	 * Exit a parse tree produced by {@link PostgreSQLParser#in_expr}.
 	 * @param ctx the parse tree
 	 */
-	void exitIn_expr_select(PostgreSQLParser.In_expr_selectContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code in_expr_list}
-	 * labeled alternative in {@link PostgreSQLParser#in_expr}.
-	 * @param ctx the parse tree
-	 */
-	void enterIn_expr_list(PostgreSQLParser.In_expr_listContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code in_expr_list}
-	 * labeled alternative in {@link PostgreSQLParser#in_expr}.
-	 * @param ctx the parse tree
-	 */
-	void exitIn_expr_list(PostgreSQLParser.In_expr_listContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code in_expr_unnest}
-	 * labeled alternative in {@link PostgreSQLParser#in_expr}.
-	 * @param ctx the parse tree
-	 */
-	void enterIn_expr_unnest(PostgreSQLParser.In_expr_unnestContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code in_expr_unnest}
-	 * labeled alternative in {@link PostgreSQLParser#in_expr}.
-	 * @param ctx the parse tree
-	 */
-	void exitIn_expr_unnest(PostgreSQLParser.In_expr_unnestContext ctx);
+	void exitIn_expr(PostgreSQLParser.In_exprContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link PostgreSQLParser#case_expr}.
 	 * @param ctx the parse tree

@@ -4128,11 +4128,17 @@ trim_list
     | expr_list
     ;
 
+// in_expr
+//     : select_with_parens               # in_expr_select
+//     | OPEN_PAREN expr_list CLOSE_PAREN # in_expr_list
+//     | unnest_func                      # in_expr_unnest
+//     ;
+
 in_expr
-    : select_with_parens               # in_expr_select
-    | OPEN_PAREN expr_list CLOSE_PAREN # in_expr_list
-    | unnest_func                      # in_expr_unnest
-    ;
+: select_with_parens               
+| OPEN_PAREN expr_list CLOSE_PAREN 
+| unnest_func                      
+;
 
 case_expr
     : CASE case_arg? when_clause_list case_default? END_P

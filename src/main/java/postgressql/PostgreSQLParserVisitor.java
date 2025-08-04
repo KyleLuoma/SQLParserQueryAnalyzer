@@ -3986,26 +3986,11 @@ public interface PostgreSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitTrim_list(PostgreSQLParser.Trim_listContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code in_expr_select}
-	 * labeled alternative in {@link PostgreSQLParser#in_expr}.
+	 * Visit a parse tree produced by {@link PostgreSQLParser#in_expr}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitIn_expr_select(PostgreSQLParser.In_expr_selectContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code in_expr_list}
-	 * labeled alternative in {@link PostgreSQLParser#in_expr}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitIn_expr_list(PostgreSQLParser.In_expr_listContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code in_expr_unnest}
-	 * labeled alternative in {@link PostgreSQLParser#in_expr}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitIn_expr_unnest(PostgreSQLParser.In_expr_unnestContext ctx);
+	T visitIn_expr(PostgreSQLParser.In_exprContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link PostgreSQLParser#case_expr}.
 	 * @param ctx the parse tree

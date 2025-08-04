@@ -10,10 +10,51 @@ import java.util.Stack;
 
 public class PostgreSQLScraperListener extends PostgreSQLParserBaseListener{
     Stack<ArrayList<String>> stack = new Stack<>();
+    Boolean inWhereClause = false;
+    String whereClauseColumnref = "";
+
+    public void enterWhere_clause(PostgreSQLParser.Where_clauseContext ctx) {
+        inWhereClause = true;
+    }
+
+    public void exitWhere_clause(PostgreSQLParser.Where_clauseContext ctx) {
+        inWhereClause = false;
+    }
+
+    public void enterA_expr_in(PostgreSQLParser.A_expr_inContext ctx) {
+        if (ctx.in_expr() != null) {
+            String columnName = ctx.a_expr_unary_not().getText();
+            if (ctx.in_expr().expr_list() != null) {
+                for (int i = 0; i < ctx.in_expr().expr_list().a_expr().size(); i++) {
+                    ArrayList<String> addItem = new ArrayList<>();
+                    addItem.add("predicatecolumn " + columnName);
+                    addItem.add("predicatevalue " + ctx.in_expr().expr_list().a_expr(i).getText());
+                    stack.push(addItem);
+                }
+            }
+        }
+    }
+
+    public void enterA_expr_compare(PostgreSQLParser.A_expr_compareContext ctx) {
+        ArrayList<String> addItem = new ArrayList<>();
+        if (ctx.a_expr_like().size() == 2) {
+            addItem.add("predicatecolumn " + ctx.a_expr_like(0).getText());
+            addItem.add("predicatevalue " + ctx.a_expr_like(1).getText());
+            stack.push(addItem);
+        }        
+    }
+
+    public void enterA_expr_like(PostgreSQLParser.A_expr_likeContext ctx) {
+        ArrayList<String> addItem = new ArrayList<>();
+        if (ctx.a_expr_qual_op().size() == 2) {
+            addItem.add("predicatecolumn "  + ctx.a_expr_qual_op(0).getText());
+            addItem.add("predicatevalue " + ctx.a_expr_qual_op(1).getText());
+            stack.push(addItem);
+        }
+    }
 
     public void enterColumnref(PostgreSQLParser.ColumnrefContext ctx) {
         ArrayList<String> addItem = new ArrayList<>();
-        addItem.add("column");
         String columnName;
         if (
             ctx.indirection() != null 
@@ -31,9 +72,14 @@ public class PostgreSQLScraperListener extends PostgreSQLParserBaseListener{
         }
         columnName = columnName.replace("\"", "");
         columnName = columnName.replace("`", "");
-        addItem.add(columnName);
-        if(!columnName.equals("none")) {
-            stack.push(addItem);
+        if (inWhereClause) {
+            whereClauseColumnref = columnName;
+        } else {
+            addItem.add("column");
+            addItem.add(columnName);
+            if(!columnName.equals("none")) {
+                stack.push(addItem);
+            }
         }
     }
 

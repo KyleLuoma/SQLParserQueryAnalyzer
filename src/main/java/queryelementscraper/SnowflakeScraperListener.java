@@ -80,20 +80,28 @@ public class SnowflakeScraperListener extends SnowflakeParserBaseListener{
 
     public void enterPredicate(SnowflakeParser.PredicateContext ctx) {
         inPredicate = true;
+        if (ctx.expr_list() != null) {
+            for (int i = 0; i < ctx.expr_list().expr().size(); i++) {
+                ArrayList<String> addItem = new ArrayList<>();
+                addItem.add("predicatecolumn " + ctx.expr(0).getText());
+                addItem.add("predicatevalue " + ctx.expr_list().expr(i).getText());
+                stack.push(addItem);
+            }
+        }
+        if (ctx.expr().size() == 2) {
+            ArrayList<String> addItem = new ArrayList<>();
+            addItem.add("predicatecolumn " + ctx.expr(0).getText());
+            addItem.add("predicatevalue " + ctx.expr(1).getText());
+            stack.push(addItem);
+        }
     }
 
     public void enterExpr(SnowflakeParser.ExprContext ctx) {
         ArrayList<String> addItem = new ArrayList<>();
-        if(inPredicate && ctx.primitive_expression() != null){
-            addItem.add("column");
-            if(ctx.primitive_expression().full_column_name() != null){
-                addItem.add(ctx.primitive_expression().full_column_name().getText());
-            } else if(ctx.primitive_expression().id_().size() > 0){
-                addItem.add(ctx.primitive_expression().id_().get(ctx.primitive_expression().id_().size() - 1).getText());
-            }
-            if(addItem.size() == 2){
-                stack.push(addItem);
-            }
+        if (inPredicate && ctx.comparison_operator() != null) {
+            addItem.add("predicatecolumn " + ctx.expr(0).getText());
+            addItem.add("predicatevalue " + ctx.expr(1).getText());
+            stack.push(addItem);
         }
     }
 

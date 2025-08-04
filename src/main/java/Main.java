@@ -25,8 +25,8 @@ public class Main {
         Boolean schematagging = false;
         String query = "";
         SqlDialect sqlDialect = SqlDialect.TSQL;
-        String version = "1.32";
-        String version_date = "2 April 2025";
+        String version = "1.33";
+        String version_date = "4 August 2025";
 
         for(int i = 0; i < args.length; i++){
             if(args[i].toLowerCase(Locale.ROOT).equals("--help")) {
@@ -36,7 +36,7 @@ public class Main {
                 System.out.println(" --query [\"SELECT A FROM...\" | filename.sql] : the query you wish to analyze encased in quotes");
                 System.out.println(" --schematagger [\"SELECT A FROM...\" | filename.sql] : the query you wish to tag");
                 System.out.println(" Tagger options:");
-                System.out.println(" --dialect [tsql | sqlite | postgressql] : the dialect of the query you are tagging.");
+                System.out.println(" --dialect [tsql | sqlite | postgressql | bigquery | snowflake] : the dialect of the query you are tagging.");
                 System.out.println(" --version : prints the current version.");
             }
             if(args[i].toLowerCase(Locale.ROOT).equals("--server")) {

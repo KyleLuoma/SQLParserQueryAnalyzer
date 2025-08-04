@@ -7961,37 +7961,13 @@ public class PostgreSQLParserBaseListener implements PostgreSQLParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterIn_expr_select(PostgreSQLParser.In_expr_selectContext ctx) { }
+	@Override public void enterIn_expr(PostgreSQLParser.In_exprContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitIn_expr_select(PostgreSQLParser.In_expr_selectContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterIn_expr_list(PostgreSQLParser.In_expr_listContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitIn_expr_list(PostgreSQLParser.In_expr_listContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterIn_expr_unnest(PostgreSQLParser.In_expr_unnestContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitIn_expr_unnest(PostgreSQLParser.In_expr_unnestContext ctx) { }
+	@Override public void exitIn_expr(PostgreSQLParser.In_exprContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

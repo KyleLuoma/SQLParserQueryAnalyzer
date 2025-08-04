@@ -68320,38 +68320,21 @@ public class PostgreSQLParser extends PostgreSQLParserBase {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class In_exprContext extends ParserRuleContext {
-		public In_exprContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
+		public Select_with_parensContext select_with_parens() {
+			return getRuleContext(Select_with_parensContext.class,0);
 		}
-		@Override public int getRuleIndex() { return RULE_in_expr; }
-	 
-		public In_exprContext() { }
-		public void copyFrom(In_exprContext ctx) {
-			super.copyFrom(ctx);
-		}
-	}
-	@SuppressWarnings("CheckReturnValue")
-	public static class In_expr_listContext extends In_exprContext {
 		public TerminalNode OPEN_PAREN() { return getToken(PostgreSQLParser.OPEN_PAREN, 0); }
 		public Expr_listContext expr_list() {
 			return getRuleContext(Expr_listContext.class,0);
 		}
 		public TerminalNode CLOSE_PAREN() { return getToken(PostgreSQLParser.CLOSE_PAREN, 0); }
-		public In_expr_listContext(In_exprContext ctx) { copyFrom(ctx); }
-	}
-	@SuppressWarnings("CheckReturnValue")
-	public static class In_expr_selectContext extends In_exprContext {
-		public Select_with_parensContext select_with_parens() {
-			return getRuleContext(Select_with_parensContext.class,0);
-		}
-		public In_expr_selectContext(In_exprContext ctx) { copyFrom(ctx); }
-	}
-	@SuppressWarnings("CheckReturnValue")
-	public static class In_expr_unnestContext extends In_exprContext {
 		public Unnest_funcContext unnest_func() {
 			return getRuleContext(Unnest_funcContext.class,0);
 		}
-		public In_expr_unnestContext(In_exprContext ctx) { copyFrom(ctx); }
+		public In_exprContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_in_expr; }
 	}
 
 	public final In_exprContext in_expr() throws RecognitionException {
@@ -68362,7 +68345,6 @@ public class PostgreSQLParser extends PostgreSQLParserBase {
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,1019,_ctx) ) {
 			case 1:
-				_localctx = new In_expr_selectContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
 				setState(10222);
@@ -68370,7 +68352,6 @@ public class PostgreSQLParser extends PostgreSQLParserBase {
 				}
 				break;
 			case 2:
-				_localctx = new In_expr_listContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
 				setState(10223);
@@ -68382,7 +68363,6 @@ public class PostgreSQLParser extends PostgreSQLParserBase {
 				}
 				break;
 			case 3:
-				_localctx = new In_expr_unnestContext(_localctx);
 				enterOuterAlt(_localctx, 3);
 				{
 				setState(10227);

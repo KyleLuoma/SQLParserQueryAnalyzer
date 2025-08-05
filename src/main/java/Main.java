@@ -25,8 +25,8 @@ public class Main {
         Boolean schematagging = false;
         String query = "";
         SqlDialect sqlDialect = SqlDialect.TSQL;
-        String version = "1.33";
-        String version_date = "4 August 2025";
+        String version = "1.34";
+        String version_date = "5 August 2025";
 
         for(int i = 0; i < args.length; i++){
             if(args[i].toLowerCase(Locale.ROOT).equals("--help")) {

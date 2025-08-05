@@ -80,7 +80,9 @@ public class PostgreSQLQueryElementScraper extends QueryElementScraper{
         ListIterator<ArrayList<String>> elemIter = this.queryElements.listIterator();
         while(elemIter.hasNext()) {
             ArrayList<String> tempPair = elemIter.next();
-            jsonString.append("\n    {\"" + tempPair.get(0) + "\" : \"" + tempPair.get(1) + "\"}");
+            String key = tempPair.get(0);
+            String value = tempPair.get(1).replace("\"", "\'");
+            jsonString.append("\n    {\"" + key + "\" : \"" + value + "\"}");
             if (elemIter.hasNext()) {
                 jsonString.append(",");
             }

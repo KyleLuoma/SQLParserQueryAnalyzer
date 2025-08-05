@@ -81,7 +81,10 @@ public class SnowflakeQueryElementScraper extends QueryElementScraper{
         ListIterator<ArrayList<String>> elemIter = this.queryElements.listIterator();
         while(elemIter.hasNext()) {
             ArrayList<String> tempPair = elemIter.next();
-            jsonString.append("\n    {\"" + tempPair.get(0) + "\" : \"" + tempPair.get(1) + "\"}");
+            jsonString.append(
+                "\n    {\"" + tempPair.get(0).replace("\"", "") 
+                + "\" : \"" + tempPair.get(1).replace("\"", "") + "\"}"
+                );
             if (elemIter.hasNext()) {
                 jsonString.append(",");
             }

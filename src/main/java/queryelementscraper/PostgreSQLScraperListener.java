@@ -11,6 +11,7 @@ import java.util.Stack;
 public class PostgreSQLScraperListener extends PostgreSQLParserBaseListener{
     Stack<ArrayList<String>> stack = new Stack<>();
     Boolean inWhereClause = false;
+    Boolean inJoinQual = false;
     String whereClauseColumnref = "";
 
     public void enterWhere_clause(PostgreSQLParser.Where_clauseContext ctx) {
@@ -21,10 +22,28 @@ public class PostgreSQLScraperListener extends PostgreSQLParserBaseListener{
         inWhereClause = false;
     }
 
+    public void enterJoin_qual(PostgreSQLParser.Join_qualContext ctx) {
+        inJoinQual = true;
+    }
+
+    public void exitJoin_qual(PostgreSQLParser.Join_qualContext ctx) {
+        inJoinQual = false;
+    }
+
+    public String dedotifyColumnName(String columnName) {
+        if(columnName.contains(".")) {
+            String[] colStrings = columnName.split("\\.");
+            if(colStrings.length > 1) {
+                columnName = colStrings[1];
+            }
+        }
+        return columnName;
+    }
+
     public void enterA_expr_in(PostgreSQLParser.A_expr_inContext ctx) {
         if (ctx.in_expr() != null) {
-            String columnName = ctx.a_expr_unary_not().getText();
-            if (ctx.in_expr().expr_list() != null) {
+            String columnName = dedotifyColumnName(ctx.a_expr_unary_not().getText());
+            if (ctx.in_expr().expr_list() != null && !inJoinQual) {
                 for (int i = 0; i < ctx.in_expr().expr_list().a_expr().size(); i++) {
                     ArrayList<String> addItem = new ArrayList<>();
                     addItem.add("predicatecolumn " + columnName);
@@ -37,8 +56,8 @@ public class PostgreSQLScraperListener extends PostgreSQLParserBaseListener{
 
     public void enterA_expr_compare(PostgreSQLParser.A_expr_compareContext ctx) {
         ArrayList<String> addItem = new ArrayList<>();
-        if (ctx.a_expr_like().size() == 2) {
-            addItem.add("predicatecolumn " + ctx.a_expr_like(0).getText());
+        if (ctx.a_expr_like().size() == 2 && !inJoinQual) {
+            addItem.add("predicatecolumn " + dedotifyColumnName(ctx.a_expr_like(0).getText()));
             addItem.add("predicatevalue " + ctx.a_expr_like(1).getText());
             stack.push(addItem);
         }        
@@ -46,8 +65,8 @@ public class PostgreSQLScraperListener extends PostgreSQLParserBaseListener{
 
     public void enterA_expr_like(PostgreSQLParser.A_expr_likeContext ctx) {
         ArrayList<String> addItem = new ArrayList<>();
-        if (ctx.a_expr_qual_op().size() == 2) {
-            addItem.add("predicatecolumn "  + ctx.a_expr_qual_op(0).getText());
+        if (ctx.a_expr_qual_op().size() == 2 && !inJoinQual) {
+            addItem.add("predicatecolumn "  + dedotifyColumnName(ctx.a_expr_qual_op(0).getText()));
             addItem.add("predicatevalue " + ctx.a_expr_qual_op(1).getText());
             stack.push(addItem);
         }

@@ -10,6 +10,7 @@ import snowflake.SnowflakeParser.ExprContext;
 public class SnowflakeScraperListener extends SnowflakeParserBaseListener{
     Stack<ArrayList<String>> stack = new Stack<>();
     Boolean inPredicate = false;
+    Boolean inWhere = false;
 
     public void enterColumn_elem(SnowflakeParser.Column_elemContext ctx) {
         ArrayList<String> addItem = new ArrayList<>();
@@ -78,19 +79,40 @@ public class SnowflakeScraperListener extends SnowflakeParserBaseListener{
         }
     }
 
+    public String dedotifyColumnName(String columnName) {
+        if(columnName.contains(".")) {
+            String[] colStrings = columnName.split("\\.");
+            if(colStrings.length > 1) {
+                columnName = colStrings[1];
+            }
+        }
+        return columnName;
+    }
+
+    public void enterWhere_clause(SnowflakeParser.Where_clauseContext ctx) {
+        inWhere = true;
+    }
+
+    public void exitWhere_clause(SnowflakeParser.Where_clauseContext ctx) {
+        inWhere = false;
+    }
+
     public void enterPredicate(SnowflakeParser.PredicateContext ctx) {
         inPredicate = true;
+        if(!inWhere){return;}
         if (ctx.expr_list() != null) {
             for (int i = 0; i < ctx.expr_list().expr().size(); i++) {
                 ArrayList<String> addItem = new ArrayList<>();
-                addItem.add("predicatecolumn " + ctx.expr(0).getText());
+                String columnName = "predicatecolumn " + dedotifyColumnName(ctx.expr(0).getText());
+                addItem.add(columnName);
                 addItem.add("predicatevalue " + ctx.expr_list().expr(i).getText());
                 stack.push(addItem);
             }
         }
         if (ctx.expr().size() == 2) {
             ArrayList<String> addItem = new ArrayList<>();
-            addItem.add("predicatecolumn " + ctx.expr(0).getText());
+            String columnName = "predicatecolumn " + dedotifyColumnName(ctx.expr(0).getText());
+            addItem.add(columnName);
             addItem.add("predicatevalue " + ctx.expr(1).getText());
             stack.push(addItem);
         }
@@ -98,8 +120,9 @@ public class SnowflakeScraperListener extends SnowflakeParserBaseListener{
 
     public void enterExpr(SnowflakeParser.ExprContext ctx) {
         ArrayList<String> addItem = new ArrayList<>();
-        if (inPredicate && ctx.comparison_operator() != null) {
-            addItem.add("predicatecolumn " + ctx.expr(0).getText());
+        if (inWhere && inPredicate && ctx.comparison_operator() != null) {
+            String columnName = "predicatecolumn " + dedotifyColumnName(ctx.expr(0).getText());
+            addItem.add(columnName);
             addItem.add("predicatevalue " + ctx.expr(1).getText());
             stack.push(addItem);
         }
